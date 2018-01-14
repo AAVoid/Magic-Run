@@ -1,0 +1,20 @@
+.anchorpane {
+	-fx-background-color: linear-gradient(#007ac1, #03a9f4);
+}
+
+.jfxbutton {
+	-fx-text-fill: #01579b;
+	-fx-font-size: 30pt;
+}
+
+.jfxtextfield {
+	-fx-text-fill: #01579b;
+	-fx-font-size: 20pt;
+}
+
+.label {
+	-fx-text-fill: #ffffff;
+	-fx-font-size: 20pt;
+	-fx-font-style: italic;
+}
+
