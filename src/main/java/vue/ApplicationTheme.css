@@ -37,3 +37,36 @@ ANNEE : 2018
 	-fx-font-style: italic;
 }
 
+
+
+/* - - - - - - - - - PAGE CREDIT - - - - - - - - - */
+
+
+
+.credits_label_top {
+	-fx-text-fill: #ffffff;
+	-fx-font-size: 20pt;
+	-fx-font-style: italic;
+}
+
+.credits_label_credits {
+	-fx-font-size: 20pt;
+}
+
+.credits_bouton_retour {
+	-fx-text-fill: #ffffff;
+	-fx-font-size: 20pt;
+}
+
+.credits_border_centre {
+	-fx-background-color: linear-gradient(#007ac1, #03a9f4);
+}
+
+.credits_border_top {
+	-fx-background-color: #01579b;
+}
+
+.credits_border_bottom {
+	-fx-background-color: #01579b;
+}
+
