@@ -9,28 +9,37 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" styleClass="anchorpane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.Controleur_PageAccueil">
-   <children>
-      <Label layoutX="34.0" layoutY="298.0" text="Pseudonyme">
-         <font>
-            <Font name="Roboto" size="12.0" />
-         </font>
-      </Label>
-      <JFXTextField alignment="CENTER" layoutX="206.0" layoutY="289.0" prefHeight="25.0" prefWidth="358.0" styleClass="jfxtextfield" unFocusColor="#4059a9">
-         <font>
-            <Font name="Roboto" size="12.0" />
-         </font>
-      </JFXTextField>
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="411.0" layoutY="419.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../Ressources/Formule1.png" />
-         </image>
-      </ImageView>
-      <JFXButton buttonType="RAISED" layoutX="134.0" layoutY="390.0" styleClass="jfxbutton" text="SE CONNECTER" />
-      <ImageView fitHeight="156.0" fitWidth="301.0" layoutX="150.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../Ressources/logoMagicRun.png" />
-         </image>
-      </ImageView>
-   </children>
-</AnchorPane>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.Controleur_PageAccueil">
+   <top>
+      <AnchorPane prefHeight="60.0" prefWidth="600.0" styleClass="accueil_border_top" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="14.0" layoutY="11.0" styleClass="accueil_label_top" text="Choix du pseudonyme" />
+         </children>
+      </AnchorPane>
+   </top>
+   <left>
+      <AnchorPane prefHeight="340.0" prefWidth="0.0" BorderPane.alignment="CENTER" />
+   </left>
+   <center>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="accueil_border_centre" BorderPane.alignment="CENTER">
+         <children>
+            <JFXButton layoutX="136.0" layoutY="238.0" styleClass="accueil_bouton_se_connecter" text="SE CONNECTER" />
+            <JFXTextField alignment="CENTER" layoutX="37.0" layoutY="138.0" prefHeight="25.0" prefWidth="529.0" promptText="Pseudonyme" styleClass="accueil_champ_pseudo" unFocusColor="#4059a9" />
+         </children>
+      </AnchorPane>
+   </center>
+   <right>
+      <AnchorPane prefHeight="340.0" prefWidth="0.0" BorderPane.alignment="CENTER" />
+   </right>
+   <bottom>
+      <AnchorPane prefHeight="150.0" prefWidth="600.0" styleClass="accueil_border_bottom" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="122.0" fitWidth="120.0" layoutX="466.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../Ressources/Formule1.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </bottom>
+</BorderPane>

@@ -1,18 +1,37 @@
-.anchorpane {
+/*
+AUTEUR : Aymerik ABOSO
+ANNEE : 2018
+*/
+
+
+
+/* - - - - - - - - - PAGE ACCUEIL - - - - - - - - - */
+
+
+
+.accueil_border_centre {
 	-fx-background-color: linear-gradient(#007ac1, #03a9f4);
 }
 
-.jfxbutton {
+.accueil_border_top {
+	-fx-background-color: #01579b;
+}
+
+.accueil_border_bottom {
+	-fx-background-color: #01579b;
+}
+
+.accueil_bouton_se_connecter {
 	-fx-text-fill: #01579b;
 	-fx-font-size: 30pt;
 }
 
-.jfxtextfield {
-	-fx-text-fill: #01579b;
+.accueil_champ_pseudo {
+	-fx-text-fill: #ffffff;
 	-fx-font-size: 20pt;
 }
 
-.label {
+.accueil_label_top {
 	-fx-text-fill: #ffffff;
 	-fx-font-size: 20pt;
 	-fx-font-style: italic;
