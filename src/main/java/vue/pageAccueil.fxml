@@ -9,7 +9,6 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" styleClass="anchorpane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.Controleur_PageAccueil">
    <children>
       <Label layoutX="34.0" layoutY="298.0" text="Pseudonyme">
@@ -24,13 +23,13 @@
       </JFXTextField>
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="411.0" layoutY="419.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../Ressources/Formule1.png" />
+            <Image url="@../../Ressources/Formule1.png" />
          </image>
       </ImageView>
       <JFXButton buttonType="RAISED" layoutX="134.0" layoutY="390.0" styleClass="jfxbutton" text="SE CONNECTER" />
       <ImageView fitHeight="156.0" fitWidth="301.0" layoutX="150.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../Ressources/logoMagicRun.png" />
+            <Image url="@../../Ressources/logoMagicRun.png" />
          </image>
       </ImageView>
    </children>
