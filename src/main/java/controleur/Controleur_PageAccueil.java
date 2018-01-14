@@ -1,6 +1,7 @@
 package controleur;
 
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXButton;
@@ -9,8 +10,14 @@ import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.TextInputDialog;
+
+
+
+/*
+ATEUR : Aymerik ABOSO
+ANNEE : 2018
+*/
 
 
 
@@ -25,7 +32,6 @@ public class Controleur_PageAccueil implements Initializable {
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		//...
 		//System.out.println("Chargé");
 		
 		//ECOUTEUR SUR LE BOUTON POUR LE DESACTIVER SI CHAMP PSEUDO VIDE
@@ -40,13 +46,21 @@ public class Controleur_PageAccueil implements Initializable {
 
     @FXML
     void seConnecter(ActionEvent event) {
-    	System.out.println("CONNECTE !");
-    	Alert alert = new Alert(AlertType.INFORMATION);
-    	alert.setTitle("Information Dialog");
-    	alert.setHeaderText("Look, an Information Dialog");
-    	alert.setContentText("I have a great message for you!");
+    	//System.out.println("CONNECTE !");
+    	String NOM_FENETRE = "Serveur de jeu";
+    	String TEXTE_EXPLICATIONS = "Bonjour " + champPseudo.getText() + " !\nVeuillez saisir l'adresse du serveur de jeu.\nExemple : '" + "lol" + "'";
+    	String TEXTE_LABEL_INPUT = "Adresse serveur";
+    	
+    	TextInputDialog dialog = new TextInputDialog("");
+    	dialog.setTitle(NOM_FENETRE);
+    	dialog.setHeaderText(TEXTE_EXPLICATIONS);
+    	dialog.setContentText(TEXTE_LABEL_INPUT);
 
-    	alert.showAndWait();
+    	Optional<String> adresseServeur = dialog.showAndWait();
+    	if (adresseServeur.isPresent()){
+    	    //System.out.println("Adresse : " + adresseServeur.get());
+    		//TEST DE CREATION DE NOUVEAU JOUEUR
+    	}
     }
     
     @FXML
