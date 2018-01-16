@@ -33,7 +33,11 @@
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="credits_border_centre" BorderPane.alignment="CENTER">
          <children>
-            <Text layoutX="28.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="credits_label_credits" text="Text" />
+            <TextFlow layoutX="14.0" layoutY="14.0" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="credits_label_credits" text="Text" />
+               </children>
+            </TextFlow>
          </children>
       </AnchorPane>
    </center>

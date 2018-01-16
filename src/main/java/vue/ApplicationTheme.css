@@ -22,8 +22,10 @@ ANNEE : 2018
 }
 
 .accueil_bouton_se_connecter {
-	-fx-text-fill: #01579b;
+	-fx-text-fill: #ffffff;
 	-fx-font-size: 30pt;
+	-fx-background-color: #01579b;
+	-fx-background-radius:30;
 }
 
 .accueil_champ_pseudo {
@@ -56,6 +58,7 @@ ANNEE : 2018
 .credits_bouton_retour {
 	-fx-text-fill: #ffffff;
 	-fx-font-size: 20pt;
+	-fx-font-weight: bold;
 }
 
 .credits_border_centre {
