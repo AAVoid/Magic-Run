@@ -73,3 +73,15 @@ ANNEE : 2018
 	-fx-background-color: #01579b;
 }
 
+.credits_texte_en_valeur {
+	-fx-font-size: 20pt;
+	-fx-text-fill: /*#FFD700*/#01579b;
+	-fx-font-weight: bold;
+	-fx-font-style: italic;
+}
+
+.credits_texte_normal {
+	-fx-font-size: 16pt;
+	-fx-text-fill: #ffffff;
+}
+

@@ -41,6 +41,9 @@
                <image>
                   <Image url="@../../Ressource/Image/Formule1.png" />
                </image>
+               <effect>
+                  <Bloom />
+               </effect>
             </ImageView>
             <JFXButton fx:id="boutonCredits" layoutX="69.0" layoutY="15.0" onAction="#afficherCredits" text=" ">
                <graphic>

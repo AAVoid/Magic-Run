@@ -33,11 +33,30 @@
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="credits_border_centre" BorderPane.alignment="CENTER">
          <children>
-            <TextFlow layoutX="14.0" layoutY="14.0" prefHeight="200.0" prefWidth="200.0">
+            <TextFlow layoutX="17.0" layoutY="325.0" prefHeight="137.0" prefWidth="566.0" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="17.0" AnchorPane.topAnchor="325.0">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="credits_label_credits" text="Text" />
+                  <Label text="         " />
+                  <Label fx:id="nomJeu" styleClass="credits_texte_en_valeur" text="Magic Run " />
+                  <Label styleClass="credits_texte_normal" text="est un projet étudiant consistant à créer" />
+                  <Label layoutX="10.0" layoutY="26.0" styleClass="credits_texte_normal" text="un jeu de voiture 2D multijoueur." />
                </children>
             </TextFlow>
+            <Label layoutX="18.0" layoutY="53.0" styleClass="credits_texte_en_valeur" text="Développeur : " />
+            <Label fx:id="nomDeveloppeur" layoutX="202.0" layoutY="57.0" styleClass="credits_texte_normal" text="Aymerik ABOSO" />
+            <Label fx:id="emailDeveloppeur" layoutX="137.0" layoutY="109.0" styleClass="credits_texte_normal" text="abosoaymerik@gmail.com" />
+            <Label layoutX="18.0" layoutY="105.0" styleClass="credits_texte_en_valeur" text="Contact : " />
+            <Label fx:id="dateDeveloppement" layoutX="99.0" layoutY="161.0" styleClass="credits_texte_normal" text="2018" />
+            <Label layoutX="18.0" layoutY="157.0" styleClass="credits_texte_en_valeur" text="Date : " />
+            <Label fx:id="versionDeveloppement" layoutX="137.0" layoutY="213.0" styleClass="credits_texte_normal" text="1.0" />
+            <Label layoutX="19.0" layoutY="209.0" styleClass="credits_texte_en_valeur" text="Version : " />
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="334.0" layoutY="130.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../Ressource/Image/Formule1.png" />
+               </image>
+               <effect>
+                  <DropShadow height="40.0" offsetX="10.0" offsetY="10.0" radius="19.5" spread="0.3" width="40.0" />
+               </effect>
+            </ImageView>
          </children>
       </AnchorPane>
    </center>

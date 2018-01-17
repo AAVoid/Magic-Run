@@ -18,6 +18,9 @@ public class Main extends Application {
 	public static final String NOM_APPLICATION = "Magic Run";
 	public static final String NOM_AUTEUR = "Aymerik ABOSO";
 	public static final String NOM_APPLICATION_FENETRE = Main.NOM_APPLICATION + " - " + Main.NOM_AUTEUR;
+	public static final String DATE_DEVELOPPEMENT = "2018";
+	public static final String EMAIL_DEVELOPPEUR = "abosoaymerik@gmail.com";
+	public static final String VERSION_DEVELOPPEMENT = "1.0";
 	public static final int LONGUEUR_FENETRE = 600;
 	public static final int HAUTEUR_FENETRE = 600;
 	public static final String CHEMIN_FXML_PAGE_ACCUEIL = "/vue/pageAccueil.fxml";

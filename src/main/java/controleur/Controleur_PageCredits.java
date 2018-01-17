@@ -12,6 +12,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import main.Main;
@@ -28,6 +29,16 @@ ANNEE : 2018
 public class Controleur_PageCredits implements Initializable {
 	@FXML
 	private JFXButton boutonRetourAccueil;
+	@FXML
+    private Label dateDeveloppement;
+    @FXML
+    private Label emailDeveloppeur;
+    @FXML
+    private Label versionDeveloppement;
+    @FXML
+    private Label nomDeveloppeur;
+    @FXML
+    private Label nomJeu;
 	
 	public static Media mediaSonRetour;
 	public static MediaPlayer mediaPlayerSonRetour;
@@ -36,6 +47,12 @@ public class Controleur_PageCredits implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		//System.out.println("Chargé");
+		//On place la valeur des textes ici pour ajuster dynamiquement par rapport au Main
+		this.dateDeveloppement.setText(Main.DATE_DEVELOPPEMENT);
+		this.emailDeveloppeur.setText(Main.EMAIL_DEVELOPPEUR);
+		this.versionDeveloppement.setText(Main.VERSION_DEVELOPPEMENT);
+		this.nomDeveloppeur.setText(Main.NOM_AUTEUR);
+		this.nomJeu.setText(Main.NOM_APPLICATION + " ");
 	}
 	
 	@FXML
