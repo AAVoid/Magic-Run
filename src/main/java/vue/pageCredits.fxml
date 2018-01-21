@@ -33,23 +33,33 @@
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="credits_border_centre" BorderPane.alignment="CENTER">
          <children>
-            <TextFlow layoutX="17.0" layoutY="325.0" prefHeight="137.0" prefWidth="566.0" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="17.0" AnchorPane.topAnchor="325.0">
+            <TextFlow layoutX="17.0" layoutY="161.0" prefHeight="295.0" prefWidth="566.0" textAlignment="JUSTIFY" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="17.0" AnchorPane.topAnchor="161.0">
                <children>
                   <Label text="         " />
                   <Label fx:id="nomJeu" styleClass="credits_texte_en_valeur" text="Magic Run " />
-                  <Label styleClass="credits_texte_normal" text="est un projet étudiant consistant à créer" />
-                  <Label layoutX="10.0" layoutY="26.0" styleClass="credits_texte_normal" text="un jeu de voiture 2D multijoueur." />
+                  <Label styleClass="credits_texte_petit" text="est un projet étudiant consistant à créer un jeu de" textAlignment="JUSTIFY" />
+                  <Label layoutX="10.0" layoutY="26.0" styleClass="credits_texte_petit" text="voiture 2D exclusivement multijoueur.                              " textAlignment="JUSTIFY" />
+                  <Label layoutX="10.0" layoutY="49.0" styleClass="credits_texte_petit" text="      Année 2213 : un monde où chacun a sa chance et peut devenir ce qu'il" textAlignment="JUSTIFY" />
+                  <Label layoutX="10.0" layoutY="80.0" styleClass="credits_texte_petit" text="veut indépendamment de son origine." textAlignment="JUSTIFY" />
+                  <Label layoutX="10.0" layoutY="111.0" styleClass="credits_texte_petit" text="      Les humains peuvent connecter leur esprit à un monde virtuel pour faire" textAlignment="JUSTIFY" />
+                  <Label layoutX="10.0" layoutY="142.0" styleClass="credits_texte_petit" text="des courses de voitures afin d'obtenir des privilèges divers. On les appelle " textAlignment="JUSTIFY" />
+                  <Label layoutX="10.0" layoutY="173.0" styleClass="credits_texte_petit" text="les Magic Runners. " />
+                  <Label layoutX="10.0" layoutY="204.0" styleClass="credits_texte_petit" text="Les classements mondiaux et en championnats décident" textAlignment="JUSTIFY" />
+                  <Label layoutX="10.0" layoutY="235.0" styleClass="credits_texte_petit" text="des avantages obtenus par un Magic Runner.     " textAlignment="JUSTIFY" />
+                  <Label layoutX="10.0" layoutY="266.0" styleClass="credits_texte_petit" text="      Tous les Magic Runners sont sur un même pied d'égalité :" textAlignment="JUSTIFY" />
+                  <Label layoutX="10.0" layoutY="224.0" styleClass="credits_texte_petit" text="seulement 15 minutes d'entrainement sont possibles par personne chaque jour." textAlignment="JUSTIFY" />
+                  <Label layoutX="10.0" layoutY="249.0" styleClass="credits_texte_petit" text="Aucune tricherie n'est possible. Seule la course importe." textAlignment="JUSTIFY" />
                </children>
             </TextFlow>
-            <Label layoutX="18.0" layoutY="53.0" styleClass="credits_texte_en_valeur" text="Développeur : " />
-            <Label fx:id="nomDeveloppeur" layoutX="202.0" layoutY="57.0" styleClass="credits_texte_normal" text="Aymerik ABOSO" />
-            <Label fx:id="emailDeveloppeur" layoutX="137.0" layoutY="109.0" styleClass="credits_texte_normal" text="abosoaymerik@gmail.com" />
-            <Label layoutX="18.0" layoutY="105.0" styleClass="credits_texte_en_valeur" text="Contact : " />
-            <Label fx:id="dateDeveloppement" layoutX="99.0" layoutY="161.0" styleClass="credits_texte_normal" text="2018" />
-            <Label layoutX="18.0" layoutY="157.0" styleClass="credits_texte_en_valeur" text="Date : " />
-            <Label fx:id="versionDeveloppement" layoutX="137.0" layoutY="213.0" styleClass="credits_texte_normal" text="1.0" />
-            <Label layoutX="19.0" layoutY="209.0" styleClass="credits_texte_en_valeur" text="Version : " />
-            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="334.0" layoutY="130.0" pickOnBounds="true" preserveRatio="true">
+            <Label layoutX="18.0" layoutY="8.0" styleClass="credits_texte_en_valeur" text="Développeur : " />
+            <Label fx:id="nomDeveloppeur" layoutX="202.0" layoutY="12.0" styleClass="credits_texte_normal" text="Aymerik ABOSO" />
+            <Label fx:id="emailDeveloppeur" layoutX="137.0" layoutY="46.0" styleClass="credits_texte_normal" text="abosoaymerik@gmail.com" />
+            <Label layoutX="18.0" layoutY="42.0" styleClass="credits_texte_en_valeur" text="Contact : " />
+            <Label fx:id="dateDeveloppement" layoutX="99.0" layoutY="80.0" styleClass="credits_texte_normal" text="2018" />
+            <Label layoutX="18.0" layoutY="76.0" styleClass="credits_texte_en_valeur" text="Date : " />
+            <Label fx:id="versionDeveloppement" layoutX="137.0" layoutY="114.0" styleClass="credits_texte_normal" text="1.0" />
+            <Label layoutX="19.0" layoutY="110.0" styleClass="credits_texte_en_valeur" text="Version : " />
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="408.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../Ressource/Image/Formule1.png" />
                </image>

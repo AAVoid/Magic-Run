@@ -85,3 +85,8 @@ ANNEE : 2018
 	-fx-text-fill: #ffffff;
 }
 
+.credits_texte_petit {
+	-fx-font-size: 12pt;
+	-fx-text-fill: #ffffff;
+}
+

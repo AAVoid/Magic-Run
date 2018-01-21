@@ -43,14 +43,17 @@ public class Controleur_PageCredits implements Initializable {
 	public static Media mediaSonRetour;
 	public static MediaPlayer mediaPlayerSonRetour;
 	public static final String CHEMIN_SON_RETOUR = "file:/" + Main.CHEMIN_SON + "/retour.wav";
+	public static final String DATE_DEVELOPPEMENT = "2018";
+	public static final String EMAIL_DEVELOPPEUR = "abosoaymerik@gmail.com";
+	public static final String VERSION_DEVELOPPEMENT = "1.0";
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		//System.out.println("Chargé");
 		//On place la valeur des textes ici pour ajuster dynamiquement par rapport au Main
-		this.dateDeveloppement.setText(Main.DATE_DEVELOPPEMENT);
-		this.emailDeveloppeur.setText(Main.EMAIL_DEVELOPPEUR);
-		this.versionDeveloppement.setText(Main.VERSION_DEVELOPPEMENT);
+		this.dateDeveloppement.setText(Controleur_PageCredits.DATE_DEVELOPPEMENT);
+		this.emailDeveloppeur.setText(Controleur_PageCredits.EMAIL_DEVELOPPEUR);
+		this.versionDeveloppement.setText(Controleur_PageCredits.VERSION_DEVELOPPEMENT);
 		this.nomDeveloppeur.setText(Main.NOM_AUTEUR);
 		this.nomJeu.setText(Main.NOM_APPLICATION + " ");
 	}
