@@ -2,7 +2,6 @@ package controleur;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Optional;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXButton;
@@ -15,7 +14,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TextInputDialog;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import main.Main;
@@ -31,9 +29,12 @@ ANNEE : 2018
 
 public class Controleur_PageAccueil implements Initializable {
 	private static final int NB_CHAR_MAX_PSEUDO = 50; //Champ pseudo peut avoir 50 caractères max
+	private static final int NB_CHAR_MAX_ADRESSE_IP = 50;
 	public static final String CHEMIN_FXML_PAGE_CREDITS = "/vue/pageCredits.fxml";
 	@FXML
 	private JFXTextField champPseudo;
+	@FXML
+    private JFXTextField champAdresseServeur;
 	@FXML
 	private JFXButton boutonSeConnecter;
 	@FXML
@@ -49,6 +50,9 @@ public class Controleur_PageAccueil implements Initializable {
 	public static Media mediaSonMessage;
 	public static MediaPlayer mediaPlayerSonMessage;
 	public static final String CHEMIN_SON_MESSAGE = "file:/" + Main.CHEMIN_SON + "/message.wav";
+	
+	private static String PSEUDONYME = "";
+	private static String ADRESSE_IP_SERVEUR = "";
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -56,11 +60,18 @@ public class Controleur_PageAccueil implements Initializable {
 
 		//ECOUTEUR SUR LE BOUTON POUR LE DESACTIVER SI CHAMP PSEUDO VIDE
 		champPseudo.textProperty().addListener((observable, oldValue, newValue) -> {
-			boutonSeConnecter.setDisable(newValue.trim().isEmpty());
+			boutonSeConnecter.setDisable(newValue.trim().isEmpty() || champAdresseServeur.getText().trim().isEmpty());
 
 			//LIMITE LE NOMBRE DE CARACTERES DU TEXT FIELD PSEUDO
 			if(newValue.length() >= Controleur_PageAccueil.NB_CHAR_MAX_PSEUDO + 1)
 				champPseudo.setText(oldValue); //On efface le caractère
+		});
+		champAdresseServeur.textProperty().addListener((observable, oldValue, newValue) -> {
+			boutonSeConnecter.setDisable(newValue.trim().isEmpty() || champPseudo.getText().trim().isEmpty());
+
+			//LIMITE LE NOMBRE DE CARACTERES DU TEXT FIELD PSEUDO
+			if(newValue.length() >= Controleur_PageAccueil.NB_CHAR_MAX_ADRESSE_IP + 1)
+				champAdresseServeur.setText(oldValue);
 		});
 
 		if(mediaMusiqueFond == null) { //ON LANCE LA MUSIQUE QUE SI ELLE N'EST PAS DEJA EN TRAIN D'ETRE JOUEE
@@ -74,27 +85,13 @@ public class Controleur_PageAccueil implements Initializable {
 	@FXML
 	void seConnecter(ActionEvent event) {
 		//System.out.println("CONNECTE !");
-		String NOM_FENETRE = "Serveur de jeu";
-		String TEXTE_EXPLICATIONS = "Bonjour " + champPseudo.getText() + 
-				" !\nVeuillez saisir l'adresse du serveur de jeu.\n\n\nExemple : \"" + "lol" + "\"";
-		String TEXTE_LABEL_INPUT = "Adresse serveur";
-
 		//On doit recharger le son à chaque fois car en le jouant une fois, il est effacé de la mémoire
 		//à la fin de sa lecture
 		mediaSonMessage = new Media(Controleur_PageAccueil.CHEMIN_SON_MESSAGE);
 		mediaPlayerSonMessage = new MediaPlayer(mediaSonMessage);
 		mediaPlayerSonMessage.setCycleCount(1);
 		mediaPlayerSonMessage.play();
-		TextInputDialog dialog = new TextInputDialog("");
-		dialog.setTitle(NOM_FENETRE);
-		dialog.setHeaderText(TEXTE_EXPLICATIONS);
-		dialog.setContentText(TEXTE_LABEL_INPUT);
-
-		Optional<String> adresseServeur = dialog.showAndWait();
-		if (adresseServeur.isPresent()){
-			//System.out.println("Adresse : " + adresseServeur.get());
-			//TEST DE CREATION DE NOUVEAU JOUEUR
-		}
+		//SAUVEGARDE DU PSEUDO ET ADRESSE IP DU SERVEUR
 	}
 
 	@FXML

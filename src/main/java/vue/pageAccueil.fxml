@@ -24,10 +24,15 @@
       <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="accueil_border_centre" BorderPane.alignment="CENTER">
          <children>
             <JFXButton fx:id="boutonSeConnecter" disable="true" layoutX="136.0" layoutY="267.0" onAction="#seConnecter" styleClass="accueil_bouton_se_connecter" text="SE CONNECTER" />
-            <JFXTextField fx:id="champPseudo" alignment="CENTER" layoutX="37.0" layoutY="138.0" prefHeight="25.0" prefWidth="529.0" promptText="Pseudonyme" styleClass="accueil_champ_pseudo" unFocusColor="#4059a9">
+            <JFXTextField fx:id="champAdresseServeur" alignment="CENTER" layoutX="38.0" layoutY="155.0" prefHeight="25.0" prefWidth="529.0" promptText="Adresse serveur" styleClass="accueil_champ_pseudo" unFocusColor="#4059a9">
                <effect>
                   <Reflection fraction="0.55" topOffset="-1.0" />
                </effect></JFXTextField>
+            <JFXTextField fx:id="champPseudo" alignment="CENTER" layoutX="38.0" layoutY="35.0" prefHeight="25.0" prefWidth="529.0" promptText="Pseudonyme" styleClass="accueil_champ_pseudo" unFocusColor="#4059a9">
+               <effect>
+                  <Reflection fraction="0.55" topOffset="-1.0" />
+               </effect>
+            </JFXTextField>
          </children>
       </AnchorPane>
    </center>
