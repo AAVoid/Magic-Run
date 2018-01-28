@@ -28,8 +28,8 @@ ANNEE : 2018
 
 
 public class Controleur_PageAccueil implements Initializable {
-	private static final int NB_CHAR_MAX_PSEUDO = 50; //Champ pseudo peut avoir 50 caractères max
-	private static final int NB_CHAR_MAX_ADRESSE_IP = 50;
+	private static final int NB_CHAR_MAX_PSEUDO = 60; //Champ pseudo peut avoir 50 caractères max
+	private static final int NB_CHAR_MAX_ADRESSE_IP = 60;
 	public static final String CHEMIN_FXML_PAGE_CREDITS = "/vue/pageCredits.fxml";
 	@FXML
 	private JFXTextField champPseudo;
@@ -57,6 +57,10 @@ public class Controleur_PageAccueil implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		//System.out.println("Chargé");
+		
+		//CHARGEMENT DES CHAMPS SI ON ETAIT DEJA CONNECTE
+		champPseudo.setText(Controleur_PageAccueil.PSEUDONYME);
+		champAdresseServeur.setText(Controleur_PageAccueil.ADRESSE_IP_SERVEUR);
 
 		//ECOUTEUR SUR LE BOUTON POUR LE DESACTIVER SI CHAMP PSEUDO VIDE
 		champPseudo.textProperty().addListener((observable, oldValue, newValue) -> {

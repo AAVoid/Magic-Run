@@ -29,5 +29,8 @@ dependencies {
     
     // JFOENIX POUR LE MATERIAL DESIGN AVEC JAVA FX
     compile 'com.jfoenix:jfoenix:8.0.1'
+    
+    //POUR L'ANALYSE DE JSON
+    compile group: 'org.json', name: 'json', version: '20170516'
 }
 
