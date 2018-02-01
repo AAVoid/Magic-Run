@@ -1,43 +1,42 @@
 package service;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
+import controleur.Controleur_PageAccueil;
+
+/*
+ATEUR : Aymerik ABOSO
+ANNEE : 2018
+*/
+
+
+
 public class UtiliserWS {
-}
-
-/*public class UtiliserWS {
-	private static final String URL_SERVEUR = "http://ns4004962.ip-198-27-65.net/applications/WAL/";
 	private static final String ENCODAGE_PARAMETRE_URL = "UTF-8";
-
 
 	public static String utiliserService(String u) throws Exception{
 		//System.out.println(u);
 		String t = "";
-		//Creation des objets
 		URL url = new URL(u);
 		HttpURLConnection con = (HttpURLConnection)url.openConnection();
-		//Ouverture de la connextion vers l'url
 		BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
 		String tmp = "";
-		while((tmp=in.readLine()) != null){
-			t += tmp;
-		}
+		while((tmp=in.readLine()) != null){	t += tmp; }
 		con.disconnect();
 		return t;
 	}
 
-	public static String serviceInscription(String identite, String eMail) throws Exception {
-		String url = URL_SERVEUR;
-		url += "wal.php?inscription&identite=" + URLEncoder.encode(identite, ENCODAGE_PARAMETRE_URL) + "&mail=" + 
-				URLEncoder.encode(eMail, ENCODAGE_PARAMETRE_URL) + "";
+	public static String service_Who() throws Exception {
+		String url = Controleur_PageAccueil.ADRESSE_IP_SERVEUR;
+		/*url += "wal.php?inscription&identite=" + URLEncoder.encode(identite, ENCODAGE_PARAMETRE_URL) + "&mail=" + 
+				URLEncoder.encode(eMail, ENCODAGE_PARAMETRE_URL) + "";*/
 		return utiliserService(url);
 	}
 
-	public static String serviceActivation(String identifiantActivation) throws Exception {
-		String url = URL_SERVEUR;
-		url += "wal.php?activation=" + URLEncoder.encode(identifiantActivation, ENCODAGE_PARAMETRE_URL) + "";
-		return utiliserService(url);
-	}
-
-	public static int getReponse(String jsonString) {
+	/*public static int getReponse(String jsonString) {
 		JSONObject jo = null;
 		try {
 			jo = new JSONObject(jsonString);
@@ -151,8 +150,8 @@ public class UtiliserWS {
 				+ URLEncoder.encode("" + idParametreCorrespondant, ENCODAGE_PARAMETRE_URL) 
 				+"&message=" + URLEncoder.encode(message, ENCODAGE_PARAMETRE_URL);
 		return utiliserService(url);
-	}
-}*/
+	}*/
+}
 
 
 

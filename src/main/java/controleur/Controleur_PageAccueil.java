@@ -17,6 +17,7 @@ import javafx.scene.Scene;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import main.Main;
+import service.UtiliserWS;
 
 
 
@@ -51,8 +52,8 @@ public class Controleur_PageAccueil implements Initializable {
 	public static MediaPlayer mediaPlayerSonMessage;
 	public static final String CHEMIN_SON_MESSAGE = "file:/" + Main.CHEMIN_SON + "/message.wav";
 	
-	private static String PSEUDONYME = "";
-	private static String ADRESSE_IP_SERVEUR = "";
+	public static String PSEUDONYME = "";
+	public static String ADRESSE_IP_SERVEUR = "";
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -96,6 +97,14 @@ public class Controleur_PageAccueil implements Initializable {
 		mediaPlayerSonMessage.setCycleCount(1);
 		mediaPlayerSonMessage.play();
 		//SAUVEGARDE DU PSEUDO ET ADRESSE IP DU SERVEUR
+		String who = null;
+		try {
+			who = UtiliserWS.service_Who();
+			System.out.println(who);
+		} catch (Exception e) { //L'adresse du serveur n'est pas correcte
+			e.printStackTrace();
+		}
+		System.out.println(who);
 	}
 
 	@FXML
