@@ -30,7 +30,7 @@ public class UtiliserWS {
 	}
 
 	public static String service_Who() throws Exception {
-		String url = Controleur_PageAccueil.ADRESSE_IP_SERVEUR;
+		String url = Controleur_PageAccueil.ADRESSE_IP_SERVEUR + "Who";
 		/*url += "wal.php?inscription&identite=" + URLEncoder.encode(identite, ENCODAGE_PARAMETRE_URL) + "&mail=" + 
 				URLEncoder.encode(eMail, ENCODAGE_PARAMETRE_URL) + "";*/
 		return utiliserService(url);

@@ -33,6 +33,11 @@ ANNEE : 2018
 	-fx-font-size: 20pt;
 }
 
+.accueil_champ_adresse_serveur {
+	-fx-text-fill: #ffffff;
+	-fx-font-size: 12pt;
+}
+
 .accueil_label_top {
 	-fx-text-fill: #ffffff;
 	-fx-font-size: 20pt;

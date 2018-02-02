@@ -30,7 +30,7 @@ ANNEE : 2018
 
 public class Controleur_PageAccueil implements Initializable {
 	private static final int NB_CHAR_MAX_PSEUDO = 60; //Champ pseudo peut avoir 50 caractères max
-	private static final int NB_CHAR_MAX_ADRESSE_IP = 60;
+	private static final int NB_CHAR_MAX_ADRESSE_IP = 80;
 	public static final String CHEMIN_FXML_PAGE_CREDITS = "/vue/pageCredits.fxml";
 	@FXML
 	private JFXTextField champPseudo;
@@ -96,15 +96,25 @@ public class Controleur_PageAccueil implements Initializable {
 		mediaPlayerSonMessage = new MediaPlayer(mediaSonMessage);
 		mediaPlayerSonMessage.setCycleCount(1);
 		mediaPlayerSonMessage.play();
-		//SAUVEGARDE DU PSEUDO ET ADRESSE IP DU SERVEUR
+		//Adresse du serveur, par exemple : Adr. serv. : http://93.113.223.251/magicrun/
+		Controleur_PageAccueil.ADRESSE_IP_SERVEUR = champAdresseServeur.getText();
 		String who = null;
 		try {
 			who = UtiliserWS.service_Who();
-			System.out.println(who);
 		} catch (Exception e) { //L'adresse du serveur n'est pas correcte
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
-		System.out.println(who);
+		//- - -
+		//ON TEST SI ON A EU UNE REPONSE
+		if(who != null) { //REPONSE => PASSAGE A L'ECRAN SUIVANT
+			/*Parent root = FXMLLoader.load(getClass().getResource(Controleur_PageAccueil.CHEMIN_FXML_PAGE_CREDITS));
+			Scene scene = new Scene(root, Main.LONGUEUR_FENETRE, Main.HAUTEUR_FENETRE);
+			scene.getStylesheets().add(Main.CHEMIN_FICHIER_CSS);
+			Main.windowStage.setScene(scene);*/
+		}
+		else { //PAS DE REPONSE
+			//AFFICHAGE MESSAGE ADRESSE SERVEUR INCORRECTE
+		}
 	}
 
 	@FXML
