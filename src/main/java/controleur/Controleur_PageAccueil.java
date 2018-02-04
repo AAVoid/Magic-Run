@@ -14,6 +14,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import main.Main;
@@ -32,6 +34,7 @@ public class Controleur_PageAccueil implements Initializable {
 	private static final int NB_CHAR_MAX_PSEUDO = 60; //Champ pseudo peut avoir 50 caractères max
 	private static final int NB_CHAR_MAX_ADRESSE_IP = 80;
 	public static final String CHEMIN_FXML_PAGE_CREDITS = "/vue/pageCredits.fxml";
+	public static final String CHEMIN_FXML_PAGE_SELECTION_VOITURE = "/vue/pageSelectionVoiture.fxml";
 	@FXML
 	private JFXTextField champPseudo;
 	@FXML
@@ -65,14 +68,14 @@ public class Controleur_PageAccueil implements Initializable {
 
 		//ECOUTEUR SUR LE BOUTON POUR LE DESACTIVER SI CHAMP PSEUDO VIDE
 		champPseudo.textProperty().addListener((observable, oldValue, newValue) -> {
-			boutonSeConnecter.setDisable(newValue.trim().isEmpty() || champAdresseServeur.getText().trim().isEmpty());
+			boutonSeConnecter.setDisable(newValue.replace(" ", "").isEmpty() || champAdresseServeur.getText().replace(" ", "").isEmpty());
 
 			//LIMITE LE NOMBRE DE CARACTERES DU TEXT FIELD PSEUDO
 			if(newValue.length() >= Controleur_PageAccueil.NB_CHAR_MAX_PSEUDO + 1)
 				champPseudo.setText(oldValue); //On efface le caractère
 		});
 		champAdresseServeur.textProperty().addListener((observable, oldValue, newValue) -> {
-			boutonSeConnecter.setDisable(newValue.trim().isEmpty() || champPseudo.getText().trim().isEmpty());
+			boutonSeConnecter.setDisable(newValue.replace(" ", "").isEmpty() || champPseudo.getText().replace(" ", "").isEmpty());
 
 			//LIMITE LE NOMBRE DE CARACTERES DU TEXT FIELD PSEUDO
 			if(newValue.length() >= Controleur_PageAccueil.NB_CHAR_MAX_ADRESSE_IP + 1)
@@ -97,23 +100,43 @@ public class Controleur_PageAccueil implements Initializable {
 		mediaPlayerSonMessage.setCycleCount(1);
 		mediaPlayerSonMessage.play();
 		//Adresse du serveur, par exemple : Adr. serv. : http://93.113.223.251/magicrun/
-		Controleur_PageAccueil.ADRESSE_IP_SERVEUR = champAdresseServeur.getText();
-		String who = null;
+		Controleur_PageAccueil.ADRESSE_IP_SERVEUR = champAdresseServeur.getText().replace(" ", "");
+		Controleur_PageAccueil.PSEUDONYME = champPseudo.getText().replace(" ", "");
+		String reponse = null;
 		try {
-			who = UtiliserWS.service_Who();
+			reponse = UtiliserWS.service_Nouveau(Controleur_PageAccueil.PSEUDONYME);
 		} catch (Exception e) { //L'adresse du serveur n'est pas correcte
 			//e.printStackTrace();
 		}
 		//- - -
 		//ON TEST SI ON A EU UNE REPONSE
-		if(who != null) { //REPONSE => PASSAGE A L'ECRAN SUIVANT
-			/*Parent root = FXMLLoader.load(getClass().getResource(Controleur_PageAccueil.CHEMIN_FXML_PAGE_CREDITS));
-			Scene scene = new Scene(root, Main.LONGUEUR_FENETRE, Main.HAUTEUR_FENETRE);
-			scene.getStylesheets().add(Main.CHEMIN_FICHIER_CSS);
-			Main.windowStage.setScene(scene);*/
+		if(reponse != null) { //REPONSE => EST-CE QUE LE PSEUDO EST DEJA UTILISE ?
+			try {
+				String status = UtiliserWS.getStatusService_Nouveau(reponse);
+				if(status.equals("OK")) {
+					//On affiche l'écran de sélection de la voiture
+					Parent root = FXMLLoader.load(getClass().getResource(Controleur_PageAccueil.CHEMIN_FXML_PAGE_SELECTION_VOITURE));
+					Scene scene = new Scene(root, Main.LONGUEUR_FENETRE, Main.HAUTEUR_FENETRE);
+					scene.getStylesheets().add(Main.CHEMIN_FICHIER_CSS);
+					Main.windowStage.setScene(scene);
+				}
+				else {
+					Alert alert = new Alert(AlertType.ERROR);
+					alert.setTitle("ERREUR");
+					alert.setHeaderText("Pseudonyme déjà utilisé !");
+					alert.setContentText("Le pseudonyme \"" + Controleur_PageAccueil.PSEUDONYME + "\" est déjà utilisé !");
+					alert.showAndWait();
+				}
+			} catch (Exception e) {
+				//e.printStackTrace();
+			}			
 		}
-		else { //PAS DE REPONSE
-			//AFFICHAGE MESSAGE ADRESSE SERVEUR INCORRECTE
+		else { //PAS DE REPONSE : MAUVAISE ADRESSE DU SERVEUR
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("ERREUR");
+			alert.setHeaderText("Serveur de jeu non trouvé !");
+			alert.setContentText("Le serveur de jeu n'a pas été trouvé via l'adresse spécifiée !");
+			alert.showAndWait();
 		}
 	}
 

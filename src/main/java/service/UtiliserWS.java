@@ -5,6 +5,9 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import controleur.Controleur_PageAccueil;
 
 /*
@@ -15,7 +18,7 @@ ANNEE : 2018
 
 
 public class UtiliserWS {
-	private static final String ENCODAGE_PARAMETRE_URL = "UTF-8";
+	//private static final String ENCODAGE_PARAMETRE_URL = "UTF-8";
 
 	public static String utiliserService(String u) throws Exception{
 		//System.out.println(u);
@@ -34,6 +37,33 @@ public class UtiliserWS {
 		/*url += "wal.php?inscription&identite=" + URLEncoder.encode(identite, ENCODAGE_PARAMETRE_URL) + "&mail=" + 
 				URLEncoder.encode(eMail, ENCODAGE_PARAMETRE_URL) + "";*/
 		return utiliserService(url);
+	}
+	
+	public static String service_Nouveau(String pseudo) throws Exception {
+		String url = Controleur_PageAccueil.ADRESSE_IP_SERVEUR + "Nouveau?pseudo=" + pseudo;
+		return utiliserService(url);
+	}
+	
+	public static String getStatusService_Nouveau(String jsonNouveau) throws Exception {
+		String status = "";
+		JSONObject jo = null;
+		try {
+			jo = new JSONObject(jsonNouveau);
+		} catch (JSONException e2) {
+			e2.printStackTrace();
+		}
+		try {
+			status = jo.getString("status");
+		} catch (JSONException e1) {
+			e1.printStackTrace();
+		}
+		return status;
+	}
+	
+	public static String service_getNombreJoueursConnectes() throws Exception {
+		String nbJoueursConnectes = "";
+		String who = UtiliserWS.service_Who();
+		return nbJoueursConnectes;
 	}
 
 	/*public static int getReponse(String jsonString) {

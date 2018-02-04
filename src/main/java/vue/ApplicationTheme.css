@@ -95,3 +95,25 @@ ANNEE : 2018
 	-fx-text-fill: #ffffff;
 }
 
+
+
+/* - - - - - - - - - PAGE ACCUEIL - - - - - - - - - */
+
+
+
+.selection_voiture_label_1 {
+	-fx-font-size: 20pt;
+	-fx-text-fill: #01579b;
+}
+
+.selection_voiture_label_2 {
+	-fx-font-size: 16pt;
+	-fx-text-fill: #ffffff;
+}
+
+.selection_voiture_bouton_bottm {
+	-fx-text-fill: #ffffff;
+	-fx-font-size: 20pt;
+}
+
+

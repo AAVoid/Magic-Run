@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.paint.*?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.Controleur_PageChoixVoiture">
+   <top>
+      <AnchorPane prefHeight="60.0" prefWidth="600.0" styleClass="credits_border_top" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="14.0" layoutY="11.0" styleClass="credits_label_top" text="Choix de la voiture" />
+         </children>
+      </AnchorPane>
+   </top>
+   <left>
+      <AnchorPane prefHeight="340.0" prefWidth="0.0" BorderPane.alignment="CENTER" />
+   </left>
+   <right>
+      <AnchorPane prefHeight="340.0" prefWidth="0.0" BorderPane.alignment="CENTER" />
+   </right>
+   <bottom>
+      <AnchorPane prefHeight="70.0" prefWidth="600.0" styleClass="credits_border_bottom" BorderPane.alignment="CENTER">
+         <children>
+            <JFXButton fx:id="boutonSeDeconnecter" layoutX="36.0" layoutY="7.0" onAction="#seDeconnecter" styleClass="selection_voiture_bouton_bottm" text="SE DECONNECTER" />
+            <JFXButton fx:id="boutonPoursuivre" layoutX="469.0" layoutY="7.0" onAction="#choisirTerrain" styleClass="selection_voiture_bouton_bottm" text="&gt;" />
+         </children>
+      </AnchorPane>
+   </bottom>
+   <center>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="credits_border_centre" BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="pseudoJoueur" layoutX="14.0" styleClass="selection_voiture_label_1" text="PSEUDONYME" />
+            <TextFlow layoutX="100.0" layoutY="39.0" prefHeight="53.0" prefWidth="492.0">
+               <children>
+                  <Label fx:id="nombreJoueurs" styleClass="selection_voiture_label_1" text="NB" />
+                  <Label layoutX="10.0" layoutY="10.0" styleClass="selection_voiture_label_2" text="joueur(s) connecté(s)" />
+               </children>
+            </TextFlow>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>
