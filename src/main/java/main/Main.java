@@ -2,6 +2,8 @@ package main;
 
 
 
+import controleur.Controleur_PageAccueil;
+
 /*
 ATEUR : Aymerik ABOSO
 ANNEE : 2018
@@ -13,6 +15,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import service.UtiliserWS;
 
 public class Main extends Application {
 	public static final String NOM_APPLICATION = "Magic Run";
@@ -40,6 +43,18 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		Main.windowStage = primaryStage;
+		//Pour déconnecter le joueur à la fermeture de la fenêtre
+		Main.windowStage.setOnCloseRequest(e -> {
+			e.consume();
+			//DECONNEXION DU JOUEUR
+			try {
+				UtiliserWS.service_DeconnecterJoueur(Controleur_PageAccueil.PSEUDONYME);
+			} catch (Exception e1) {
+				//e1.printStackTrace();
+			}
+			//System.out.println("Fermeture de la fenetre");
+			Main.windowStage.close();
+		});
 		Parent root = FXMLLoader.load(getClass().getResource(Main.CHEMIN_FXML_PAGE_ACCUEIL));
 		Main.windowStage.setTitle(Main.NOM_APPLICATION_FENETRE);
 		Image iconeApplication = new Image("file:/" + Main.CHEMIN_IMAGE + "/Formule1.png");

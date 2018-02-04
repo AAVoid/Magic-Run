@@ -34,13 +34,40 @@
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="credits_border_centre" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="pseudoJoueur" layoutX="14.0" styleClass="selection_voiture_label_1" text="PSEUDONYME" />
+            <Label fx:id="pseudoJoueur" layoutX="14.0" styleClass="selection_voiture_label_1" text="PSEUDONYME">
+               <effect>
+                  <Lighting>
+                     <bumpInput>
+                        <Shadow />
+                     </bumpInput>
+                     <light>
+                        <Light.Distant />
+                     </light>
+                  </Lighting>
+               </effect></Label>
             <TextFlow layoutX="100.0" layoutY="39.0" prefHeight="53.0" prefWidth="492.0">
                <children>
-                  <Label fx:id="nombreJoueurs" styleClass="selection_voiture_label_1" text="NB" />
+                  <Label fx:id="nombreJoueurs" rotate="30.0" styleClass="selection_voiture_label_3" text="NB">
+                     <effect>
+                        <Lighting>
+                           <bumpInput>
+                              <Shadow />
+                           </bumpInput>
+                           <light>
+                              <Light.Distant />
+                           </light>
+                        </Lighting>
+                     </effect></Label>
+                  <Label layoutX="10.0" layoutY="10.0" styleClass="selection_voiture_label_1" text=" " />
                   <Label layoutX="10.0" layoutY="10.0" styleClass="selection_voiture_label_2" text="joueur(s) connecté(s)" />
                </children>
             </TextFlow>
+            <JFXListView fx:id="listeVoiture" layoutX="43.0" layoutY="166.0" opacity="0.7" prefHeight="200.0" prefWidth="157.0" rotate="-20.0" />
+            <Label fx:id="nomVoitureSelectionnee" layoutX="267.0" layoutY="97.0" styleClass="selection_voiture_label_4" text="VOITURE">
+               <effect>
+                  <Reflection fraction="0.65" topOffset="-10.0" />
+               </effect>
+            </Label>
          </children>
       </AnchorPane>
    </center>

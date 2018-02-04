@@ -5,6 +5,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -13,7 +14,7 @@ import controleur.Controleur_PageAccueil;
 /*
 ATEUR : Aymerik ABOSO
 ANNEE : 2018
-*/
+ */
 
 
 
@@ -33,17 +34,16 @@ public class UtiliserWS {
 	}
 
 	public static String service_Who() throws Exception {
+		//URLEncoder.encode(pseudo, ENCODAGE_PARAMETRE_URL);
 		String url = Controleur_PageAccueil.ADRESSE_IP_SERVEUR + "Who";
-		/*url += "wal.php?inscription&identite=" + URLEncoder.encode(identite, ENCODAGE_PARAMETRE_URL) + "&mail=" + 
-				URLEncoder.encode(eMail, ENCODAGE_PARAMETRE_URL) + "";*/
 		return utiliserService(url);
 	}
-	
+
 	public static String service_Nouveau(String pseudo) throws Exception {
 		String url = Controleur_PageAccueil.ADRESSE_IP_SERVEUR + "Nouveau?pseudo=" + pseudo;
 		return utiliserService(url);
 	}
-	
+
 	public static String getStatusService_Nouveau(String jsonNouveau) throws Exception {
 		String status = "";
 		JSONObject jo = null;
@@ -59,11 +59,17 @@ public class UtiliserWS {
 		}
 		return status;
 	}
-	
-	public static String service_getNombreJoueursConnectes() throws Exception {
-		String nbJoueursConnectes = "";
+
+	public static int service_getNombreJoueursConnectes() throws Exception {
 		String who = UtiliserWS.service_Who();
-		return nbJoueursConnectes;
+		JSONArray tab = null;
+		tab = new JSONArray(who);
+		return tab.length();
+	}
+
+	public static String service_DeconnecterJoueur(String pseudo) throws Exception {
+		String url = Controleur_PageAccueil.ADRESSE_IP_SERVEUR + "jeu/DecoJoueur?pseudo=" + pseudo;
+		return utiliserService(url);
 	}
 
 	/*public static int getReponse(String jsonString) {
@@ -85,7 +91,7 @@ public class UtiliserWS {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}*/
-		//return reponse;
+	//return reponse;
 	//}
 
 	/*public static String getIdApresActivation(String jsonString) {

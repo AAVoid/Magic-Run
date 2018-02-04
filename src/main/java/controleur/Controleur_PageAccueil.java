@@ -31,14 +31,14 @@ ANNEE : 2018
 
 
 public class Controleur_PageAccueil implements Initializable {
-	private static final int NB_CHAR_MAX_PSEUDO = 60; //Champ pseudo peut avoir 50 caractères max
-	private static final int NB_CHAR_MAX_ADRESSE_IP = 80;
+	private static final int NB_CHAR_MAX_PSEUDO = 40; //Champ pseudo peut avoir 40 caractères max
+	private static final int NB_CHAR_MAX_ADRESSE_IP = 60;
 	public static final String CHEMIN_FXML_PAGE_CREDITS = "/vue/pageCredits.fxml";
 	public static final String CHEMIN_FXML_PAGE_SELECTION_VOITURE = "/vue/pageSelectionVoiture.fxml";
 	@FXML
 	private JFXTextField champPseudo;
 	@FXML
-    private JFXTextField champAdresseServeur;
+	private JFXTextField champAdresseServeur;
 	@FXML
 	private JFXButton boutonSeConnecter;
 	@FXML
@@ -54,17 +54,13 @@ public class Controleur_PageAccueil implements Initializable {
 	public static Media mediaSonMessage;
 	public static MediaPlayer mediaPlayerSonMessage;
 	public static final String CHEMIN_SON_MESSAGE = "file:/" + Main.CHEMIN_SON + "/message.wav";
-	
+
 	public static String PSEUDONYME = "";
 	public static String ADRESSE_IP_SERVEUR = "";
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		//System.out.println("Chargé");
-		
-		//CHARGEMENT DES CHAMPS SI ON ETAIT DEJA CONNECTE
-		champPseudo.setText(Controleur_PageAccueil.PSEUDONYME);
-		champAdresseServeur.setText(Controleur_PageAccueil.ADRESSE_IP_SERVEUR);
 
 		//ECOUTEUR SUR LE BOUTON POUR LE DESACTIVER SI CHAMP PSEUDO VIDE
 		champPseudo.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -88,6 +84,10 @@ public class Controleur_PageAccueil implements Initializable {
 			mediaPlayerMusiqueFond.setCycleCount(Timeline.INDEFINITE); //Lecture de la musique en boucle
 			mediaPlayerMusiqueFond.play();
 		}
+
+		//CHARGEMENT DES CHAMPS SI ON ETAIT DEJA CONNECTE
+		champPseudo.setText(Controleur_PageAccueil.PSEUDONYME);
+		champAdresseServeur.setText(Controleur_PageAccueil.ADRESSE_IP_SERVEUR);
 	}
 
 	@FXML
@@ -153,7 +153,7 @@ public class Controleur_PageAccueil implements Initializable {
 			scene.getStylesheets().add(Main.CHEMIN_FICHIER_CSS);
 			Main.windowStage.setScene(scene);
 		} catch (IOException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 	}
 }

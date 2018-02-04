@@ -111,9 +111,35 @@ ANNEE : 2018
 	-fx-text-fill: #ffffff;
 }
 
+.selection_voiture_label_3 {
+	-fx-font-size: 30pt;
+	-fx-text-fill: #01579b;
+}
+
+.selection_voiture_label_4 {
+	-fx-font-size: 30pt;
+	-fx-text-fill: #FFD700;
+}
+
 .selection_voiture_bouton_bottm {
 	-fx-text-fill: #ffffff;
 	-fx-font-size: 20pt;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
