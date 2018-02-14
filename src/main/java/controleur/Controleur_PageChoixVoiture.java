@@ -3,6 +3,7 @@ package controleur;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXButton;
@@ -16,6 +17,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.SelectionMode;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import main.Main;
@@ -42,7 +45,9 @@ public class Controleur_PageChoixVoiture implements Initializable {
 	@FXML
 	private JFXListView<String> listeVoiture;
 	@FXML
-    private Label nomVoitureSelectionnee;
+	private Label nomVoitureSelectionnee;
+	@FXML
+	private ImageView imageVoiture;
 
 	public static Media mediaSonRetour;
 	public static MediaPlayer mediaPlayerSonRetour;
@@ -51,6 +56,8 @@ public class Controleur_PageChoixVoiture implements Initializable {
 	public static Media mediaSonSelection;
 	public static MediaPlayer mediaPlayerSonSelection;
 	public static ArrayList<String> listeNomsVoitures;
+	private static final String CHEMIN_IMAGE_VOITURE = "file:/" + Main.CHEMIN_IMAGE + "/F1_";
+	private static HashMap<String, String> hashMapNomVoitureNomImage;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -72,15 +79,25 @@ public class Controleur_PageChoixVoiture implements Initializable {
 		String nomVoiture_7 = "Falco";
 		String nomVoiture_8 = "Hero";
 		Controleur_PageChoixVoiture.listeNomsVoitures = new ArrayList<>();
+		Controleur_PageChoixVoiture.hashMapNomVoitureNomImage = new HashMap<String, String>();
 		Controleur_PageChoixVoiture.listeNomsVoitures.add(nomVoiture_1);
+		Controleur_PageChoixVoiture.hashMapNomVoitureNomImage.put(nomVoiture_1, Controleur_PageChoixVoiture.CHEMIN_IMAGE_VOITURE + nomVoiture_1 + ".png");
 		nomVoitureSelectionnee.setText(nomVoiture_1);
+		imageVoiture.setImage(new Image(Controleur_PageChoixVoiture.hashMapNomVoitureNomImage.get(nomVoiture_1)));
 		Controleur_PageChoixVoiture.listeNomsVoitures.add(nomVoiture_2);
+		Controleur_PageChoixVoiture.hashMapNomVoitureNomImage.put(nomVoiture_2, Controleur_PageChoixVoiture.CHEMIN_IMAGE_VOITURE + nomVoiture_2 + ".png");
 		Controleur_PageChoixVoiture.listeNomsVoitures.add(nomVoiture_3);
+		Controleur_PageChoixVoiture.hashMapNomVoitureNomImage.put(nomVoiture_3, Controleur_PageChoixVoiture.CHEMIN_IMAGE_VOITURE + nomVoiture_3 + ".png");
 		Controleur_PageChoixVoiture.listeNomsVoitures.add(nomVoiture_4);
+		Controleur_PageChoixVoiture.hashMapNomVoitureNomImage.put(nomVoiture_4, Controleur_PageChoixVoiture.CHEMIN_IMAGE_VOITURE + nomVoiture_4 + ".png");
 		Controleur_PageChoixVoiture.listeNomsVoitures.add(nomVoiture_5);
+		Controleur_PageChoixVoiture.hashMapNomVoitureNomImage.put(nomVoiture_5, Controleur_PageChoixVoiture.CHEMIN_IMAGE_VOITURE + nomVoiture_5 + ".png");
 		Controleur_PageChoixVoiture.listeNomsVoitures.add(nomVoiture_6);
+		Controleur_PageChoixVoiture.hashMapNomVoitureNomImage.put(nomVoiture_6, Controleur_PageChoixVoiture.CHEMIN_IMAGE_VOITURE + nomVoiture_6 + ".png");
 		Controleur_PageChoixVoiture.listeNomsVoitures.add(nomVoiture_7);
+		Controleur_PageChoixVoiture.hashMapNomVoitureNomImage.put(nomVoiture_7, Controleur_PageChoixVoiture.CHEMIN_IMAGE_VOITURE + nomVoiture_7 + ".png");
 		Controleur_PageChoixVoiture.listeNomsVoitures.add(nomVoiture_8);
+		Controleur_PageChoixVoiture.hashMapNomVoitureNomImage.put(nomVoiture_8, Controleur_PageChoixVoiture.CHEMIN_IMAGE_VOITURE + nomVoiture_8 + ".png");
 		listeVoiture.getItems().addAll(listeNomsVoitures);
 		listeVoiture.getSelectionModel().setSelectionMode(SelectionMode.SINGLE); //On peut sélectionner qu'une voiture
 		listeVoiture.getSelectionModel().selectedItemProperty().addListener((v, oldValue, newValue) -> {
@@ -92,6 +109,8 @@ public class Controleur_PageChoixVoiture implements Initializable {
 			mediaPlayerSonSelection.play();
 			//ON AFFICHE LA NOUVELLE IMAGE DE VOITURE ET SES STATISTIQUES
 			nomVoitureSelectionnee.setText(newValue);
+			Image nouvelleImage = new Image(Controleur_PageChoixVoiture.hashMapNomVoitureNomImage.get(newValue));
+			imageVoiture.setImage(nouvelleImage);
 		});
 	}
 
