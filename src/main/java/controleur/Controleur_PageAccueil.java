@@ -47,7 +47,7 @@ public class Controleur_PageAccueil implements Initializable {
 	//MUSIQUE ET SON
 	public static Media mediaMusiqueFond;
 	public static MediaPlayer mediaPlayerMusiqueFond;
-	public static final String CHEMIN_MUSIQUE_FOND = "file:/" + Main.CHEMIN_MUSIQUE + "/Mario_Kart_Stadium_Mario_Kart_8_OST.mp3";
+	public static final String CHEMIN_MUSIQUE_FOND = "file:/" + Main.CHEMIN_MUSIQUE + "/Dark_Souls_III_Soundtrack_OST_-_Iudex_Gundyr.mp3";
 	public static Media mediaSonBouton;
 	public static MediaPlayer mediaPlayerSonBouton;
 	public static final String CHEMIN_SON_BOUTON = "file:/" + Main.CHEMIN_SON + "/valider.wav";

@@ -68,11 +68,21 @@
                   <Reflection fraction="0.65" topOffset="-10.0" />
                </effect>
             </Label>
-            <ImageView fx:id="imageVoiture" fitHeight="64.0" fitWidth="26.0" layoutX="516.0" layoutY="113.0" pickOnBounds="true" preserveRatio="true" rotate="45.0">
+            <ImageView fx:id="imageVoiture" fitHeight="123.0" fitWidth="50.0" layoutX="501.0" layoutY="195.0" pickOnBounds="true" preserveRatio="true" rotate="45.0">
                <image>
                   <Image url="@../../Ressource/Image/F1_Neutrino.png" />
                </image>
             </ImageView>
+            <Label layoutX="250.0" layoutY="210.0" styleClass="selection_voiture_label_5" text="Puissance : " />
+            <Label layoutX="250.0" layoutY="256.0" styleClass="selection_voiture_label_5" text="Prise au vent : " />
+            <Label layoutX="250.0" layoutY="303.0" styleClass="selection_voiture_label_5" text="Freinage : " />
+            <Label layoutX="250.0" layoutY="355.0" styleClass="selection_voiture_label_5" text="Tenue de route : " />
+            <Label layoutX="253.0" layoutY="402.0" styleClass="selection_voiture_label_5" text="Vitesse max. : " />
+            <Label fx:id="valeurPuissance" layoutX="358.0" layoutY="197.0" styleClass="selection_voiture_label_6" text="0" />
+            <Label fx:id="valeurPriseVent" layoutX="387.0" layoutY="243.0" styleClass="selection_voiture_label_6" text="0" />
+            <Label fx:id="valeurFreinage" layoutX="347.0" layoutY="290.0" styleClass="selection_voiture_label_6" text="0" />
+            <Label fx:id="valeurTenueRoute" layoutX="410.0" layoutY="342.0" styleClass="selection_voiture_label_6" text="0" />
+            <Label fx:id="valeurVitesseMax" layoutX="387.0" layoutY="389.0" styleClass="selection_voiture_label_6" text="0" />
          </children>
       </AnchorPane>
    </center>
