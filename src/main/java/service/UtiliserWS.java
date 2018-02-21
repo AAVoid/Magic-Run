@@ -10,6 +10,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import controleur.Controleur_PageAccueil;
+import modele.StatistiquesVoiture;
 
 /*
 ATEUR : Aymerik ABOSO
@@ -70,6 +71,27 @@ public class UtiliserWS {
 	public static String service_DeconnecterJoueur(String pseudo) throws Exception {
 		String url = Controleur_PageAccueil.ADRESSE_IP_SERVEUR + "jeu/DecoJoueur?pseudo=" + pseudo;
 		return utiliserService(url);
+	}
+	
+	public static String service_Teleporter(String pseudo, int x, int y, int angle) throws Exception {
+		String url = Controleur_PageAccueil.ADRESSE_IP_SERVEUR + "jeu/DeplacerJoueur?pseudo=" + pseudo + "&x="
+				+ x + "&y=" + y + "&angle=" + angle;
+		return utiliserService(url);
+	}
+	
+	public static String service_ModifierCaracteristiques(String pseudo, int x, int y, int angle, int vitesse,
+			int acceleration, int rotation, int deceleration, int frein, int vitesseMax) throws Exception {
+		String url = Controleur_PageAccueil.ADRESSE_IP_SERVEUR + "jeu/ModifStats?pseudo=" + pseudo
+				+ "&x=" + x + "&y=" + y + "&angle=" + angle + "&vitesse=" + vitesse 
+				+ "&acceleration=" + acceleration + "&rotation=" + rotation + "&deceleration=" + deceleration
+				+ "&frein=" + frein + "&vitesseMax=" + vitesseMax;
+		return utiliserService(url);
+	}
+	
+	public static String service_ModifierCaracteristiques(String pseudo, StatistiquesVoiture statistiques) throws Exception {
+		return UtiliserWS.service_ModifierCaracteristiques(pseudo, statistiques.getX(), statistiques.getY(), 
+				statistiques.getAngle(), statistiques.getVitesse(), statistiques.getAcceleration(), 
+				statistiques.getRotation(), statistiques.getDeceleration(), statistiques.getFrein(), statistiques.getVitesseMax());
 	}
 
 	/*public static int getReponse(String jsonString) {

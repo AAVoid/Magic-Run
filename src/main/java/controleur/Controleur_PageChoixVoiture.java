@@ -109,9 +109,8 @@ public class Controleur_PageChoixVoiture implements Initializable {
 		this.valeurPriseVent.setText("" + Controleur_PageChoixVoiture.statistiqueVoiture.getDeceleration());
 		this.valeurFreinage.setText("" + Controleur_PageChoixVoiture.statistiqueVoiture.getFrein());
 		this.valeurTenueRoute.setText("" + Controleur_PageChoixVoiture.statistiqueVoiture.getRotation());
-		this.valeurVitesseMax.setText("" + Controleur_PageChoixVoiture.statistiqueVoiture.getVitesse());
+		this.valeurVitesseMax.setText("" + Controleur_PageChoixVoiture.statistiqueVoiture.getVitesseMax());
 		nomVoitureSelectionnee.setText(nomVoiture_1);
-		Controleur_PageChoixVoiture.statistiqueVoiture = Controleur_PageChoixVoiture.hashMapNomVoitureStatistiques.get(nomVoiture_1);
 		imageVoiture.setImage(new Image(Controleur_PageChoixVoiture.hashMapNomVoitureNomImage.get(nomVoiture_1)));
 		Controleur_PageChoixVoiture.listeNomsVoitures.add(nomVoiture_2);
 		Controleur_PageChoixVoiture.hashMapNomVoitureNomImage.put(nomVoiture_2, Controleur_PageChoixVoiture.CHEMIN_IMAGE_VOITURE + nomVoiture_2 + ".png");
@@ -194,7 +193,7 @@ public class Controleur_PageChoixVoiture implements Initializable {
 			this.valeurPriseVent.setText("" + Controleur_PageChoixVoiture.statistiqueVoiture.getDeceleration());
 			this.valeurFreinage.setText("" + Controleur_PageChoixVoiture.statistiqueVoiture.getFrein());
 			this.valeurTenueRoute.setText("" + Controleur_PageChoixVoiture.statistiqueVoiture.getRotation());
-			this.valeurVitesseMax.setText("" + Controleur_PageChoixVoiture.statistiqueVoiture.getVitesse());
+			this.valeurVitesseMax.setText("" + Controleur_PageChoixVoiture.statistiqueVoiture.getVitesseMax());
 		});
 	}
 
@@ -229,6 +228,22 @@ public class Controleur_PageChoixVoiture implements Initializable {
 		mediaPlayerSonContinuer = new MediaPlayer(mediaSonContinuer);
 		mediaPlayerSonContinuer.setCycleCount(1);
 		mediaPlayerSonContinuer.play();
+		//Modification des statistiques de la voiture
+		try {
+			UtiliserWS.service_ModifierCaracteristiques(Controleur_PageAccueil.PSEUDONYME, Controleur_PageChoixVoiture.statistiqueVoiture);
+		} catch (Exception e1) {
+			//e1.printStackTrace();
+		}
+		//Changement de scene
+		Parent root;
+		try {
+			root = FXMLLoader.load(getClass().getResource(Controleur_PageChoixCircuit.CHEMIN_FXML_PAGE_CHOIX_CIRCUIT));
+			Scene scene = new Scene(root, Main.LONGUEUR_FENETRE, Main.HAUTEUR_FENETRE);
+			scene.getStylesheets().add(Main.CHEMIN_FICHIER_CSS);
+			Main.windowStage.setScene(scene);
+		} catch (IOException e) {
+			//e.printStackTrace();
+		}
 	}
 }
 

@@ -122,66 +122,6 @@ public class StatistiquesVoiture {
 	public void setVitesseMax(int vitesseMax) {
 		this.vitesseMax = vitesseMax;
 	}
-
-	public static int getAccelerationD() {
-		return ACCELERATION_D;
-	}
-
-	public static int getAccelerationN() {
-		return ACCELERATION_N;
-	}
-
-	public static int getAccelerationU() {
-		return ACCELERATION_U;
-	}
-
-	public static int getRotationD() {
-		return ROTATION_D;
-	}
-
-	public static int getRotationN() {
-		return ROTATION_N;
-	}
-
-	public static int getRotationU() {
-		return ROTATION_U;
-	}
-
-	public static int getDecelerationD() {
-		return DECELERATION_D;
-	}
-
-	public static int getDecelerationN() {
-		return DECELERATION_N;
-	}
-
-	public static int getDecelerationU() {
-		return DECELERATION_U;
-	}
-
-	public static int getFreinD() {
-		return FREIN_D;
-	}
-
-	public static int getFreinN() {
-		return FREIN_N;
-	}
-
-	public static int getFreinU() {
-		return FREIN_U;
-	}
-
-	public static int getVitesseMaxD() {
-		return VITESSE_MAX_D;
-	}
-
-	public static int getVitesseMaxN() {
-		return VITESSE_MAX_N;
-	}
-
-	public static int getVitesseMaxU() {
-		return VITESSE_MAX_U;
-	}
 }
 
 
