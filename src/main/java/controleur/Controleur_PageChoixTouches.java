@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTextField;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,6 +14,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import main.Main;
@@ -36,6 +38,14 @@ public class Controleur_PageChoixTouches implements Initializable {
 	private JFXButton boutonPoursuivre;
 	@FXML
 	private JFXButton boutonPrecedent;
+	@FXML
+	private JFXTextField champToucheAccelerer;
+	@FXML
+	private JFXTextField champToucheTournerDroite;
+	@FXML
+	private JFXTextField champToucheFreiner;
+	@FXML
+	private JFXTextField champToucheTournerGauche;
 
 	public static Media mediaSonRetour;
 	public static MediaPlayer mediaPlayerSonRetour;
@@ -43,6 +53,11 @@ public class Controleur_PageChoixTouches implements Initializable {
 	public static MediaPlayer mediaPlayerSonContinuer;
 	public static Media mediaSonSelection;
 	public static MediaPlayer mediaPlayerSonSelection;
+
+	public static String nomToucheAccelerer;
+	public static String nomToucheFreiner;
+	public static String nomToucheTournerGauche;
+	public static String nomToucheTournerDroite;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -54,6 +69,66 @@ public class Controleur_PageChoixTouches implements Initializable {
 		} catch (Exception e) {
 			//e.printStackTrace();
 		}
+		nomToucheAccelerer = "";
+		nomToucheFreiner = "";
+		nomToucheTournerGauche = "";
+		nomToucheTournerDroite = "";
+	}
+
+	@FXML
+	void keyPressedChampAccelerer(KeyEvent event) {
+		//System.out.println("Accel" + "/" + event.getCode() + "/" + event.getText());
+		champToucheAccelerer.setText(event.getCode().getName());
+		Controleur_PageChoixTouches.nomToucheAccelerer = event.getCode().getName();
+		//Activation ou non du bouton pour poursuivre
+		boutonPoursuivre.setDisable(
+				Controleur_PageChoixTouches.nomToucheAccelerer.isEmpty()
+				|| Controleur_PageChoixTouches.nomToucheFreiner.isEmpty()
+				|| Controleur_PageChoixTouches.nomToucheTournerGauche.isEmpty()
+				|| Controleur_PageChoixTouches.nomToucheTournerDroite.isEmpty()
+				);
+	}
+
+	@FXML
+	void keyPressedChampFreiner(KeyEvent event) {
+		//System.out.println("Frein" + "/" + event.getCode() + "/" + event.getText());
+		champToucheFreiner.setText(event.getCode().getName());
+		Controleur_PageChoixTouches.nomToucheFreiner = event.getCode().getName();
+		//Activation ou non du bouton pour poursuivre
+		boutonPoursuivre.setDisable(
+				Controleur_PageChoixTouches.nomToucheAccelerer.isEmpty()
+				|| Controleur_PageChoixTouches.nomToucheFreiner.isEmpty()
+				|| Controleur_PageChoixTouches.nomToucheTournerGauche.isEmpty()
+				|| Controleur_PageChoixTouches.nomToucheTournerDroite.isEmpty()
+				);
+	}
+
+	@FXML
+	void keyPressedChampTournerGauche(KeyEvent event) {
+		//System.out.println("Gauche" + "/" + event.getCode() + "/" + event.getText());
+		champToucheTournerGauche.setText(event.getCode().getName());
+		Controleur_PageChoixTouches.nomToucheTournerGauche = event.getCode().getName();
+		//Activation ou non du bouton pour poursuivre
+		boutonPoursuivre.setDisable(
+				Controleur_PageChoixTouches.nomToucheAccelerer.isEmpty()
+				|| Controleur_PageChoixTouches.nomToucheFreiner.isEmpty()
+				|| Controleur_PageChoixTouches.nomToucheTournerGauche.isEmpty()
+				|| Controleur_PageChoixTouches.nomToucheTournerDroite.isEmpty()
+				);
+	}
+
+	@FXML
+	void keyPressedChampTournerDroite(KeyEvent event) {
+		//System.out.println("Droite" + "/" + event.getCode() + "/" + event.getText());
+		champToucheTournerDroite.setText(event.getCode().getName());
+		Controleur_PageChoixTouches.nomToucheTournerDroite = event.getCode().getName();
+		//Activation ou non du bouton pour poursuivre
+		boutonPoursuivre.setDisable(
+				Controleur_PageChoixTouches.nomToucheAccelerer.isEmpty()
+				|| Controleur_PageChoixTouches.nomToucheFreiner.isEmpty()
+				|| Controleur_PageChoixTouches.nomToucheTournerGauche.isEmpty()
+				|| Controleur_PageChoixTouches.nomToucheTournerDroite.isEmpty()
+				);
 	}
 
 	@FXML
@@ -97,7 +172,7 @@ public class Controleur_PageChoixTouches implements Initializable {
 			//e.printStackTrace();
 		}
 	}
-	
+
 	@FXML
 	void lancerCourse(ActionEvent event) {
 		mediaSonContinuer = new Media(Controleur_PageAccueil.CHEMIN_SON_MESSAGE);

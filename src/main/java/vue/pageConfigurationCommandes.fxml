@@ -27,7 +27,7 @@
       <AnchorPane prefHeight="70.0" prefWidth="600.0" styleClass="credits_border_bottom" BorderPane.alignment="CENTER">
          <children>
             <JFXButton fx:id="boutonPrecedent" layoutX="76.0" layoutY="7.0" onAction="#afficherChoixCircuit" styleClass="selection_voiture_bouton_bottm" text="&lt;" />
-            <JFXButton fx:id="boutonPoursuivre" layoutX="468.0" layoutY="7.0" onAction="#lancerCourse" styleClass="selection_voiture_bouton_bottm" text="&gt;" />
+            <JFXButton fx:id="boutonPoursuivre" disable="true" layoutX="468.0" layoutY="7.0" onAction="#lancerCourse" styleClass="selection_voiture_bouton_bottm" text="&gt;" />
             <JFXButton fx:id="boutonSeDeconnecter" layoutX="173.0" layoutY="7.0" onAction="#seDeconnecter" styleClass="selection_voiture_bouton_bottm" text="SE DECONNECTER" />
          </children>
       </AnchorPane>
@@ -63,6 +63,10 @@
                   <Label layoutX="10.0" layoutY="10.0" styleClass="selection_voiture_label_2" text="joueur(s) connecté(s)" />
                </children>
             </TextFlow>
+            <JFXTextField fx:id="champToucheAccelerer" alignment="CENTER" editable="false" layoutX="36.0" layoutY="136.0" onKeyPressed="#keyPressedChampAccelerer" prefHeight="25.0" prefWidth="529.0" promptText="Touche accélérer" styleClass="choix_commande_champ" unFocusColor="#4059a9" />
+            <JFXTextField fx:id="champToucheFreiner" alignment="CENTER" editable="false" layoutX="36.0" layoutY="214.0" onKeyPressed="#keyPressedChampFreiner" prefHeight="25.0" prefWidth="529.0" promptText="Touche freiner" styleClass="choix_commande_champ" unFocusColor="#4059a9" />
+            <JFXTextField fx:id="champToucheTournerGauche" alignment="CENTER" editable="false" layoutX="36.0" layoutY="291.0" onKeyPressed="#keyPressedChampTournerGauche" prefHeight="25.0" prefWidth="529.0" promptText="Touche tourner à gauche" styleClass="choix_commande_champ" unFocusColor="#4059a9" />
+            <JFXTextField fx:id="champToucheTournerDroite" alignment="CENTER" editable="false" layoutX="36.0" layoutY="368.0" onKeyPressed="#keyPressedChampTournerDroite" prefHeight="25.0" prefWidth="529.0" promptText="Touche tourner à droite" styleClass="choix_commande_champ" unFocusColor="#4059a9" />
          </children>
       </AnchorPane>
    </center>
