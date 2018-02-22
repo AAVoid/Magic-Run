@@ -33,7 +33,7 @@
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="credits_border_centre" BorderPane.alignment="CENTER">
          <children>
-            <TextFlow layoutX="17.0" layoutY="161.0" prefHeight="295.0" prefWidth="566.0" textAlignment="JUSTIFY" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="17.0" AnchorPane.topAnchor="161.0">
+            <TextFlow layoutX="17.0" layoutY="145.0" prefHeight="295.0" prefWidth="566.0" textAlignment="JUSTIFY" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="17.0" AnchorPane.topAnchor="145.0">
                <children>
                   <Label text="         " />
                   <Label fx:id="nomJeu" styleClass="credits_texte_en_valeur" text="Magic Run ">

@@ -55,6 +55,7 @@ public class Controleur_PageChoixCircuit implements Initializable {
 	public static MediaPlayer mediaPlayerSonContinuer;
 	public static Media mediaSonSelection;
 	public static MediaPlayer mediaPlayerSonSelection;
+	public static String nomCircuitSelectionneeValide;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -117,6 +118,17 @@ public class Controleur_PageChoixCircuit implements Initializable {
 		mediaPlayerSonContinuer = new MediaPlayer(mediaSonContinuer);
 		mediaPlayerSonContinuer.setCycleCount(1);
 		mediaPlayerSonContinuer.play();
+		//Changement de scène
+		Controleur_PageChoixCircuit.nomCircuitSelectionneeValide = nomCircuit.getText();
+		Parent root = null;
+		try {
+			root = FXMLLoader.load(getClass().getResource(Controleur_PageChoixTouches.CHEMIN_FXML_PAGE_CHOIX_TOUCHES));
+			Scene scene = new Scene(root, Main.LONGUEUR_FENETRE, Main.HAUTEUR_FENETRE);
+			scene.getStylesheets().add(Main.CHEMIN_FICHIER_CSS);
+			Main.windowStage.setScene(scene);
+		} catch (IOException e) {
+			//e.printStackTrace();
+		}
 	}
 
 	@FXML

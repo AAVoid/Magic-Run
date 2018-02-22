@@ -71,6 +71,7 @@ public class Controleur_PageChoixVoiture implements Initializable {
 	private static HashMap<String, String> hashMapNomVoitureNomImage;
 	private static HashMap<String, StatistiquesVoiture> hashMapNomVoitureStatistiques;
 	private static StatistiquesVoiture statistiqueVoiture;
+	public static String nomVoitureSelectionneeValide;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -234,6 +235,8 @@ public class Controleur_PageChoixVoiture implements Initializable {
 		} catch (Exception e1) {
 			//e1.printStackTrace();
 		}
+		//Enregistrement de la voiture choisie pour la suite
+		Controleur_PageChoixVoiture.nomVoitureSelectionneeValide = nomVoitureSelectionnee.getText();
 		//Changement de scene
 		Parent root;
 		try {
