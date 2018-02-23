@@ -70,7 +70,7 @@ public class Controleur_PageChoixVoiture implements Initializable {
 	private static final String CHEMIN_IMAGE_VOITURE = "file:/" + Main.CHEMIN_IMAGE + "/F1_";
 	private static HashMap<String, String> hashMapNomVoitureNomImage;
 	private static HashMap<String, StatistiquesVoiture> hashMapNomVoitureStatistiques;
-	private static StatistiquesVoiture statistiqueVoiture;
+	public static StatistiquesVoiture statistiqueVoiture;
 	public static String nomVoitureSelectionneeValide;
 
 	@Override
@@ -229,12 +229,6 @@ public class Controleur_PageChoixVoiture implements Initializable {
 		mediaPlayerSonContinuer = new MediaPlayer(mediaSonContinuer);
 		mediaPlayerSonContinuer.setCycleCount(1);
 		mediaPlayerSonContinuer.play();
-		//Modification des statistiques de la voiture
-		try {
-			UtiliserWS.service_ModifierCaracteristiques(Controleur_PageAccueil.PSEUDONYME, Controleur_PageChoixVoiture.statistiqueVoiture);
-		} catch (Exception e1) {
-			//e1.printStackTrace();
-		}
 		//Enregistrement de la voiture choisie pour la suite
 		Controleur_PageChoixVoiture.nomVoitureSelectionneeValide = nomVoitureSelectionnee.getText();
 		//Changement de scene

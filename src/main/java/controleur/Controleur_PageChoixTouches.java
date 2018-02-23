@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -53,7 +54,13 @@ public class Controleur_PageChoixTouches implements Initializable {
 	public static MediaPlayer mediaPlayerSonContinuer;
 	public static Media mediaSonSelection;
 	public static MediaPlayer mediaPlayerSonSelection;
-
+	public static final String CHEMIN_SON_ENGAGEMENT = "file:/" + Main.CHEMIN_SON + "/engagement.wav";
+	public static Media mediaSonEngagement;
+	public static MediaPlayer mediaPlayerSonEngagement;
+	public static final String CHEMIN_MUSIQUE_FOND_JEU = "file:/" + Main.CHEMIN_MUSIQUE + "/Dark_Souls_III_Soundtrack_OST_-_Lorian_Elder_Prince_Lothric_Younger_Prince.mp3";
+	public static Media mediaMusiqueFond;
+	public static MediaPlayer mediaPlayerMusiqueFond;
+	
 	public static String nomToucheAccelerer;
 	public static String nomToucheFreiner;
 	public static String nomToucheTournerGauche;
@@ -175,10 +182,43 @@ public class Controleur_PageChoixTouches implements Initializable {
 
 	@FXML
 	void lancerCourse(ActionEvent event) {
+		final int TEMPS_ATTENTE_AVANT_ENGAGEMENT = 300;
+		
 		mediaSonContinuer = new Media(Controleur_PageAccueil.CHEMIN_SON_MESSAGE);
 		mediaPlayerSonContinuer = new MediaPlayer(mediaSonContinuer);
 		mediaPlayerSonContinuer.setCycleCount(1);
 		mediaPlayerSonContinuer.play();
+		//Modification des statistiques de la voiture en fonction de la voiture choisie
+		try {
+			UtiliserWS.service_ModifierCaracteristiques(Controleur_PageAccueil.PSEUDONYME, Controleur_PageChoixVoiture.statistiqueVoiture);
+		} catch (Exception e1) {
+			//e1.printStackTrace();
+		}
+		//On joue le son d'engagement de partie, on arrête la musique de fond actuelle et on lance la nouvelle musique de fond
+		try {
+			Thread.sleep(TEMPS_ATTENTE_AVANT_ENGAGEMENT);
+		} catch (InterruptedException e1) {
+			//e1.printStackTrace();
+		}
+		mediaSonEngagement = new Media(Controleur_PageChoixTouches.CHEMIN_SON_ENGAGEMENT);
+		mediaPlayerSonEngagement = new MediaPlayer(mediaSonEngagement);
+		mediaPlayerSonEngagement.setCycleCount(1);
+		mediaPlayerSonEngagement.play();
+		Controleur_PageAccueil.mediaPlayerMusiqueFond.stop();
+		mediaMusiqueFond = new Media(Controleur_PageChoixTouches.CHEMIN_MUSIQUE_FOND_JEU);
+		mediaPlayerMusiqueFond = new MediaPlayer(mediaMusiqueFond);
+		mediaPlayerMusiqueFond.setCycleCount(Timeline.INDEFINITE); //Lecture de la musique en boucle
+		mediaPlayerMusiqueFond.play();
+		//On lance le jeu
+		Parent root = null;
+		try {
+			root = FXMLLoader.load(getClass().getResource(Controleur_PageJeu.CHEMIN_FXML_PAGE_JEU));
+			Scene scene = new Scene(root, Main.LONGUEUR_FENETRE, Main.HAUTEUR_FENETRE);
+			scene.getStylesheets().add(Main.CHEMIN_FICHIER_CSS);
+			Main.windowStage.setScene(scene);
+		} catch (IOException e) {
+			//e.printStackTrace();
+		}
 	}
 }
 
