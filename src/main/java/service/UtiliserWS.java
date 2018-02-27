@@ -93,6 +93,11 @@ public class UtiliserWS {
 				statistiques.getAngle(), statistiques.getVitesse(), statistiques.getAcceleration(), 
 				statistiques.getRotation(), statistiques.getDeceleration(), statistiques.getFrein(), statistiques.getVitesseMax());
 	}
+	
+	public static String service_Jouer(String pseudo, String sens, int angle) throws Exception {
+		String url = Controleur_PageAccueil.ADRESSE_IP_SERVEUR + "jeu?pseudo=" + pseudo + "&sens=" + sens + "&angle=" + angle;
+		return utiliserService(url);
+	}
 
 	/*public static int getReponse(String jsonString) {
 		JSONObject jo = null;
