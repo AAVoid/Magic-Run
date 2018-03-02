@@ -8,6 +8,8 @@ import java.util.ResourceBundle;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import com.jfoenix.controls.JFXButton;
+
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
@@ -42,6 +44,8 @@ public class Controleur_PageJeu implements Initializable {
     private Button boutonEcouteurKey;
 	@FXML
     private Label vitesseAffichee;
+	@FXML
+    private JFXButton boutonQuitterPartie;
 
 	public static final String CHEMIN_FXML_PAGE_JEU = "/vue/pageJeu.fxml";
 	public static Media mediaMusiqueFond;
@@ -181,6 +185,11 @@ public class Controleur_PageJeu implements Initializable {
 				//e.printStackTrace();
 			}
 		}*/
+	}
+	
+	@FXML
+    void quitterPartie(ActionEvent event) {
+		System.out.println("QUITTER");
 	}
 }
 

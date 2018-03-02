@@ -204,10 +204,12 @@ public class Controleur_PageChoixTouches implements Initializable {
 		mediaPlayerSonEngagement.setCycleCount(1);
 		mediaPlayerSonEngagement.play();
 		Controleur_PageAccueil.mediaPlayerMusiqueFond.stop();
-		mediaMusiqueFond = new Media(Controleur_PageChoixTouches.CHEMIN_MUSIQUE_FOND_JEU);
-		mediaPlayerMusiqueFond = new MediaPlayer(mediaMusiqueFond);
-		mediaPlayerMusiqueFond.setCycleCount(Timeline.INDEFINITE); //Lecture de la musique en boucle
-		mediaPlayerMusiqueFond.play();
+		if(mediaMusiqueFond == null) { //ON LANCE LA MUSIQUE QUE SI ELLE N'EST PAS DEJA EN TRAIN D'ETRE JOUEE
+			mediaMusiqueFond = new Media(Controleur_PageChoixTouches.CHEMIN_MUSIQUE_FOND_JEU);
+			mediaPlayerMusiqueFond = new MediaPlayer(mediaMusiqueFond);
+			mediaPlayerMusiqueFond.setCycleCount(Timeline.INDEFINITE); //Lecture de la musique en boucle
+			mediaPlayerMusiqueFond.play();
+		}
 		//On lance le jeu
 		Parent root = null;
 		try {

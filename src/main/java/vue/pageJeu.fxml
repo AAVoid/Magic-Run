@@ -25,5 +25,14 @@
             </Lighting>
          </effect>
       </Label>
+      <JFXButton fx:id="boutonQuitterPartie" layoutX="522.0" layoutY="526.0" onAction="#quitterPartie" text=" ">
+         <graphic>
+            <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../Ressource/Image/quitterPartie.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </JFXButton>
    </children>
 </AnchorPane>
