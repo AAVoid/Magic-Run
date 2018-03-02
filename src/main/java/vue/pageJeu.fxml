@@ -9,9 +9,20 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
 <AnchorPane fx:id="anchorLayout" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.Controleur_PageJeu">
    <children>
       <Button fx:id="boutonEcouteurKey" layoutX="-173.0" layoutY="182.0" mnemonicParsing="false" onKeyPressed="#getKeyJeu" text="ButtonPourEcouterKey" />
+      <Label fx:id="vitesseAffichee" layoutX="14.0" layoutY="528.0" styleClass="jeu_affichage_vitesse" text="v">
+         <effect>
+            <Lighting>
+               <bumpInput>
+                  <Shadow />
+               </bumpInput>
+               <light>
+                  <Light.Distant />
+               </light>
+            </Lighting>
+         </effect>
+      </Label>
    </children>
 </AnchorPane>

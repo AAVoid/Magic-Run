@@ -94,7 +94,7 @@ public class UtiliserWS {
 				statistiques.getRotation(), statistiques.getDeceleration(), statistiques.getFrein(), statistiques.getVitesseMax());
 	}
 	
-	public static String service_Jouer(String pseudo, String sens, int angle) throws Exception {
+	public static String service_Jouer(String pseudo, String sens, String angle) throws Exception {
 		String url = Controleur_PageAccueil.ADRESSE_IP_SERVEUR + "jeu?pseudo=" + pseudo + "&sens=" + sens + "&angle=" + angle;
 		return utiliserService(url);
 	}

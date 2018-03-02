@@ -68,7 +68,8 @@ public class Controleur_PageChoixVoiture implements Initializable {
 	public static MediaPlayer mediaPlayerSonSelection;
 	public static ArrayList<String> listeNomsVoitures;
 	private static final String CHEMIN_IMAGE_VOITURE = "file:/" + Main.CHEMIN_IMAGE + "/F1_";
-	private static HashMap<String, String> hashMapNomVoitureNomImage;
+	public static final String CHEMIN_IMAGE_VOITURE_ADVERSAIRE = CHEMIN_IMAGE_VOITURE + "Adversaire.png";
+	public static HashMap<String, String> hashMapNomVoitureNomImage;
 	private static HashMap<String, StatistiquesVoiture> hashMapNomVoitureStatistiques;
 	public static StatistiquesVoiture statistiqueVoiture;
 	public static String nomVoitureSelectionneeValide;

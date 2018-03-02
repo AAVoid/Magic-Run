@@ -154,6 +154,17 @@ ANNEE : 2018
 
 
 
+/* - - - - - - - - - PAGE JEU - - - - - - - - - */
+
+
+
+.jeu_affichage_vitesse {
+	-fx-font-size: 30pt;
+	-fx-text-fill: #FFD700;
+}
+
+
+
 
 
 

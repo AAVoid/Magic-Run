@@ -50,6 +50,20 @@ public class StatistiquesVoiture {
 	public StatistiquesVoiture() {
 		this(0, 0, 0, 0, 0, 0, 0, 0, 0);
 	}
+	
+	public static StatistiquesVoiture copier(StatistiquesVoiture statistiques) {
+		StatistiquesVoiture s = new StatistiquesVoiture();
+		s.x = statistiques.x;
+		s.y = statistiques.y;
+		s.angle = statistiques.angle;
+		s.vitesse = statistiques.vitesse;
+		s.acceleration = statistiques.acceleration;
+		s.rotation = statistiques.rotation;
+		s.deceleration = statistiques.deceleration;
+		s.frein = statistiques.frein;
+		s.vitesseMax = statistiques.vitesseMax;
+		return s;
+	}
 
 	public int getX() {
 		return x;
