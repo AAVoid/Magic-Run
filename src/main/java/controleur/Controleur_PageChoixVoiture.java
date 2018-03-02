@@ -66,13 +66,14 @@ public class Controleur_PageChoixVoiture implements Initializable {
 	public static MediaPlayer mediaPlayerSonContinuer;
 	public static Media mediaSonSelection;
 	public static MediaPlayer mediaPlayerSonSelection;
-	public static ArrayList<String> listeNomsVoitures;
 	private static final String CHEMIN_IMAGE_VOITURE = "file:/" + Main.CHEMIN_IMAGE + "/F1_";
 	public static final String CHEMIN_IMAGE_VOITURE_ADVERSAIRE = CHEMIN_IMAGE_VOITURE + "Adversaire.png";
 	public static HashMap<String, String> hashMapNomVoitureNomImage;
 	private static HashMap<String, StatistiquesVoiture> hashMapNomVoitureStatistiques;
 	public static StatistiquesVoiture statistiqueVoiture;
 	public static String nomVoitureSelectionneeValide;
+	
+	private ArrayList<String> listeNomsVoitures;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -94,10 +95,10 @@ public class Controleur_PageChoixVoiture implements Initializable {
 		String nomVoiture_7 = "Falco";
 		String nomVoiture_8 = "Hero";
 		Controleur_PageChoixVoiture.statistiqueVoiture = new StatistiquesVoiture();
-		Controleur_PageChoixVoiture.listeNomsVoitures = new ArrayList<>();
+		this.listeNomsVoitures = new ArrayList<>();
 		Controleur_PageChoixVoiture.hashMapNomVoitureNomImage = new HashMap<String, String>();
 		Controleur_PageChoixVoiture.hashMapNomVoitureStatistiques = new HashMap<String, StatistiquesVoiture>();
-		Controleur_PageChoixVoiture.listeNomsVoitures.add(nomVoiture_1);
+		this.listeNomsVoitures.add(nomVoiture_1);
 		Controleur_PageChoixVoiture.hashMapNomVoitureNomImage.put(nomVoiture_1, Controleur_PageChoixVoiture.CHEMIN_IMAGE_VOITURE + nomVoiture_1 + ".png");
 		Controleur_PageChoixVoiture.hashMapNomVoitureStatistiques.put(nomVoiture_1, 
 				new StatistiquesVoiture(0, 0, 0, 0, 
@@ -114,7 +115,7 @@ public class Controleur_PageChoixVoiture implements Initializable {
 		this.valeurVitesseMax.setText("" + Controleur_PageChoixVoiture.statistiqueVoiture.getVitesseMax());
 		nomVoitureSelectionnee.setText(nomVoiture_1);
 		imageVoiture.setImage(new Image(Controleur_PageChoixVoiture.hashMapNomVoitureNomImage.get(nomVoiture_1)));
-		Controleur_PageChoixVoiture.listeNomsVoitures.add(nomVoiture_2);
+		this.listeNomsVoitures.add(nomVoiture_2);
 		Controleur_PageChoixVoiture.hashMapNomVoitureNomImage.put(nomVoiture_2, Controleur_PageChoixVoiture.CHEMIN_IMAGE_VOITURE + nomVoiture_2 + ".png");
 		Controleur_PageChoixVoiture.hashMapNomVoitureStatistiques.put(nomVoiture_2, 
 				new StatistiquesVoiture(0, 0, 0, 0, 
@@ -123,7 +124,7 @@ public class Controleur_PageChoixVoiture implements Initializable {
 						StatistiquesVoiture.DECELERATION_N, 
 						StatistiquesVoiture.FREIN_N, 
 						StatistiquesVoiture.VITESSE_MAX_D));
-		Controleur_PageChoixVoiture.listeNomsVoitures.add(nomVoiture_3);
+		this.listeNomsVoitures.add(nomVoiture_3);
 		Controleur_PageChoixVoiture.hashMapNomVoitureNomImage.put(nomVoiture_3, Controleur_PageChoixVoiture.CHEMIN_IMAGE_VOITURE + nomVoiture_3 + ".png");
 		Controleur_PageChoixVoiture.hashMapNomVoitureStatistiques.put(nomVoiture_3, 
 				new StatistiquesVoiture(0, 0, 0, 0, 
@@ -132,7 +133,7 @@ public class Controleur_PageChoixVoiture implements Initializable {
 						StatistiquesVoiture.DECELERATION_N, 
 						StatistiquesVoiture.FREIN_N, 
 						StatistiquesVoiture.VITESSE_MAX_D));
-		Controleur_PageChoixVoiture.listeNomsVoitures.add(nomVoiture_4);
+		this.listeNomsVoitures.add(nomVoiture_4);
 		Controleur_PageChoixVoiture.hashMapNomVoitureNomImage.put(nomVoiture_4, Controleur_PageChoixVoiture.CHEMIN_IMAGE_VOITURE + nomVoiture_4 + ".png");
 		Controleur_PageChoixVoiture.hashMapNomVoitureStatistiques.put(nomVoiture_4, 
 				new StatistiquesVoiture(0, 0, 0, 0, 
@@ -141,7 +142,7 @@ public class Controleur_PageChoixVoiture implements Initializable {
 						StatistiquesVoiture.DECELERATION_N, 
 						StatistiquesVoiture.FREIN_U, 
 						StatistiquesVoiture.VITESSE_MAX_D));
-		Controleur_PageChoixVoiture.listeNomsVoitures.add(nomVoiture_5);
+		this.listeNomsVoitures.add(nomVoiture_5);
 		Controleur_PageChoixVoiture.hashMapNomVoitureNomImage.put(nomVoiture_5, Controleur_PageChoixVoiture.CHEMIN_IMAGE_VOITURE + nomVoiture_5 + ".png");
 		Controleur_PageChoixVoiture.hashMapNomVoitureStatistiques.put(nomVoiture_5, 
 				new StatistiquesVoiture(0, 0, 0, 0, 
@@ -150,7 +151,7 @@ public class Controleur_PageChoixVoiture implements Initializable {
 						StatistiquesVoiture.DECELERATION_N, 
 						StatistiquesVoiture.FREIN_N, 
 						StatistiquesVoiture.VITESSE_MAX_U));
-		Controleur_PageChoixVoiture.listeNomsVoitures.add(nomVoiture_6);
+		this.listeNomsVoitures.add(nomVoiture_6);
 		Controleur_PageChoixVoiture.hashMapNomVoitureNomImage.put(nomVoiture_6, Controleur_PageChoixVoiture.CHEMIN_IMAGE_VOITURE + nomVoiture_6 + ".png");
 		Controleur_PageChoixVoiture.hashMapNomVoitureStatistiques.put(nomVoiture_6, 
 				new StatistiquesVoiture(0, 0, 0, 0, 
@@ -159,7 +160,7 @@ public class Controleur_PageChoixVoiture implements Initializable {
 						StatistiquesVoiture.DECELERATION_N, 
 						StatistiquesVoiture.FREIN_N, 
 						StatistiquesVoiture.VITESSE_MAX_U));
-		Controleur_PageChoixVoiture.listeNomsVoitures.add(nomVoiture_7);
+		this.listeNomsVoitures.add(nomVoiture_7);
 		Controleur_PageChoixVoiture.hashMapNomVoitureNomImage.put(nomVoiture_7, Controleur_PageChoixVoiture.CHEMIN_IMAGE_VOITURE + nomVoiture_7 + ".png");
 		Controleur_PageChoixVoiture.hashMapNomVoitureStatistiques.put(nomVoiture_7, 
 				new StatistiquesVoiture(0, 0, 0, 0, 
@@ -168,7 +169,7 @@ public class Controleur_PageChoixVoiture implements Initializable {
 						StatistiquesVoiture.DECELERATION_N, 
 						StatistiquesVoiture.FREIN_D, 
 						StatistiquesVoiture.VITESSE_MAX_U));
-		Controleur_PageChoixVoiture.listeNomsVoitures.add(nomVoiture_8);
+		this.listeNomsVoitures.add(nomVoiture_8);
 		Controleur_PageChoixVoiture.hashMapNomVoitureNomImage.put(nomVoiture_8, Controleur_PageChoixVoiture.CHEMIN_IMAGE_VOITURE + nomVoiture_8 + ".png");
 		Controleur_PageChoixVoiture.hashMapNomVoitureStatistiques.put(nomVoiture_8, 
 				new StatistiquesVoiture(0, 0, 0, 0, 

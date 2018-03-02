@@ -2,6 +2,7 @@ package controleur;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
 import org.json.JSONArray;
@@ -41,7 +42,6 @@ public class Controleur_PageJeu implements Initializable {
     private Button boutonEcouteurKey;
 	@FXML
     private Label vitesseAffichee;
-	public Timeline timerJeu;
 
 	public static final String CHEMIN_FXML_PAGE_JEU = "/vue/pageJeu.fxml";
 	public static Media mediaMusiqueFond;
@@ -49,45 +49,40 @@ public class Controleur_PageJeu implements Initializable {
 	public static final String CHEMIN_MUSIQUE_FOND = "file:/" + Main.CHEMIN_MUSIQUE + "/Dark_Souls_III_Soundtrack_OST_-_Iudex_Gundyr.mp3";
 	public static final int NOMBRE_FPS_JEU = 30;
 	public static final int FACTEUR_VITESSE = 2;
-	public static ArrayList<String> listeTouchesPressees;
-	public static String jsonListeJoueurs;
+	public static Timeline timerJeu;
 	
-	private Voiture voitureJoueur;
+	private ArrayList<String> listeTouchesPressees;
+	private String jsonListeJoueurs;
+	private HashMap<String, Voiture> hashMapJoueur;
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		//System.out.println("Chargé");
-		Controleur_PageJeu.listeTouchesPressees = new ArrayList<String>();
-		//Affichage de la voiture du joueur
-		Image imageVoitureJoueur = new Image(Controleur_PageChoixVoiture.hashMapNomVoitureNomImage.get(Controleur_PageChoixVoiture.nomVoitureSelectionneeValide));
-		ImageView imageVoiture = new ImageView(imageVoitureJoueur);
-		voitureJoueur = new Voiture(imageVoiture, StatistiquesVoiture.copier(Controleur_PageChoixVoiture.statistiqueVoiture));
-		voitureJoueur.getImage().setLayoutX((Main.LONGUEUR_FENETRE / 2) - (voitureJoueur.getImage().getFitWidth() / 2));
-		voitureJoueur.getImage().setLayoutY((Main.HAUTEUR_FENETRE / 2) - (voitureJoueur.getImage().getFitHeight() / 2));
-		anchorLayout.getChildren().add(voitureJoueur.getImage());
-		this.timerJeu = new Timeline(new KeyFrame(Duration.millis(1000 / Controleur_PageJeu.NOMBRE_FPS_JEU), new EventHandler<ActionEvent>() {
+		this.listeTouchesPressees = new ArrayList<String>();
+		this.hashMapJoueur = new HashMap<String, Voiture>();
+		this.jsonListeJoueurs = "";
+		Controleur_PageJeu.timerJeu = new Timeline(new KeyFrame(Duration.millis(1000 / Controleur_PageJeu.NOMBRE_FPS_JEU), new EventHandler<ActionEvent>() {
 		    @Override
 		    public void handle(ActionEvent event) {
+		    	actualiserPositionCreerJoueur();
 		        traiterTouches();
-		        actualiser();
-		        //System.out.println(Controleur_PageJeu.jsonListeJoueurs);
 		    }
 		}));
-		this.timerJeu.setCycleCount(Timeline.INDEFINITE);
-		this.timerJeu.play();
+		Controleur_PageJeu.timerJeu.setCycleCount(Timeline.INDEFINITE);
+		Controleur_PageJeu.timerJeu.play();
 	}
 	
 	@FXML
     void getKeyJeu(KeyEvent event) {
-		if(!Controleur_PageJeu.listeTouchesPressees.contains(event.getCode().getName()))
-			Controleur_PageJeu.listeTouchesPressees.add(event.getCode().getName());
+		if(!this.listeTouchesPressees.contains(event.getCode().getName()))
+			this.listeTouchesPressees.add(event.getCode().getName());
     }
 	
-	private void actualiser() {
+	private void actualiserPositionCreerJoueur() {
 		try {
-			Controleur_PageJeu.jsonListeJoueurs = UtiliserWS.service_Who();
+			this.jsonListeJoueurs = UtiliserWS.service_Who();
 			JSONArray tab = null;
-			tab = new JSONArray(Controleur_PageJeu.jsonListeJoueurs);
+			tab = new JSONArray(this.jsonListeJoueurs);
 			String pseudo;
 			int x;
 			int y;
@@ -100,10 +95,38 @@ public class Controleur_PageJeu implements Initializable {
 					y = tab.getJSONObject(i).getJSONObject("voiture").getInt("y");
 					angle = tab.getJSONObject(i).getJSONObject("voiture").getInt("angle");
 					vitesse = tab.getJSONObject(i).getJSONObject("voiture").getInt("vitesse");
-					if(pseudo.equals(Controleur_PageAccueil.PSEUDONYME)) {
-						//Actualise la position et la vitesse affichée
-						this.vitesseAffichee.setText("" + (vitesse * Controleur_PageJeu.FACTEUR_VITESSE) + " km/h");
-						this.voitureJoueur.getImage().setRotate(angle + 90); 
+					if(!hashMapJoueur.containsKey(pseudo)) { //SI LE JOUEUR N'A PAS ENCORE REJOINT LA PARTIE
+						if(pseudo.equals(Controleur_PageAccueil.PSEUDONYME)) { //SI C'EST NOUS
+							hashMapJoueur.put(Controleur_PageAccueil.PSEUDONYME, 
+									new Voiture(new ImageView(
+											new Image(Controleur_PageChoixVoiture.hashMapNomVoitureNomImage.get(Controleur_PageChoixVoiture.nomVoitureSelectionneeValide))
+											), StatistiquesVoiture.copier(Controleur_PageChoixVoiture.statistiqueVoiture)));
+							Voiture v = hashMapJoueur.get(pseudo);
+							v.getImage().setLayoutX(x);
+							v.getImage().setLayoutY(y);
+							v.getImage().setRotate(angle + 90);
+							this.anchorLayout.getChildren().add(v.getImage());
+						}
+						else { //SI C'EST UN ADVERSAIRE
+							hashMapJoueur.put(pseudo, 
+									new Voiture(new ImageView(
+											new Image(Controleur_PageChoixVoiture.CHEMIN_IMAGE_VOITURE_ADVERSAIRE)
+											), new StatistiquesVoiture(x, y, angle, 0, 0, 0, 0, 0, 0)));
+							Voiture v = hashMapJoueur.get(pseudo);
+							v.getImage().setLayoutX(x);
+							v.getImage().setLayoutY(y);
+							v.getImage().setRotate(angle + 90);
+							this.anchorLayout.getChildren().add(v.getImage());
+						}
+					}
+					else { //SI LE JOUEUR A DEJA REJOINT LA PARTIE, ON LE DEPLACE UNIQUEMENT
+						Voiture v = hashMapJoueur.get(pseudo);
+						v.getImage().setLayoutX(x);
+						v.getImage().setLayoutY(y);
+						v.getImage().setRotate(angle + 90);
+						//Si c'est nous on actualise la vitesse affichée
+						if(pseudo.equals(Controleur_PageAccueil.PSEUDONYME))
+							this.vitesseAffichee.setText("" + vitesse + " km/h");
 					}
 				} catch (JSONException e) {
 					e.printStackTrace();
@@ -115,49 +138,49 @@ public class Controleur_PageJeu implements Initializable {
 	}
 	
 	private void traiterTouches() {
-		if(Controleur_PageJeu.listeTouchesPressees.contains(Controleur_PageChoixTouches.nomToucheAccelerer)) {
-			//System.out.println("Avancer");
+		if(this.listeTouchesPressees.contains(Controleur_PageChoixTouches.nomToucheAccelerer)) {
+			System.out.println("Avancer");
 			try {
-				Controleur_PageJeu.jsonListeJoueurs = UtiliserWS.service_Jouer(Controleur_PageAccueil.PSEUDONYME, "avancer", "rien");
+				UtiliserWS.service_Jouer(Controleur_PageAccueil.PSEUDONYME, "avancer", "rien");
 			} catch (Exception e) {
 				//e.printStackTrace();
 			}
-			Controleur_PageJeu.listeTouchesPressees.remove(Controleur_PageChoixTouches.nomToucheAccelerer);
+			this.listeTouchesPressees.remove(Controleur_PageChoixTouches.nomToucheAccelerer);
 		}
-		else if(Controleur_PageJeu.listeTouchesPressees.contains(Controleur_PageChoixTouches.nomToucheFreiner)) {
+		else if(this.listeTouchesPressees.contains(Controleur_PageChoixTouches.nomToucheFreiner)) {
 			try {
-				Controleur_PageJeu.jsonListeJoueurs = UtiliserWS.service_Jouer(Controleur_PageAccueil.PSEUDONYME, "reculer", "rien");
+				UtiliserWS.service_Jouer(Controleur_PageAccueil.PSEUDONYME, "reculer", "rien");
 			} catch (Exception e) {
 				//e.printStackTrace();
 			}
-			//System.out.println("Freiner");
-			Controleur_PageJeu.listeTouchesPressees.remove(Controleur_PageChoixTouches.nomToucheFreiner);
+			System.out.println("Freiner");
+			this.listeTouchesPressees.remove(Controleur_PageChoixTouches.nomToucheFreiner);
 		}
-		else if(Controleur_PageJeu.listeTouchesPressees.contains(Controleur_PageChoixTouches.nomToucheTournerGauche)) {
-			//System.out.println("Gauche");
+		else if(this.listeTouchesPressees.contains(Controleur_PageChoixTouches.nomToucheTournerGauche)) {
+			System.out.println("Gauche");
 			try {
-				Controleur_PageJeu.jsonListeJoueurs = UtiliserWS.service_Jouer(Controleur_PageAccueil.PSEUDONYME, "libre", "gauche");
+				UtiliserWS.service_Jouer(Controleur_PageAccueil.PSEUDONYME, "libre", "gauche");
 			} catch (Exception e) {
 				//e.printStackTrace();
 			}
-			Controleur_PageJeu.listeTouchesPressees.remove(Controleur_PageChoixTouches.nomToucheTournerGauche);
+			this.listeTouchesPressees.remove(Controleur_PageChoixTouches.nomToucheTournerGauche);
 		}
-		else if(Controleur_PageJeu.listeTouchesPressees.contains(Controleur_PageChoixTouches.nomToucheTournerDroite)) {
-			//System.out.println("Droite");
+		else if(this.listeTouchesPressees.contains(Controleur_PageChoixTouches.nomToucheTournerDroite)) {
+			System.out.println("Droite");
 			try {
-				Controleur_PageJeu.jsonListeJoueurs = UtiliserWS.service_Jouer(Controleur_PageAccueil.PSEUDONYME, "libre", "droite");
+				UtiliserWS.service_Jouer(Controleur_PageAccueil.PSEUDONYME, "libre", "droite");
 			} catch (Exception e) {
 				//e.printStackTrace();
 			}
-			Controleur_PageJeu.listeTouchesPressees.remove(Controleur_PageChoixTouches.nomToucheTournerDroite);
+			this.listeTouchesPressees.remove(Controleur_PageChoixTouches.nomToucheTournerDroite);
 		}
-		else { //Si on appuie sur rien
+		/*else { //Si on appuie sur rien
 			try {
 				Controleur_PageJeu.jsonListeJoueurs = UtiliserWS.service_Jouer(Controleur_PageAccueil.PSEUDONYME, "libre", "rien");
 			} catch (Exception e) {
 				//e.printStackTrace();
 			}
-		}
+		}*/
 	}
 }
 

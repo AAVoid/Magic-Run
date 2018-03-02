@@ -60,7 +60,6 @@ public class Controleur_PageChoixTouches implements Initializable {
 	public static final String CHEMIN_MUSIQUE_FOND_JEU = "file:/" + Main.CHEMIN_MUSIQUE + "/Dark_Souls_III_Soundtrack_OST_-_Lorian_Elder_Prince_Lothric_Younger_Prince.mp3";
 	public static Media mediaMusiqueFond;
 	public static MediaPlayer mediaPlayerMusiqueFond;
-	
 	public static String nomToucheAccelerer;
 	public static String nomToucheFreiner;
 	public static String nomToucheTournerGauche;

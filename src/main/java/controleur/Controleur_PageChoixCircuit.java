@@ -46,9 +46,8 @@ public class Controleur_PageChoixCircuit implements Initializable {
 	@FXML
 	private JFXButton boutonPrecedent;
 
-	private static ArrayList<String> listeNomsCircuits;
+	
 	private static final String CHEMIN_IMAGE_CIRCUITS = "file:/" + Main.CHEMIN_IMAGE + "/Circuit_";
-	private static HashMap<String, String> hashMapNomCircuitsNomImage;
 	public static Media mediaSonRetour;
 	public static MediaPlayer mediaPlayerSonRetour;
 	public static Media mediaSonContinuer;
@@ -56,6 +55,9 @@ public class Controleur_PageChoixCircuit implements Initializable {
 	public static Media mediaSonSelection;
 	public static MediaPlayer mediaPlayerSonSelection;
 	public static String nomCircuitSelectionneeValide;
+	
+	private ArrayList<String> listeNomsCircuits;
+	private HashMap<String, String> hashMapNomCircuitsNomImage;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -70,10 +72,10 @@ public class Controleur_PageChoixCircuit implements Initializable {
 		//PREPARATION DE LA LIST VIEW
 		String nomCircuit_1 = "Évolution";
 		//String nomCircuit_2 = "Test";
-		Controleur_PageChoixCircuit.listeNomsCircuits = new ArrayList<>();
-		Controleur_PageChoixCircuit.hashMapNomCircuitsNomImage = new HashMap<String, String>();
-		Controleur_PageChoixCircuit.listeNomsCircuits.add(nomCircuit_1);
-		Controleur_PageChoixCircuit.hashMapNomCircuitsNomImage.put(nomCircuit_1, Controleur_PageChoixCircuit.CHEMIN_IMAGE_CIRCUITS + nomCircuit_1 + ".png");
+		this.listeNomsCircuits = new ArrayList<>();
+		this.hashMapNomCircuitsNomImage = new HashMap<String, String>();
+		this.listeNomsCircuits.add(nomCircuit_1);
+		this.hashMapNomCircuitsNomImage.put(nomCircuit_1, Controleur_PageChoixCircuit.CHEMIN_IMAGE_CIRCUITS + nomCircuit_1 + ".png");
 		nomCircuit.setText(nomCircuit_1);
 
 		//Controleur_PageChoixCircuit.listeNomsCircuits.add(nomCircuit_2);
@@ -120,6 +122,10 @@ public class Controleur_PageChoixCircuit implements Initializable {
 		mediaPlayerSonContinuer.play();
 		//Changement de scène
 		Controleur_PageChoixCircuit.nomCircuitSelectionneeValide = nomCircuit.getText();
+		//On place la voiture initialement sur le terrain
+		Controleur_PageChoixVoiture.statistiqueVoiture.setX(30);
+		Controleur_PageChoixVoiture.statistiqueVoiture.setY(30);
+		Controleur_PageChoixVoiture.statistiqueVoiture.setAngle(0);
 		Parent root = null;
 		try {
 			root = FXMLLoader.load(getClass().getResource(Controleur_PageChoixTouches.CHEMIN_FXML_PAGE_CHOIX_TOUCHES));
