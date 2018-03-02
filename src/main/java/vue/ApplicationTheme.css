@@ -159,7 +159,12 @@ ANNEE : 2018
 
 
 .jeu_affichage_vitesse {
-	-fx-font-size: 30pt;
+	-fx-font-size: 20pt;
+	-fx-text-fill: #FFD700;
+}
+
+.jeu_affichage_chrono {
+	-fx-font-size: 20pt;
 	-fx-text-fill: #FFD700;
 }
 

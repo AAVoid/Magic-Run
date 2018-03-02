@@ -13,7 +13,7 @@
 <AnchorPane fx:id="anchorLayout" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.Controleur_PageJeu">
    <children>
       <Button fx:id="boutonEcouteurKey" layoutX="-50.0" layoutY="165.0" mnemonicParsing="false" onKeyPressed="#getKeyJeu" text="BKEY" />
-      <Label fx:id="vitesseAffichee" layoutX="14.0" layoutY="528.0" styleClass="jeu_affichage_vitesse" text="v">
+      <Label fx:id="vitesseAffichee" layoutX="6.0" layoutY="560.0" styleClass="jeu_affichage_vitesse" text="v">
          <effect>
             <Lighting>
                <bumpInput>
@@ -25,14 +25,38 @@
             </Lighting>
          </effect>
       </Label>
-      <JFXButton fx:id="boutonQuitterPartie" layoutX="522.0" layoutY="526.0" onAction="#quitterPartie" text=" ">
+      <JFXButton fx:id="boutonQuitterPartie" layoutX="553.0" layoutY="559.0" onAction="#quitterPartie" text=" ">
          <graphic>
-            <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../Ressource/Image/quitterPartie.png" />
                </image>
             </ImageView>
          </graphic>
       </JFXButton>
+      <Label fx:id="chronoAffiche" layoutX="6.0" layoutY="1.0" styleClass="jeu_affichage_chrono" text="c">
+         <effect>
+            <Lighting>
+               <bumpInput>
+                  <Shadow />
+               </bumpInput>
+               <light>
+                  <Light.Distant />
+               </light>
+            </Lighting>
+         </effect>
+      </Label>
+      <Label fx:id="compteurTours" alignment="TOP_RIGHT" layoutX="377.0" layoutY="14.0" prefHeight="39.0" prefWidth="209.0" styleClass="jeu_affichage_chrono" text="Tour 1 / 10">
+         <effect>
+            <Lighting>
+               <bumpInput>
+                  <Shadow />
+               </bumpInput>
+               <light>
+                  <Light.Distant />
+               </light>
+            </Lighting>
+         </effect>
+      </Label>
    </children>
 </AnchorPane>

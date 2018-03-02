@@ -1,5 +1,6 @@
 package controleur;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,7 +16,10 @@ import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -46,6 +50,10 @@ public class Controleur_PageJeu implements Initializable {
     private Label vitesseAffichee;
 	@FXML
     private JFXButton boutonQuitterPartie;
+	@FXML
+    private Label chronoAffiche;
+	@FXML
+    private Label compteurTours;
 
 	public static final String CHEMIN_FXML_PAGE_JEU = "/vue/pageJeu.fxml";
 	public static Media mediaMusiqueFond;
@@ -54,10 +62,12 @@ public class Controleur_PageJeu implements Initializable {
 	public static final int NOMBRE_FPS_JEU = 30;
 	public static final int FACTEUR_VITESSE = 2;
 	public static Timeline timerJeu;
+	public static Timeline timerChrono;
 	
 	private ArrayList<String> listeTouchesPressees;
 	private String jsonListeJoueurs;
 	private HashMap<String, Voiture> hashMapJoueur;
+	public int valeurChrono;
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -65,6 +75,9 @@ public class Controleur_PageJeu implements Initializable {
 		this.listeTouchesPressees = new ArrayList<String>();
 		this.hashMapJoueur = new HashMap<String, Voiture>();
 		this.jsonListeJoueurs = "";
+		this.valeurChrono = 0;
+		this.chronoAffiche.setText("" + this.valeurChrono + "s");
+		//BOUCLE DE JEU
 		Controleur_PageJeu.timerJeu = new Timeline(new KeyFrame(Duration.millis(1000 / Controleur_PageJeu.NOMBRE_FPS_JEU), new EventHandler<ActionEvent>() {
 		    @Override
 		    public void handle(ActionEvent event) {
@@ -74,6 +87,15 @@ public class Controleur_PageJeu implements Initializable {
 		}));
 		Controleur_PageJeu.timerJeu.setCycleCount(Timeline.INDEFINITE);
 		Controleur_PageJeu.timerJeu.play();
+		//CHRONO
+		Controleur_PageJeu.timerChrono = new Timeline(new KeyFrame(Duration.seconds(1.0), new EventHandler<ActionEvent>() {
+		    @Override
+		    public void handle(ActionEvent event) {
+		    	incrementerChrono();
+		    }
+		}));
+		Controleur_PageJeu.timerChrono.setCycleCount(Timeline.INDEFINITE);
+		Controleur_PageJeu.timerChrono.play();
 	}
 	
 	@FXML
@@ -81,6 +103,11 @@ public class Controleur_PageJeu implements Initializable {
 		if(!this.listeTouchesPressees.contains(event.getCode().getName()))
 			this.listeTouchesPressees.add(event.getCode().getName());
     }
+	
+	private void incrementerChrono() {
+		this.valeurChrono++;
+    	this.chronoAffiche.setText("" + this.valeurChrono + "s");
+	}
 	
 	private void actualiserPositionCreerJoueur() {
 		try {
@@ -143,7 +170,7 @@ public class Controleur_PageJeu implements Initializable {
 	
 	private void traiterTouches() {
 		if(this.listeTouchesPressees.contains(Controleur_PageChoixTouches.nomToucheAccelerer)) {
-			System.out.println("Avancer");
+			//System.out.println("Avancer");
 			try {
 				UtiliserWS.service_Jouer(Controleur_PageAccueil.PSEUDONYME, "avancer", "rien");
 			} catch (Exception e) {
@@ -152,12 +179,12 @@ public class Controleur_PageJeu implements Initializable {
 			this.listeTouchesPressees.remove(Controleur_PageChoixTouches.nomToucheAccelerer);
 		}
 		else if(this.listeTouchesPressees.contains(Controleur_PageChoixTouches.nomToucheFreiner)) {
+			//System.out.println("Freiner");
 			try {
 				UtiliserWS.service_Jouer(Controleur_PageAccueil.PSEUDONYME, "reculer", "rien");
 			} catch (Exception e) {
 				//e.printStackTrace();
 			}
-			System.out.println("Freiner");
 			this.listeTouchesPressees.remove(Controleur_PageChoixTouches.nomToucheFreiner);
 		}
 		else if(this.listeTouchesPressees.contains(Controleur_PageChoixTouches.nomToucheTournerGauche)) {
@@ -189,7 +216,17 @@ public class Controleur_PageJeu implements Initializable {
 	
 	@FXML
     void quitterPartie(ActionEvent event) {
-		System.out.println("QUITTER");
+		Controleur_PageJeu.timerJeu.stop(); //Arrêt de la boucle de jeu et du chrono
+		Controleur_PageJeu.timerChrono.stop();
+		Parent root = null;
+		try {
+			root = FXMLLoader.load(getClass().getResource(Controleur_PageChoixTouches.CHEMIN_FXML_PAGE_CHOIX_TOUCHES));
+			Scene scene = new Scene(root, Main.LONGUEUR_FENETRE, Main.HAUTEUR_FENETRE);
+			scene.getStylesheets().add(Main.CHEMIN_FICHIER_CSS);
+			Main.windowStage.setScene(scene);
+		} catch (IOException e) {
+			//e.printStackTrace();
+		}
 	}
 }
 
