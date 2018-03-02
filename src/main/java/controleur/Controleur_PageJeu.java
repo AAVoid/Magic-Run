@@ -68,6 +68,7 @@ public class Controleur_PageJeu implements Initializable {
 	private String jsonListeJoueurs;
 	private HashMap<String, Voiture> hashMapJoueur;
 	public int valeurChrono;
+	private boolean partieDemarree;
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -77,6 +78,7 @@ public class Controleur_PageJeu implements Initializable {
 		this.jsonListeJoueurs = "";
 		this.valeurChrono = 0;
 		this.chronoAffiche.setText("" + this.valeurChrono + "s");
+		this.partieDemarree = false;
 		//BOUCLE DE JEU
 		Controleur_PageJeu.timerJeu = new Timeline(new KeyFrame(Duration.millis(1000 / Controleur_PageJeu.NOMBRE_FPS_JEU), new EventHandler<ActionEvent>() {
 		    @Override
@@ -95,12 +97,12 @@ public class Controleur_PageJeu implements Initializable {
 		    }
 		}));
 		Controleur_PageJeu.timerChrono.setCycleCount(Timeline.INDEFINITE);
-		Controleur_PageJeu.timerChrono.play();
 	}
 	
 	@FXML
     void getKeyJeu(KeyEvent event) {
-		if(!this.listeTouchesPressees.contains(event.getCode().getName()))
+		if(!this.listeTouchesPressees.contains(event.getCode().getName())
+				&& Controleur_PageChoixTouches.listeTouchesDeJeu.contains(event.getCode().getName()))
 			this.listeTouchesPressees.add(event.getCode().getName());
     }
 	
@@ -171,6 +173,10 @@ public class Controleur_PageJeu implements Initializable {
 	private void traiterTouches() {
 		if(this.listeTouchesPressees.contains(Controleur_PageChoixTouches.nomToucheAccelerer)) {
 			//System.out.println("Avancer");
+			if(!this.partieDemarree) { //Si c'est la première fois qu'on bouge on lance le chrono
+				this.partieDemarree = true;
+				Controleur_PageJeu.timerChrono.play();
+			}
 			try {
 				UtiliserWS.service_Jouer(Controleur_PageAccueil.PSEUDONYME, "avancer", "rien");
 			} catch (Exception e) {
@@ -180,6 +186,10 @@ public class Controleur_PageJeu implements Initializable {
 		}
 		else if(this.listeTouchesPressees.contains(Controleur_PageChoixTouches.nomToucheFreiner)) {
 			//System.out.println("Freiner");
+			if(!this.partieDemarree) { //Si c'est la première fois qu'on bouge on lance le chrono
+				this.partieDemarree = true;
+				Controleur_PageJeu.timerChrono.play();
+			}
 			try {
 				UtiliserWS.service_Jouer(Controleur_PageAccueil.PSEUDONYME, "reculer", "rien");
 			} catch (Exception e) {
@@ -188,7 +198,11 @@ public class Controleur_PageJeu implements Initializable {
 			this.listeTouchesPressees.remove(Controleur_PageChoixTouches.nomToucheFreiner);
 		}
 		else if(this.listeTouchesPressees.contains(Controleur_PageChoixTouches.nomToucheTournerGauche)) {
-			System.out.println("Gauche");
+			//System.out.println("Gauche");
+			if(!this.partieDemarree) { //Si c'est la première fois qu'on bouge on lance le chrono
+				this.partieDemarree = true;
+				Controleur_PageJeu.timerChrono.play();
+			}
 			try {
 				UtiliserWS.service_Jouer(Controleur_PageAccueil.PSEUDONYME, "libre", "gauche");
 			} catch (Exception e) {
@@ -197,7 +211,11 @@ public class Controleur_PageJeu implements Initializable {
 			this.listeTouchesPressees.remove(Controleur_PageChoixTouches.nomToucheTournerGauche);
 		}
 		else if(this.listeTouchesPressees.contains(Controleur_PageChoixTouches.nomToucheTournerDroite)) {
-			System.out.println("Droite");
+			//System.out.println("Droite");
+			if(!this.partieDemarree) { //Si c'est la première fois qu'on bouge on lance le chrono
+				this.partieDemarree = true;
+				Controleur_PageJeu.timerChrono.play();
+			}
 			try {
 				UtiliserWS.service_Jouer(Controleur_PageAccueil.PSEUDONYME, "libre", "droite");
 			} catch (Exception e) {

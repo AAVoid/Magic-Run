@@ -2,6 +2,7 @@ package controleur;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXButton;
@@ -64,10 +65,12 @@ public class Controleur_PageChoixTouches implements Initializable {
 	public static String nomToucheFreiner;
 	public static String nomToucheTournerGauche;
 	public static String nomToucheTournerDroite;
+	public static ArrayList<String> listeTouchesDeJeu;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		//System.out.println("Chargé");
+		Controleur_PageChoixTouches.listeTouchesDeJeu = new ArrayList<String>();
 		//AFFICHAGE DU PSEUDO DU JOUEUR ET DU NOMBRE DE JOUEURS CONNECTES
 		pseudoJoueur.setText(Controleur_PageAccueil.PSEUDONYME);
 		try {
@@ -210,6 +213,11 @@ public class Controleur_PageChoixTouches implements Initializable {
 			mediaPlayerMusiqueFond.setCycleCount(Timeline.INDEFINITE); //Lecture de la musique en boucle
 			mediaPlayerMusiqueFond.play();
 		}
+		//On enregistre les touches de jeu
+		Controleur_PageChoixTouches.listeTouchesDeJeu.add(Controleur_PageChoixTouches.nomToucheAccelerer);
+		Controleur_PageChoixTouches.listeTouchesDeJeu.add(Controleur_PageChoixTouches.nomToucheFreiner);
+		Controleur_PageChoixTouches.listeTouchesDeJeu.add(Controleur_PageChoixTouches.nomToucheTournerGauche);
+		Controleur_PageChoixTouches.listeTouchesDeJeu.add(Controleur_PageChoixTouches.nomToucheTournerDroite);
 		//On lance le jeu
 		Parent root = null;
 		try {
