@@ -15,6 +15,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.media.Media;
@@ -185,7 +187,7 @@ public class Controleur_PageChoixTouches implements Initializable {
 	@FXML
 	void lancerCourse(ActionEvent event) {
 		final int TEMPS_ATTENTE_AVANT_ENGAGEMENT = 300;
-		
+
 		mediaSonContinuer = new Media(Controleur_PageAccueil.CHEMIN_SON_MESSAGE);
 		mediaPlayerSonContinuer = new MediaPlayer(mediaSonContinuer);
 		mediaPlayerSonContinuer.setCycleCount(1);
@@ -194,12 +196,6 @@ public class Controleur_PageChoixTouches implements Initializable {
 		try {
 			UtiliserWS.service_ModifierCaracteristiques(Controleur_PageAccueil.PSEUDONYME, Controleur_PageChoixVoiture.statistiqueVoiture);
 		} catch (Exception e1) {
-			//e1.printStackTrace();
-		}
-		//On joue le son d'engagement de partie, on arrête la musique de fond actuelle et on lance la nouvelle musique de fond
-		try {
-			Thread.sleep(TEMPS_ATTENTE_AVANT_ENGAGEMENT);
-		} catch (InterruptedException e1) {
 			//e1.printStackTrace();
 		}
 		mediaSonEngagement = new Media(Controleur_PageChoixTouches.CHEMIN_SON_ENGAGEMENT);
@@ -218,6 +214,18 @@ public class Controleur_PageChoixTouches implements Initializable {
 		Controleur_PageChoixTouches.listeTouchesDeJeu.add(Controleur_PageChoixTouches.nomToucheFreiner);
 		Controleur_PageChoixTouches.listeTouchesDeJeu.add(Controleur_PageChoixTouches.nomToucheTournerGauche);
 		Controleur_PageChoixTouches.listeTouchesDeJeu.add(Controleur_PageChoixTouches.nomToucheTournerDroite);
+		//AFFICHAGE DES INFORMATIONS DE JEU VIA UNE BOITE DE DIALOGUE
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle("Déroulement d'une partie");
+		alert.setHeaderText("3..., 2..., 1..., GO !!!");
+		alert.setContentText("I have a great message for you!");
+		alert.showAndWait();
+		//On joue le son d'engagement de partie, on arrête la musique de fond actuelle et on lance la nouvelle musique de fond
+		try {
+			Thread.sleep(TEMPS_ATTENTE_AVANT_ENGAGEMENT);
+		} catch (InterruptedException e1) {
+			//e1.printStackTrace();
+		}
 		//On lance le jeu
 		Parent root = null;
 		try {

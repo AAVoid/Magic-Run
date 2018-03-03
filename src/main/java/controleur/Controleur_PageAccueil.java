@@ -54,6 +54,8 @@ public class Controleur_PageAccueil implements Initializable {
 	public static Media mediaSonMessage;
 	public static MediaPlayer mediaPlayerSonMessage;
 	public static final String CHEMIN_SON_MESSAGE = "file:/" + Main.CHEMIN_SON + "/message.wav";
+	private static final int COORDONNEES_X_APRES_CONNEXION = -9999999;
+	private static final int COORDONNEES_Y_APRES_CONNEXION = -9999999;
 
 	public static String PSEUDONYME = "";
 	public static String ADRESSE_IP_SERVEUR = "";
@@ -114,6 +116,9 @@ public class Controleur_PageAccueil implements Initializable {
 			try {
 				String status = UtiliserWS.getStatusService_Nouveau(reponse);
 				if(status.equals("OK")) {
+					reponse = UtiliserWS.service_Teleporter(Controleur_PageAccueil.PSEUDONYME, 
+							Controleur_PageAccueil.COORDONNEES_X_APRES_CONNEXION, 
+							Controleur_PageAccueil.COORDONNEES_Y_APRES_CONNEXION, 0);
 					//On affiche l'écran de sélection de la voiture
 					Parent root = FXMLLoader.load(getClass().getResource(Controleur_PageAccueil.CHEMIN_FXML_PAGE_SELECTION_VOITURE));
 					Scene scene = new Scene(root, Main.LONGUEUR_FENETRE, Main.HAUTEUR_FENETRE);

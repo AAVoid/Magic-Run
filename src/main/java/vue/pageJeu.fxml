@@ -25,7 +25,7 @@
             </Lighting>
          </effect>
       </Label>
-      <JFXButton fx:id="boutonQuitterPartie" layoutX="553.0" layoutY="559.0" onAction="#quitterPartie" text=" ">
+      <JFXButton fx:id="boutonQuitterPartie" layoutX="553.0" layoutY="560.0" onAction="#quitterPartie" text=" ">
          <graphic>
             <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -46,7 +46,7 @@
             </Lighting>
          </effect>
       </Label>
-      <Label fx:id="compteurTours" alignment="TOP_RIGHT" layoutX="377.0" layoutY="14.0" prefHeight="39.0" prefWidth="209.0" styleClass="jeu_affichage_chrono" text="Tour 1 / 10">
+      <Label fx:id="compteurTours" alignment="TOP_RIGHT" layoutX="377.0" layoutY="1.0" prefHeight="39.0" prefWidth="209.0" styleClass="jeu_affichage_chrono" text="Tour 1 / 10">
          <effect>
             <Lighting>
                <bumpInput>

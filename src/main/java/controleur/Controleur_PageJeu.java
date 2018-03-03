@@ -45,15 +45,15 @@ public class Controleur_PageJeu implements Initializable {
 	@FXML
 	private AnchorPane anchorLayout;
 	@FXML
-    private Button boutonEcouteurKey;
+	private Button boutonEcouteurKey;
 	@FXML
-    private Label vitesseAffichee;
+	private Label vitesseAffichee;
 	@FXML
-    private JFXButton boutonQuitterPartie;
+	private JFXButton boutonQuitterPartie;
 	@FXML
-    private Label chronoAffiche;
+	private Label chronoAffiche;
 	@FXML
-    private Label compteurTours;
+	private Label compteurTours;
 
 	public static final String CHEMIN_FXML_PAGE_JEU = "/vue/pageJeu.fxml";
 	public static Media mediaMusiqueFond;
@@ -63,13 +63,15 @@ public class Controleur_PageJeu implements Initializable {
 	public static final int FACTEUR_VITESSE = 2;
 	public static Timeline timerJeu;
 	public static Timeline timerChrono;
-	
+	private static final int TAUX_AMORTISSEMENT_DECELERATION = 5;
+
 	private ArrayList<String> listeTouchesPressees;
 	private String jsonListeJoueurs;
 	private HashMap<String, Voiture> hashMapJoueur;
 	public int valeurChrono;
 	private boolean partieDemarree;
-	
+	private int amortissementDeceleration;
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		//System.out.println("Chargé");
@@ -79,38 +81,39 @@ public class Controleur_PageJeu implements Initializable {
 		this.valeurChrono = 0;
 		this.chronoAffiche.setText("" + this.valeurChrono + "s");
 		this.partieDemarree = false;
+		this.amortissementDeceleration = 0;
 		//BOUCLE DE JEU
 		Controleur_PageJeu.timerJeu = new Timeline(new KeyFrame(Duration.millis(1000 / Controleur_PageJeu.NOMBRE_FPS_JEU), new EventHandler<ActionEvent>() {
-		    @Override
-		    public void handle(ActionEvent event) {
-		    	actualiserPositionCreerJoueur();
-		        traiterTouches();
-		    }
+			@Override
+			public void handle(ActionEvent event) {
+				actualiserPositionCreerJoueur();
+				traiterTouches();
+			}
 		}));
 		Controleur_PageJeu.timerJeu.setCycleCount(Timeline.INDEFINITE);
 		Controleur_PageJeu.timerJeu.play();
 		//CHRONO
 		Controleur_PageJeu.timerChrono = new Timeline(new KeyFrame(Duration.seconds(1.0), new EventHandler<ActionEvent>() {
-		    @Override
-		    public void handle(ActionEvent event) {
-		    	incrementerChrono();
-		    }
+			@Override
+			public void handle(ActionEvent event) {
+				incrementerChrono();
+			}
 		}));
 		Controleur_PageJeu.timerChrono.setCycleCount(Timeline.INDEFINITE);
 	}
-	
+
 	@FXML
-    void getKeyJeu(KeyEvent event) {
+	void getKeyJeu(KeyEvent event) {
 		if(!this.listeTouchesPressees.contains(event.getCode().getName())
 				&& Controleur_PageChoixTouches.listeTouchesDeJeu.contains(event.getCode().getName()))
 			this.listeTouchesPressees.add(event.getCode().getName());
-    }
-	
+	}
+
 	private void incrementerChrono() {
 		this.valeurChrono++;
-    	this.chronoAffiche.setText("" + this.valeurChrono + "s");
+		this.chronoAffiche.setText("" + this.valeurChrono + "s");
 	}
-	
+
 	private void actualiserPositionCreerJoueur() {
 		try {
 			this.jsonListeJoueurs = UtiliserWS.service_Who();
@@ -169,7 +172,7 @@ public class Controleur_PageJeu implements Initializable {
 			//e.printStackTrace();
 		}
 	}
-	
+
 	private void traiterTouches() {
 		if(this.listeTouchesPressees.contains(Controleur_PageChoixTouches.nomToucheAccelerer)) {
 			//System.out.println("Avancer");
@@ -223,17 +226,22 @@ public class Controleur_PageJeu implements Initializable {
 			}
 			this.listeTouchesPressees.remove(Controleur_PageChoixTouches.nomToucheTournerDroite);
 		}
-		/*else { //Si on appuie sur rien
-			try {
-				Controleur_PageJeu.jsonListeJoueurs = UtiliserWS.service_Jouer(Controleur_PageAccueil.PSEUDONYME, "libre", "rien");
-			} catch (Exception e) {
-				//e.printStackTrace();
+		else { //Si on appuie sur rien
+			this.amortissementDeceleration++;
+			this.amortissementDeceleration %= 
+					(Controleur_PageJeu.TAUX_AMORTISSEMENT_DECELERATION - Controleur_PageChoixVoiture.statistiqueVoiture.getDeceleration());
+			if(this.amortissementDeceleration == 0) {
+				try {
+					UtiliserWS.service_Jouer(Controleur_PageAccueil.PSEUDONYME, "libre", "rien");
+				} catch (Exception e) {
+					//e.printStackTrace();
+				}
 			}
-		}*/
+		}
 	}
-	
+
 	@FXML
-    void quitterPartie(ActionEvent event) {
+	void quitterPartie(ActionEvent event) {
 		Controleur_PageJeu.timerJeu.stop(); //Arrêt de la boucle de jeu et du chrono
 		Controleur_PageJeu.timerChrono.stop();
 		Parent root = null;
