@@ -63,7 +63,7 @@ public class Controleur_PageJeu implements Initializable {
 	public static final int FACTEUR_VITESSE = 2;
 	public static Timeline timerJeu;
 	public static Timeline timerChrono;
-	private static final int TAUX_AMORTISSEMENT_DECELERATION = 5;
+	private static final int TAUX_AMORTISSEMENT_DECELERATION = 10;
 
 	private ArrayList<String> listeTouchesPressees;
 	private String jsonListeJoueurs;

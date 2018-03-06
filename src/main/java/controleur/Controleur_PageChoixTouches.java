@@ -68,6 +68,19 @@ public class Controleur_PageChoixTouches implements Initializable {
 	public static String nomToucheTournerGauche;
 	public static String nomToucheTournerDroite;
 	public static ArrayList<String> listeTouchesDeJeu;
+	private static final String texteInformationsJeu = 
+			"Le principe d'une course en jeu est celui du contre-la-montre. \r\n" + 
+			"\r\n" + 
+			"Dans la partie supérieure gauche de l'écran il y a un chronomètre. Il est lancé dès l'instant où vous allez utiliser les commandes de jeu configurées.\r\n" + 
+			"Il s'arrête automatiquement après avoir fait le nombre de tours de terrain choisi.\r\n" + 
+			"\r\n" + 
+			"Les joueurs peuvent réaliser leurs tours de terrain en même temps en faisant la course ou peuvent le faire quand bon leur semble. Le chronomètre juge des performances de chacun.\r\n" + 
+			"\r\n" + 
+			"Vous pouvez quitter la course grâce à l'icône dans la partie inférieure droite de l'écran.\r\n" + 
+			"\r\n" + 
+			"La vitesse de votre voiture est affichée dans la partie inférieure gauche de l'écran.\r\n" + 
+			"\r\n" + 
+			"La difficulté imposée aux joueurs : une seule touche de jeu est utilisable à la fois ! Il est donc impossible d'accélérer et de tourner en même temps par exemple !";
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -218,7 +231,7 @@ public class Controleur_PageChoixTouches implements Initializable {
 		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.setTitle("Déroulement d'une partie");
 		alert.setHeaderText("3..., 2..., 1..., GO !!!");
-		alert.setContentText("I have a great message for you!");
+		alert.setContentText(Controleur_PageChoixTouches.texteInformationsJeu);
 		alert.showAndWait();
 		//On joue le son d'engagement de partie, on arrête la musique de fond actuelle et on lance la nouvelle musique de fond
 		try {
