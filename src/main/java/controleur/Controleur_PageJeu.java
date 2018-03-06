@@ -3,6 +3,7 @@ package controleur;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 
@@ -10,6 +11,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXListView;
+import com.jfoenix.controls.JFXTabPane;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -22,6 +25,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
@@ -54,6 +58,12 @@ public class Controleur_PageJeu implements Initializable {
 	private Label chronoAffiche;
 	@FXML
 	private Label compteurTours;
+	@FXML
+	private JFXTabPane groupeOnglets;
+	@FXML
+	private Label nombreJoueursConnectes;
+	@FXML
+	private JFXListView<String> listeViewJoueursConnectes;
 
 	public static final String CHEMIN_FXML_PAGE_JEU = "/vue/pageJeu.fxml";
 	public static Media mediaMusiqueFond;
@@ -82,6 +92,13 @@ public class Controleur_PageJeu implements Initializable {
 		this.chronoAffiche.setText("" + this.valeurChrono + "s");
 		this.partieDemarree = false;
 		this.amortissementDeceleration = 0;
+		//ECOUTEUR SUR LA SELECTION D'ONGLET
+		this.groupeOnglets.getSelectionModel().selectedItemProperty().addListener((ov, oldTab, newTab) -> {
+			//System.out.println("" + oldTab.getText() + "/" + newTab.getText());
+			if(newTab.getText().equals("Joueurs connectés")) { //Si on veut voir les joueurs connectés
+				actualiserListeJoueursConnectes();
+			}
+		});
 		//BOUCLE DE JEU
 		Controleur_PageJeu.timerJeu = new Timeline(new KeyFrame(Duration.millis(1000 / Controleur_PageJeu.NOMBRE_FPS_JEU), new EventHandler<ActionEvent>() {
 			@Override
@@ -105,13 +122,43 @@ public class Controleur_PageJeu implements Initializable {
 	@FXML
 	void getKeyJeu(KeyEvent event) {
 		if(!this.listeTouchesPressees.contains(event.getCode().getName())
-				&& Controleur_PageChoixTouches.listeTouchesDeJeu.contains(event.getCode().getName()))
+				&& Controleur_PageChoixTouches.listeTouchesDeJeu.contains(event.getCode().getName())
+				&& this.groupeOnglets.getSelectionModel().getSelectedIndex() == 0) {
+			//System.out.println(this.groupeOnglets.getSelectionModel().getSelectedIndex());
 			this.listeTouchesPressees.add(event.getCode().getName());
+		}
 	}
 
 	private void incrementerChrono() {
 		this.valeurChrono++;
 		this.chronoAffiche.setText("" + this.valeurChrono + "s");
+	}
+
+	private void actualiserListeJoueursConnectes() {
+		try {
+			this.listeViewJoueursConnectes.getItems().clear(); //On vide la liste
+			ArrayList<String> listePseudoJoueurs = new ArrayList<String>();
+			String jsonWho = UtiliserWS.service_Who();
+			JSONArray tab = null;
+			tab = new JSONArray(jsonWho);
+			String pseudo;
+			int nbJoueurs = tab.length();
+			this.nombreJoueursConnectes.setText("" + nbJoueurs);
+			for(int i = 0 ; i < nbJoueurs ; i++) {
+				try {
+					pseudo = tab.getJSONObject(i).getString("pseudonyme");
+					listePseudoJoueurs.add(pseudo);
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+			}
+			//Ajout des éléments à la liste
+			Collections.sort(listePseudoJoueurs);
+			this.listeViewJoueursConnectes.getItems().addAll(listePseudoJoueurs);
+			this.listeViewJoueursConnectes.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+		} catch (Exception e1) {
+			//e1.printStackTrace();
+		}
 	}
 
 	private void actualiserPositionCreerJoueur() {
@@ -174,6 +221,7 @@ public class Controleur_PageJeu implements Initializable {
 	}
 
 	private void traiterTouches() {
+		boutonEcouteurKey.requestFocus(); //BOUTON PLACE EN FOCUS POUR ACTIVER L'ECOUTEUR
 		if(this.listeTouchesPressees.contains(Controleur_PageChoixTouches.nomToucheAccelerer)) {
 			//System.out.println("Avancer");
 			if(!this.partieDemarree) { //Si c'est la première fois qu'on bouge on lance le chrono

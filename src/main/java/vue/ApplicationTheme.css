@@ -168,6 +168,17 @@ ANNEE : 2018
 	-fx-text-fill: #FFD700;
 }
 
+.jeu_affichage_nombreJoueursCo_1 {
+	-fx-font-size: 30pt;
+	-fx-text-fill: #01579b;
+	-fx-font-weight: bold;
+}
+
+.jeu_affichage_nombreJoueursCo_2 {
+	-fx-font-size: 14pt;
+	-fx-text-fill: #000000;
+}
+
 
 
 

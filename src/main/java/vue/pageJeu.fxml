@@ -10,53 +10,80 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="anchorLayout" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.Controleur_PageJeu">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.Controleur_PageJeu">
    <children>
-      <Button fx:id="boutonEcouteurKey" layoutX="-50.0" layoutY="165.0" mnemonicParsing="false" onKeyPressed="#getKeyJeu" text="BKEY" />
-      <Label fx:id="vitesseAffichee" layoutX="6.0" layoutY="560.0" styleClass="jeu_affichage_vitesse" text="v">
-         <effect>
-            <Lighting>
-               <bumpInput>
-                  <Shadow />
-               </bumpInput>
-               <light>
-                  <Light.Distant />
-               </light>
-            </Lighting>
-         </effect>
-      </Label>
-      <JFXButton fx:id="boutonQuitterPartie" layoutX="553.0" layoutY="560.0" onAction="#quitterPartie" text=" ">
-         <graphic>
-            <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../Ressource/Image/quitterPartie.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </JFXButton>
-      <Label fx:id="chronoAffiche" layoutX="6.0" layoutY="1.0" styleClass="jeu_affichage_chrono" text="c">
-         <effect>
-            <Lighting>
-               <bumpInput>
-                  <Shadow />
-               </bumpInput>
-               <light>
-                  <Light.Distant />
-               </light>
-            </Lighting>
-         </effect>
-      </Label>
-      <Label fx:id="compteurTours" alignment="TOP_RIGHT" layoutX="377.0" layoutY="1.0" prefHeight="39.0" prefWidth="209.0" styleClass="jeu_affichage_chrono" text="Tour 1 / 10">
-         <effect>
-            <Lighting>
-               <bumpInput>
-                  <Shadow />
-               </bumpInput>
-               <light>
-                  <Light.Distant />
-               </light>
-            </Lighting>
-         </effect>
-      </Label>
+      <JFXTabPane fx:id="groupeOnglets" prefHeight="600.0" prefWidth="600.0">
+         <tabs>
+            <Tab text="Course">
+              <content>
+                <AnchorPane fx:id="anchorLayout" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label fx:id="vitesseAffichee" layoutX="7.0" layoutY="525.0" styleClass="jeu_affichage_vitesse" text="v">
+                           <effect>
+                              <Lighting>
+                                 <bumpInput>
+                                    <Shadow />
+                                 </bumpInput>
+                                 <light>
+                                    <Light.Distant />
+                                 </light>
+                              </Lighting>
+                           </effect>
+                        </Label>
+                        <Label fx:id="chronoAffiche" layoutX="7.0" styleClass="jeu_affichage_chrono" text="c">
+                           <effect>
+                              <Lighting>
+                                 <bumpInput>
+                                    <Shadow />
+                                 </bumpInput>
+                                 <light>
+                                    <Light.Distant />
+                                 </light>
+                              </Lighting>
+                           </effect>
+                        </Label>
+                        <Label fx:id="compteurTours" alignment="TOP_RIGHT" layoutX="385.0" layoutY="1.0" prefHeight="39.0" prefWidth="209.0" styleClass="jeu_affichage_chrono" text="Tour 1 / 10">
+                           <effect>
+                              <Lighting>
+                                 <bumpInput>
+                                    <Shadow />
+                                 </bumpInput>
+                                 <light>
+                                    <Light.Distant />
+                                 </light>
+                              </Lighting>
+                           </effect>
+                        </Label>
+                        <JFXButton fx:id="boutonQuitterPartie" layoutX="523.0" layoutY="492.0" onAction="#quitterPartie" text=" ">
+                           <graphic>
+                              <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../Ressource/Image/quitterPartie.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab text="Joueurs connectés">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXListView fx:id="listeViewJoueursConnectes" layoutX="21.0" layoutY="82.0" prefHeight="470.0" prefWidth="559.0" />
+                        <TextFlow layoutX="14.0" layoutY="14.0" prefHeight="57.0" prefWidth="572.0">
+                           <children>
+                              <Label fx:id="nombreJoueursConnectes" styleClass="jeu_affichage_nombreJoueursCo_1" text="NB" />
+                              <Label styleClass="jeu_affichage_nombreJoueursCo_2" text=" joueur(s) connecté(s)" />
+                           </children>
+                        </TextFlow>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+         </tabs>
+      </JFXTabPane>
+      <Button fx:id="boutonEcouteurKey" focusTraversable="false" layoutX="-55.0" layoutY="313.0" mnemonicParsing="false" onKeyPressed="#getKeyJeu" text="BKEY" />
    </children>
 </AnchorPane>
