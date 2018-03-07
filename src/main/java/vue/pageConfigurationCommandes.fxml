@@ -27,7 +27,7 @@
       <AnchorPane prefHeight="70.0" prefWidth="600.0" styleClass="credits_border_bottom" BorderPane.alignment="CENTER">
          <children>
             <JFXButton fx:id="boutonPrecedent" layoutX="76.0" layoutY="7.0" onAction="#afficherChoixCircuit" styleClass="selection_voiture_bouton_bottm" text="&lt;" />
-            <JFXButton fx:id="boutonPoursuivre" disable="true" layoutX="468.0" layoutY="7.0" onAction="#lancerCourse" styleClass="selection_voiture_bouton_bottm" text="&gt;" />
+            <JFXButton fx:id="boutonPoursuivre" disable="true" layoutX="457.0" layoutY="7.0" onAction="#lancerCourse" styleClass="selection_voiture_bouton_bottm" text="GO" />
             <JFXButton fx:id="boutonSeDeconnecter" layoutX="173.0" layoutY="7.0" onAction="#seDeconnecter" styleClass="selection_voiture_bouton_bottm" text="SE DECONNECTER" />
          </children>
       </AnchorPane>

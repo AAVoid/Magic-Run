@@ -23,7 +23,14 @@
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="accueil_border_centre" BorderPane.alignment="CENTER">
          <children>
-            <JFXButton fx:id="boutonSeConnecter" disable="true" layoutX="136.0" layoutY="267.0" onAction="#seConnecter" styleClass="accueil_bouton_se_connecter" text="SE CONNECTER" />
+            <JFXButton fx:id="boutonSeConnecter" disable="true" layoutX="107.0" layoutY="270.0" onAction="#seConnecter" styleClass="accueil_bouton_se_connecter" text="SE CONNECTER">
+               <graphic>
+                  <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../Ressource/Image/go.png" />
+                     </image>
+                  </ImageView>
+               </graphic></JFXButton>
             <JFXTextField fx:id="champAdresseServeur" alignment="CENTER" layoutX="38.0" layoutY="155.0" prefHeight="25.0" prefWidth="529.0" promptText="Adresse serveur, par exemple : http://93.113.223.251/magicrun/" styleClass="accueil_champ_adresse_serveur" unFocusColor="#4059a9">
                <effect>
                   <Reflection fraction="0.55" topOffset="-1.0" />

@@ -80,7 +80,9 @@ public class Controleur_PageChoixTouches implements Initializable {
 			"\r\n" + 
 			"La vitesse de votre voiture est affichée dans la partie inférieure gauche de l'écran.\r\n" + 
 			"\r\n" + 
-			"La difficulté imposée aux joueurs : une seule touche de jeu est utilisable à la fois ! Il est donc impossible d'accélérer et de tourner en même temps par exemple !";
+			"La difficulté imposée aux joueurs : une seule touche de jeu est utilisable à la fois ! Il est donc impossible d'accélérer et de tourner en même temps par exemple !\r\n" + 
+			"\r\n" + 
+			"Dans l'onglet \"Joueurs connectés\" vous pouvez voir la liste des joueurs connectés. Vous pouvez aussi choisir ou non que les pseudonymes des joueurs soient affichés ainsi que leur couleur.";
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
