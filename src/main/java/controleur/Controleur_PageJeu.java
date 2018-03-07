@@ -23,7 +23,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.image.Image;
@@ -47,9 +46,9 @@ ANNEE : 2018
 
 public class Controleur_PageJeu implements Initializable {
 	@FXML
-	private AnchorPane anchorLayout;
+    private AnchorPane anchorLayoutFenetre;
 	@FXML
-	private Button boutonEcouteurKey;
+	private AnchorPane anchorLayout;
 	@FXML
 	private Label vitesseAffichee;
 	@FXML
@@ -124,7 +123,6 @@ public class Controleur_PageJeu implements Initializable {
 		if(!this.listeTouchesPressees.contains(event.getCode().getName())
 				&& Controleur_PageChoixTouches.listeTouchesDeJeu.contains(event.getCode().getName())
 				&& this.groupeOnglets.getSelectionModel().getSelectedIndex() == 0) {
-			//System.out.println(this.groupeOnglets.getSelectionModel().getSelectedIndex());
 			this.listeTouchesPressees.add(event.getCode().getName());
 		}
 	}
@@ -149,7 +147,7 @@ public class Controleur_PageJeu implements Initializable {
 					pseudo = tab.getJSONObject(i).getString("pseudonyme");
 					listePseudoJoueurs.add(pseudo);
 				} catch (JSONException e) {
-					e.printStackTrace();
+					//e.printStackTrace();
 				}
 			}
 			//Ajout des éléments à la liste
@@ -212,7 +210,7 @@ public class Controleur_PageJeu implements Initializable {
 							this.vitesseAffichee.setText("" + vitesse + " km/h");
 					}
 				} catch (JSONException e) {
-					e.printStackTrace();
+					//e.printStackTrace();
 				}
 			}
 		} catch (Exception e) {
@@ -221,7 +219,6 @@ public class Controleur_PageJeu implements Initializable {
 	}
 
 	private void traiterTouches() {
-		boutonEcouteurKey.requestFocus(); //BOUTON PLACE EN FOCUS POUR ACTIVER L'ECOUTEUR
 		if(this.listeTouchesPressees.contains(Controleur_PageChoixTouches.nomToucheAccelerer)) {
 			//System.out.println("Avancer");
 			if(!this.partieDemarree) { //Si c'est la première fois qu'on bouge on lance le chrono
