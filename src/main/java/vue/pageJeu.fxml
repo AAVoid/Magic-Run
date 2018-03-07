@@ -71,13 +71,15 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <JFXListView fx:id="listeViewJoueursConnectes" layoutX="21.0" layoutY="82.0" prefHeight="470.0" prefWidth="559.0" />
-                        <TextFlow layoutX="14.0" layoutY="14.0" prefHeight="57.0" prefWidth="572.0">
+                        <JFXListView fx:id="listeViewJoueursConnectes" layoutX="21.0" layoutY="138.0" prefHeight="414.0" prefWidth="559.0" />
+                        <TextFlow layoutX="14.0" layoutY="14.0" prefHeight="58.0" prefWidth="346.0">
                            <children>
                               <Label fx:id="nombreJoueursConnectes" styleClass="jeu_affichage_nombreJoueursCo_1" text="NB" />
                               <Label styleClass="jeu_affichage_nombreJoueursCo_2" text=" joueur(s) connecté(s)" />
                            </children>
                         </TextFlow>
+                        <JFXToggleButton fx:id="toggleAfficherPseudoJoueurs" layoutX="14.0" layoutY="72.0" text="Afficher pseudo. joueurs" />
+                        <JFXColorPicker fx:id="couleurPickerPseudo" layoutX="242.0" layoutY="89.0" />
                      </children>
                   </AnchorPane>
               </content>

@@ -11,8 +11,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXColorPicker;
 import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTabPane;
+import com.jfoenix.controls.JFXToggleButton;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -31,6 +33,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import main.Main;
 import modele.StatistiquesVoiture;
@@ -63,6 +66,10 @@ public class Controleur_PageJeu implements Initializable {
 	private Label nombreJoueursConnectes;
 	@FXML
 	private JFXListView<String> listeViewJoueursConnectes;
+	@FXML
+    private JFXToggleButton toggleAfficherPseudoJoueurs;
+	@FXML
+    private JFXColorPicker couleurPickerPseudo;
 
 	public static final String CHEMIN_FXML_PAGE_JEU = "/vue/pageJeu.fxml";
 	public static Media mediaMusiqueFond;
@@ -91,6 +98,7 @@ public class Controleur_PageJeu implements Initializable {
 		this.chronoAffiche.setText("" + this.valeurChrono + "s");
 		this.partieDemarree = false;
 		this.amortissementDeceleration = 0;
+		this.couleurPickerPseudo.setValue(Color.rgb(0, 0, 0));
 		//ECOUTEUR SUR LA SELECTION D'ONGLET
 		this.groupeOnglets.getSelectionModel().selectedItemProperty().addListener((ov, oldTab, newTab) -> {
 			//System.out.println("" + oldTab.getText() + "/" + newTab.getText());
@@ -181,23 +189,30 @@ public class Controleur_PageJeu implements Initializable {
 							hashMapJoueur.put(Controleur_PageAccueil.PSEUDONYME, 
 									new Voiture(new ImageView(
 											new Image(Controleur_PageChoixVoiture.hashMapNomVoitureNomImage.get(Controleur_PageChoixVoiture.nomVoitureSelectionneeValide))
-											), StatistiquesVoiture.copier(Controleur_PageChoixVoiture.statistiqueVoiture)));
+											), StatistiquesVoiture.copier(Controleur_PageChoixVoiture.statistiqueVoiture),
+											new Label(pseudo)));
 							Voiture v = hashMapJoueur.get(pseudo);
 							v.getImage().setLayoutX(x);
 							v.getImage().setLayoutY(y);
 							v.getImage().setRotate(angle + 90);
+							v.getLabelPseudo().setLayoutX(x + 50);
+							v.getLabelPseudo().setLayoutY(y);
 							this.anchorLayout.getChildren().add(v.getImage());
+							this.anchorLayout.getChildren().add(v.getLabelPseudo());
 						}
 						else { //SI C'EST UN ADVERSAIRE
 							hashMapJoueur.put(pseudo, 
 									new Voiture(new ImageView(
 											new Image(Controleur_PageChoixVoiture.CHEMIN_IMAGE_VOITURE_ADVERSAIRE)
-											), new StatistiquesVoiture(x, y, angle, 0, 0, 0, 0, 0, 0)));
+											), new StatistiquesVoiture(x, y, angle, 0, 0, 0, 0, 0, 0), new Label(pseudo)));
 							Voiture v = hashMapJoueur.get(pseudo);
 							v.getImage().setLayoutX(x);
 							v.getImage().setLayoutY(y);
 							v.getImage().setRotate(angle + 90);
+							v.getLabelPseudo().setLayoutX(x + 50);
+							v.getLabelPseudo().setLayoutY(y);
 							this.anchorLayout.getChildren().add(v.getImage());
+							this.anchorLayout.getChildren().add(v.getLabelPseudo());
 						}
 					}
 					else { //SI LE JOUEUR A DEJA REJOINT LA PARTIE, ON LE DEPLACE UNIQUEMENT
@@ -205,6 +220,10 @@ public class Controleur_PageJeu implements Initializable {
 						v.getImage().setLayoutX(x);
 						v.getImage().setLayoutY(y);
 						v.getImage().setRotate(angle + 90);
+						v.getLabelPseudo().setLayoutX(x + 50);
+						v.getLabelPseudo().setLayoutY(y);
+						v.getLabelPseudo().setTextFill(this.couleurPickerPseudo.getValue());
+						v.getLabelPseudo().setVisible(this.toggleAfficherPseudoJoueurs.isSelected());
 						//Si c'est nous on actualise la vitesse affichée
 						if(pseudo.equals(Controleur_PageAccueil.PSEUDONYME))
 							this.vitesseAffichee.setText("" + vitesse + " km/h");

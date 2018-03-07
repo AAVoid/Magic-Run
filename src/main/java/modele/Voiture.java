@@ -1,5 +1,6 @@
 package modele;
 
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 
 
@@ -12,11 +13,13 @@ ANNEE : 2018
 public class Voiture {
 	private ImageView image;
 	private StatistiquesVoiture statistiques;
+	private Label labelPseudo;
 	
-	public Voiture(ImageView image, StatistiquesVoiture statistiques) {
+	public Voiture(ImageView image, StatistiquesVoiture statistiques, Label labelPseudo) {
 		super();
 		this.image = image;
 		this.statistiques = statistiques;
+		this.labelPseudo = labelPseudo;
 	}
 
 	public ImageView getImage() {
@@ -33,6 +36,14 @@ public class Voiture {
 
 	public void setStatistiques(StatistiquesVoiture statistiques) {
 		this.statistiques = statistiques;
+	}
+
+	public Label getLabelPseudo() {
+		return labelPseudo;
+	}
+
+	public void setLabelPseudo(Label labelPseudo) {
+		this.labelPseudo = labelPseudo;
 	}
 }
 
