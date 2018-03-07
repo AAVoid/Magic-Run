@@ -17,6 +17,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.SelectionMode;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import main.Main;
@@ -45,9 +47,11 @@ public class Controleur_PageChoixCircuit implements Initializable {
 	private JFXListView<String> listeCircuit;
 	@FXML
 	private JFXButton boutonPrecedent;
+	@FXML
+    private ImageView imageMinature;
 
 	
-	private static final String CHEMIN_IMAGE_CIRCUITS = "file:/" + Main.CHEMIN_IMAGE + "/Circuit_";
+	private static final String CHEMIN_IMAGE_CIRCUITS = "file:/" + Main.CHEMIN_IMAGE + "/";
 	public static Media mediaSonRetour;
 	public static MediaPlayer mediaPlayerSonRetour;
 	public static Media mediaSonContinuer;
@@ -70,13 +74,15 @@ public class Controleur_PageChoixCircuit implements Initializable {
 			//e.printStackTrace();
 		}
 		//PREPARATION DE LA LIST VIEW
-		String nomCircuit_1 = "Évolution";
+		String nomCircuit_1 = "Evolution";
 		//String nomCircuit_2 = "Test";
 		this.listeNomsCircuits = new ArrayList<>();
 		this.hashMapNomCircuitsNomImage = new HashMap<String, String>();
 		this.listeNomsCircuits.add(nomCircuit_1);
-		this.hashMapNomCircuitsNomImage.put(nomCircuit_1, Controleur_PageChoixCircuit.CHEMIN_IMAGE_CIRCUITS + nomCircuit_1 + ".png");
+		this.hashMapNomCircuitsNomImage.put(nomCircuit_1, Controleur_PageChoixCircuit.CHEMIN_IMAGE_CIRCUITS + nomCircuit_1 + "_Map.png");
 		nomCircuit.setText(nomCircuit_1);
+		Image imageMiniat = new Image(this.hashMapNomCircuitsNomImage.get(nomCircuit_1));
+		imageMinature.setImage(imageMiniat);
 
 		//Controleur_PageChoixCircuit.listeNomsCircuits.add(nomCircuit_2);
 		//Controleur_PageChoixCircuit.hashMapNomCircuitsNomImage.put(nomCircuit_2, Controleur_PageChoixCircuit.CHEMIN_IMAGE_CIRCUITS + nomCircuit_2 + ".png");
@@ -91,8 +97,8 @@ public class Controleur_PageChoixCircuit implements Initializable {
 			mediaPlayerSonSelection.play();
 			//ON AFFICHE LA NOUVELLE IMAGE DU TERRAIN
 			nomCircuit.setText(newValue);
-			/*Image nouvelleImage = new Image(Controleur_PageChoixVoiture.hashMapNomVoitureNomImage.get(newValue));
-			imageVoiture.setImage(nouvelleImage);*/
+			Image nouvelleImage = new Image(this.hashMapNomCircuitsNomImage.get(newValue));
+			imageMinature.setImage(nouvelleImage);
 		});
 	}
 

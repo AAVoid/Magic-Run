@@ -18,6 +18,11 @@
               <content>
                 <AnchorPane fx:id="anchorLayout" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
+                        <ImageView fitHeight="600.0" fitWidth="600.0" layoutY="-24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../Ressource/Image/Evolution_Map.png" />
+                           </image>
+                        </ImageView>
                         <Label fx:id="vitesseAffichee" layoutX="7.0" layoutY="525.0" styleClass="jeu_affichage_vitesse" text="v">
                            <effect>
                               <Lighting>
