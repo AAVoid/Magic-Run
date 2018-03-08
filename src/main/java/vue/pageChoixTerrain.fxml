@@ -63,17 +63,19 @@
                   <Label layoutX="10.0" layoutY="10.0" styleClass="selection_voiture_label_2" text="joueur(s) connecté(s)" />
                </children>
             </TextFlow>
-            <JFXListView fx:id="listeCircuit" layoutX="29.0" layoutY="235.0" opacity="0.7" prefHeight="195.0" prefWidth="157.0" rotate="-9.0" />
-            <Label fx:id="nomCircuit" layoutX="209.0" layoutY="117.0" styleClass="selection_voiture_label_4" text="CIRCUIT">
+            <JFXListView fx:id="listeCircuit" layoutX="42.0" layoutY="138.0" opacity="0.7" prefHeight="195.0" prefWidth="157.0" rotate="-9.0" />
+            <Label fx:id="nomCircuit" layoutX="209.0" layoutY="104.0" styleClass="selection_voiture_label_4" text="CIRCUIT">
                <effect>
                   <Reflection fraction="0.65" topOffset="-10.0" />
                </effect>
             </Label>
-            <ImageView fx:id="imageMinature" fitHeight="250.0" fitWidth="250.0" layoutX="300.0" layoutY="208.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imageMinature" fitHeight="250.0" fitWidth="250.0" layoutX="281.0" layoutY="196.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../Ressource/Image/Evolution_Map.png" />
                </image>
             </ImageView>
+            <JFXSlider fx:id="sliderNombreToursTerrain" layoutX="28.0" layoutY="432.0" max="30.0" min="1.0" prefHeight="14.0" prefWidth="215.0" value="1.0" />
+            <Label layoutX="27.0" layoutY="348.0" styleClass="jeu_affichage_vitesse" text="Tours de terrain" />
          </children>
       </AnchorPane>
    </center>

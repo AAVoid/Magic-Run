@@ -87,6 +87,7 @@ public class Controleur_PageJeu implements Initializable {
 	public int valeurChrono;
 	private boolean partieDemarree;
 	private int amortissementDeceleration;
+	private int numeroTourActuel;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -99,6 +100,7 @@ public class Controleur_PageJeu implements Initializable {
 		this.partieDemarree = false;
 		this.amortissementDeceleration = 0;
 		this.couleurPickerPseudo.setValue(Color.rgb(0, 0, 0));
+		this.numeroTourActuel = 0;
 		//ECOUTEUR SUR LA SELECTION D'ONGLET
 		this.groupeOnglets.getSelectionModel().selectedItemProperty().addListener((ov, oldTab, newTab) -> {
 			//System.out.println("" + oldTab.getText() + "/" + newTab.getText());
@@ -111,6 +113,7 @@ public class Controleur_PageJeu implements Initializable {
 			@Override
 			public void handle(ActionEvent event) {
 				actualiserPositionCreerJoueur();
+				actualiserNombreToursTerrain();
 				traiterTouches();
 			}
 		}));
@@ -133,6 +136,16 @@ public class Controleur_PageJeu implements Initializable {
 				&& this.groupeOnglets.getSelectionModel().getSelectedIndex() == 0) {
 			this.listeTouchesPressees.add(event.getCode().getName());
 		}
+	}
+	
+	private void actualiserNombreToursTerrain() {
+		this.compteurTours.setText("Tour " + (this.numeroTourActuel + 1) + " / " + Controleur_PageChoixCircuit.NOMBRE_TOURS_A_FAIRE);
+		//CAS OU TOUS LES TOURS SONT TERMINES
+		/*if(this.numeroTourActuel == Controleur_PageChoixCircuit.NOMBRE_TOURS_A_FAIRE) {
+			//Arrêt des timer etc.
+			On empêche le joueur de bouger, ...
+			On efface le comptage de tours
+		}*/
 	}
 
 	private void incrementerChrono() {

@@ -141,6 +141,12 @@ ANNEE : 2018
 /* - - - - - - - - - PAGE CHOIX CIRCUIT - - - - - - - - - */
 
 
+.choixTerrain_nbTours {
+	-fx-font-size: 20pt;
+	-fx-text-fill: #FFD700;
+}
+
+
 
 /* - - - - - - - - - PAGE INFORMATIONS COMMANDES - - - - - - - - - */
 
@@ -160,12 +166,12 @@ ANNEE : 2018
 
 .jeu_affichage_vitesse {
 	-fx-font-size: 20pt;
-	-fx-text-fill: #FFD700;
+	-fx-text-fill: #01579b;
 }
 
 .jeu_affichage_chrono {
 	-fx-font-size: 20pt;
-	-fx-text-fill: #FFD700;
+	-fx-text-fill: #01579b;
 }
 
 .jeu_affichage_nombreJoueursCo_1 {

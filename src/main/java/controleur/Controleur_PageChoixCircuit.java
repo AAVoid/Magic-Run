@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
+import com.jfoenix.controls.JFXSlider;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -49,6 +50,8 @@ public class Controleur_PageChoixCircuit implements Initializable {
 	private JFXButton boutonPrecedent;
 	@FXML
     private ImageView imageMinature;
+	@FXML
+    private JFXSlider sliderNombreToursTerrain;
 
 	
 	private static final String CHEMIN_IMAGE_CIRCUITS = "file:/" + Main.CHEMIN_IMAGE + "/";
@@ -59,6 +62,9 @@ public class Controleur_PageChoixCircuit implements Initializable {
 	public static Media mediaSonSelection;
 	public static MediaPlayer mediaPlayerSonSelection;
 	public static String nomCircuitSelectionneeValide;
+	public static int NOMBRE_TOURS_A_FAIRE = 0;
+	private static final int COORDONNEES_X_INITIALES = 30;
+	private static final int COORDONNEES_Y_INITIALES = 15;
 	
 	private ArrayList<String> listeNomsCircuits;
 	private HashMap<String, String> hashMapNomCircuitsNomImage;
@@ -126,11 +132,11 @@ public class Controleur_PageChoixCircuit implements Initializable {
 		mediaPlayerSonContinuer = new MediaPlayer(mediaSonContinuer);
 		mediaPlayerSonContinuer.setCycleCount(1);
 		mediaPlayerSonContinuer.play();
-		//Changement de scène
 		Controleur_PageChoixCircuit.nomCircuitSelectionneeValide = nomCircuit.getText();
+		Controleur_PageChoixCircuit.NOMBRE_TOURS_A_FAIRE = (int)this.sliderNombreToursTerrain.getValue();
 		//On place la voiture initialement sur le terrain
-		Controleur_PageChoixVoiture.statistiqueVoiture.setX(30);
-		Controleur_PageChoixVoiture.statistiqueVoiture.setY(30);
+		Controleur_PageChoixVoiture.statistiqueVoiture.setX(Controleur_PageChoixCircuit.COORDONNEES_X_INITIALES);
+		Controleur_PageChoixVoiture.statistiqueVoiture.setY(Controleur_PageChoixCircuit.COORDONNEES_Y_INITIALES);
 		Controleur_PageChoixVoiture.statistiqueVoiture.setAngle(0);
 		Parent root = null;
 		try {
