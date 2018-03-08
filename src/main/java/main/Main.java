@@ -20,7 +20,7 @@ import service.UtiliserWS;
 public class Main extends Application {
 	public static final String NOM_APPLICATION = "Magic Run";
 	public static final String NOM_AUTEUR = "Aymerik ABOSO";
-	public static final String NOM_APPLICATION_FENETRE = Main.NOM_APPLICATION + " (Démo) - " + Main.NOM_AUTEUR;
+	public static final String NOM_APPLICATION_FENETRE = Main.NOM_APPLICATION + " (Démo. concept) - " + Main.NOM_AUTEUR;
 	public static final int LONGUEUR_FENETRE = 600;
 	public static final int HAUTEUR_FENETRE = 600;
 	public static final String CHEMIN_FXML_PAGE_ACCUEIL = "/vue/pageAccueil.fxml";

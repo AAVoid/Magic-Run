@@ -1,5 +1,6 @@
 package controleur;
 
+import java.awt.Rectangle;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -37,6 +38,7 @@ import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import main.Main;
 import modele.StatistiquesVoiture;
+import modele.Teleporteur;
 import modele.Voiture;
 import service.UtiliserWS;
 
@@ -88,6 +90,7 @@ public class Controleur_PageJeu implements Initializable {
 	private boolean partieDemarree;
 	private int amortissementDeceleration;
 	private int numeroTourActuel;
+	private ArrayList<Teleporteur> listeTeleporteurs;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -108,6 +111,23 @@ public class Controleur_PageJeu implements Initializable {
 				actualiserListeJoueursConnectes();
 			}
 		});
+		//CREATION DES RECTANGLE POUR TELEPORTEURS
+		this.listeTeleporteurs = new ArrayList<Teleporteur>();
+		//Téléporteurs rajouté dans l'ordre de passage sur la carte
+		this.listeTeleporteurs.add(new Teleporteur(new Rectangle(570, 9, 50, 55),
+				45, 29, 90));
+		this.listeTeleporteurs.add(new Teleporteur(new Rectangle(0, 219, 30, 55),
+				30, 454, 0));
+		this.listeTeleporteurs.add(new Teleporteur(new Rectangle(0, 309, 30, 55),
+				290, 394, 0));
+		this.listeTeleporteurs.add(new Teleporteur(new Rectangle(516, 524, 59, 50),
+				165, 539, -90));
+		this.listeTeleporteurs.add(new Teleporteur(new Rectangle(425, 489, 50, 55),
+				195, 399, -90));
+		this.listeTeleporteurs.add(new Teleporteur(new Rectangle(370, 100, 45, 54),
+				375, 204, 90));
+		this.listeTeleporteurs.add(new Teleporteur(new Rectangle(570, 129, 50, 55),
+				30, 10, 0));
 		//BOUCLE DE JEU
 		Controleur_PageJeu.timerJeu = new Timeline(new KeyFrame(Duration.millis(1000 / Controleur_PageJeu.NOMBRE_FPS_JEU), new EventHandler<ActionEvent>() {
 			@Override
@@ -115,6 +135,15 @@ public class Controleur_PageJeu implements Initializable {
 				actualiserPositionCreerJoueur();
 				actualiserNombreToursTerrain();
 				traiterTouches();
+				teleporterJoueur();
+				/*
+				RECUPERER LA POSITION DE LA SOURIS A L'ECRAN : UTILISE POUR CREER LES TELEPORTEURS - y - 61 à cause des onglets
+				com.sun.glass.ui.Robot robot = com.sun.glass.ui.Application.GetApplication().createRobot();
+		        int y = robot.getMouseY();
+		        System.out.println("y point = " + y);
+		        int x = robot.getMouseX();
+		        System.out.println("x point= " + x);
+		        */
 			}
 		}));
 		Controleur_PageJeu.timerJeu.setCycleCount(Timeline.INDEFINITE);
@@ -135,6 +164,19 @@ public class Controleur_PageJeu implements Initializable {
 				&& Controleur_PageChoixTouches.listeTouchesDeJeu.contains(event.getCode().getName())
 				&& this.groupeOnglets.getSelectionModel().getSelectedIndex() == 0) {
 			this.listeTouchesPressees.add(event.getCode().getName());
+		}
+	}
+	
+	private void teleporterJoueur() {
+		for(Teleporteur t : this.listeTeleporteurs) {
+			if(hashMapJoueur.get(Controleur_PageAccueil.PSEUDONYME).getImage().intersects(t.getRectangle().x, t.getRectangle().y, t.getRectangle().width, t.getRectangle().height)) {
+				System.out.println("COLLISION TELEPORTEUR");
+				try {
+					UtiliserWS.service_Teleporter(Controleur_PageAccueil.PSEUDONYME, t.getNewX(), t.getNewY(), t.getNewAngle());
+				} catch (Exception e) {
+					//e.printStackTrace();
+				}
+			}
 		}
 	}
 	
@@ -205,8 +247,8 @@ public class Controleur_PageJeu implements Initializable {
 											), StatistiquesVoiture.copier(Controleur_PageChoixVoiture.statistiqueVoiture),
 											new Label(pseudo)));
 							Voiture v = hashMapJoueur.get(pseudo);
-							v.getImage().setLayoutX(x);
-							v.getImage().setLayoutY(y);
+							v.getImage().setX((double)x);
+							v.getImage().setY((double)y);
 							v.getImage().setRotate(angle + 90);
 							v.getLabelPseudo().setLayoutX(x + 50);
 							v.getLabelPseudo().setLayoutY(y);
@@ -219,8 +261,8 @@ public class Controleur_PageJeu implements Initializable {
 											new Image(Controleur_PageChoixVoiture.CHEMIN_IMAGE_VOITURE_ADVERSAIRE)
 											), new StatistiquesVoiture(x, y, angle, 0, 0, 0, 0, 0, 0), new Label(pseudo)));
 							Voiture v = hashMapJoueur.get(pseudo);
-							v.getImage().setLayoutX(x);
-							v.getImage().setLayoutY(y);
+							v.getImage().setX((double)x);
+							v.getImage().setY((double)y);
 							v.getImage().setRotate(angle + 90);
 							v.getLabelPseudo().setLayoutX(x + 50);
 							v.getLabelPseudo().setLayoutY(y);
@@ -230,8 +272,8 @@ public class Controleur_PageJeu implements Initializable {
 					}
 					else { //SI LE JOUEUR A DEJA REJOINT LA PARTIE, ON LE DEPLACE UNIQUEMENT
 						Voiture v = hashMapJoueur.get(pseudo);
-						v.getImage().setLayoutX(x);
-						v.getImage().setLayoutY(y);
+						v.getImage().setX((double)x);
+						v.getImage().setY((double)y);
 						v.getImage().setRotate(angle + 90);
 						v.getLabelPseudo().setLayoutX(x + 50);
 						v.getLabelPseudo().setLayoutY(y);
