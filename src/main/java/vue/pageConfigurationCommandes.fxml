@@ -63,10 +63,11 @@
                   <Label layoutX="10.0" layoutY="10.0" styleClass="selection_voiture_label_2" text="joueur(s) connecté(s)" />
                </children>
             </TextFlow>
-            <JFXTextField fx:id="champToucheAccelerer" alignment="CENTER" editable="false" layoutX="36.0" layoutY="136.0" onKeyPressed="#keyPressedChampAccelerer" prefHeight="25.0" prefWidth="529.0" promptText="Touche accélérer" styleClass="choix_commande_champ" unFocusColor="#4059a9" />
-            <JFXTextField fx:id="champToucheFreiner" alignment="CENTER" editable="false" layoutX="36.0" layoutY="214.0" onKeyPressed="#keyPressedChampFreiner" prefHeight="25.0" prefWidth="529.0" promptText="Touche freiner" styleClass="choix_commande_champ" unFocusColor="#4059a9" />
-            <JFXTextField fx:id="champToucheTournerGauche" alignment="CENTER" editable="false" layoutX="36.0" layoutY="291.0" onKeyPressed="#keyPressedChampTournerGauche" prefHeight="25.0" prefWidth="529.0" promptText="Touche tourner à gauche" styleClass="choix_commande_champ" unFocusColor="#4059a9" />
-            <JFXTextField fx:id="champToucheTournerDroite" alignment="CENTER" editable="false" layoutX="36.0" layoutY="368.0" onKeyPressed="#keyPressedChampTournerDroite" prefHeight="25.0" prefWidth="529.0" promptText="Touche tourner à droite" styleClass="choix_commande_champ" unFocusColor="#4059a9" />
+            <JFXTextField fx:id="champToucheAccelerer" alignment="CENTER" editable="false" layoutX="36.0" layoutY="111.0" onKeyPressed="#keyPressedChampAccelerer" prefHeight="25.0" prefWidth="529.0" promptText="Touche accélérer" styleClass="choix_commande_champ" unFocusColor="#4059a9" />
+            <JFXTextField fx:id="champToucheFreiner" alignment="CENTER" editable="false" layoutX="36.0" layoutY="181.0" onKeyPressed="#keyPressedChampFreiner" prefHeight="25.0" prefWidth="529.0" promptText="Touche freiner" styleClass="choix_commande_champ" unFocusColor="#4059a9" />
+            <JFXTextField fx:id="champToucheTournerGauche" alignment="CENTER" editable="false" layoutX="36.0" layoutY="251.0" onKeyPressed="#keyPressedChampTournerGauche" prefHeight="25.0" prefWidth="529.0" promptText="Touche tourner à gauche" styleClass="choix_commande_champ" unFocusColor="#4059a9" />
+            <JFXTextField fx:id="champToucheTournerDroite" alignment="CENTER" editable="false" layoutX="36.0" layoutY="332.0" onKeyPressed="#keyPressedChampTournerDroite" prefHeight="25.0" prefWidth="529.0" promptText="Touche tourner à droite" styleClass="choix_commande_champ" unFocusColor="#4059a9" />
+            <JFXTextField fx:id="champToucheRetour" alignment="CENTER" editable="false" layoutX="36.0" layoutY="402.0" onKeyPressed="#keyPressedChampRetour" prefHeight="25.0" prefWidth="529.0" promptText="Touche retour" styleClass="choix_commande_champ" unFocusColor="#4059a9" />
          </children>
       </AnchorPane>
    </center>

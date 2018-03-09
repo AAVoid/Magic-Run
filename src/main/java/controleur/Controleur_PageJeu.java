@@ -51,7 +51,7 @@ ANNEE : 2018
 
 public class Controleur_PageJeu implements Initializable {
 	@FXML
-    private AnchorPane anchorLayoutFenetre;
+	private AnchorPane anchorLayoutFenetre;
 	@FXML
 	private AnchorPane anchorLayout;
 	@FXML
@@ -69,11 +69,11 @@ public class Controleur_PageJeu implements Initializable {
 	@FXML
 	private JFXListView<String> listeViewJoueursConnectes;
 	@FXML
-    private JFXToggleButton toggleAfficherPseudoJoueurs;
+	private JFXToggleButton toggleAfficherPseudoJoueurs;
 	@FXML
-    private JFXColorPicker couleurPickerPseudo;
+	private JFXColorPicker couleurPickerPseudo;
 	@FXML
-    private JFXToggleButton toggleAfficherAdversaires;
+	private JFXToggleButton toggleAfficherAdversaires;
 
 	public static final String CHEMIN_FXML_PAGE_JEU = "/vue/pageJeu.fxml";
 	public static Media mediaMusiqueFond;
@@ -95,7 +95,8 @@ public class Controleur_PageJeu implements Initializable {
 	private boolean partieDemarree;
 	private int amortissementDeceleration;
 	private int numeroTourActuel;
-	private ArrayList<Teleporteur> listeTeleporteurs;
+	private HashMap<Integer, Teleporteur> hashMapNumeroTeleporteurTeleporteur;
+	private int numeroDernierTeleporteur;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -109,6 +110,7 @@ public class Controleur_PageJeu implements Initializable {
 		this.amortissementDeceleration = 0;
 		this.couleurPickerPseudo.setValue(Color.rgb(0, 0, 0));
 		this.numeroTourActuel = 0;
+		this.numeroDernierTeleporteur = 7; //Dernier téléporteur du terrain pour être téléporter au début
 		//ECOUTEUR SUR LA SELECTION D'ONGLET
 		this.groupeOnglets.getSelectionModel().selectedItemProperty().addListener((ov, oldTab, newTab) -> {
 			//System.out.println("" + oldTab.getText() + "/" + newTab.getText());
@@ -117,22 +119,22 @@ public class Controleur_PageJeu implements Initializable {
 			}
 		});
 		//CREATION DES RECTANGLE POUR TELEPORTEURS
-		this.listeTeleporteurs = new ArrayList<Teleporteur>();
+		this.hashMapNumeroTeleporteurTeleporteur = new HashMap<Integer, Teleporteur>();
 		//Téléporteurs rajouté dans l'ordre de passage sur la carte
-		this.listeTeleporteurs.add(new Teleporteur(new Rectangle(570, 9, 50, 55),
-				45, 29, 90));
-		this.listeTeleporteurs.add(new Teleporteur(new Rectangle(0, 219, 30, 55),
-				30, 454, 0));
-		this.listeTeleporteurs.add(new Teleporteur(new Rectangle(0, 309, 30, 55),
-				290, 394, 0));
-		this.listeTeleporteurs.add(new Teleporteur(new Rectangle(516, 524, 59, 50),
-				165, 539, -90));
-		this.listeTeleporteurs.add(new Teleporteur(new Rectangle(425, 489, 50, 55),
-				195, 399, -90));
-		this.listeTeleporteurs.add(new Teleporteur(new Rectangle(370, 100, 45, 54),
-				375, 204, 90));
-		this.listeTeleporteurs.add(new Teleporteur(new Rectangle(570, 129, 50, 55),
-				30, 10, 0));
+		this.hashMapNumeroTeleporteurTeleporteur.put(1, new Teleporteur(new Rectangle(570, 9, 50, 55),
+				45, 29, 90, 1));
+		this.hashMapNumeroTeleporteurTeleporteur.put(2, new Teleporteur(new Rectangle(0, 219, 30, 55),
+				30, 454, 0, 2));
+		this.hashMapNumeroTeleporteurTeleporteur.put(3, new Teleporteur(new Rectangle(0, 309, 30, 55),
+				290, 394, 0, 3));
+		this.hashMapNumeroTeleporteurTeleporteur.put(4, new Teleporteur(new Rectangle(516, 524, 59, 50),
+				165, 539, -90, 4));
+		this.hashMapNumeroTeleporteurTeleporteur.put(5, new Teleporteur(new Rectangle(425, 489, 50, 55),
+				195, 399, -90, 5));
+		this.hashMapNumeroTeleporteurTeleporteur.put(6, new Teleporteur(new Rectangle(370, 100, 45, 54),
+				375, 204, 90, 6));
+		this.hashMapNumeroTeleporteurTeleporteur.put(7, new Teleporteur(new Rectangle(570, 129, 50, 55),
+				30, 10, 0, 7));
 		//BOUCLE DE JEU
 		Controleur_PageJeu.timerJeu = new Timeline(new KeyFrame(Duration.millis(1000 / Controleur_PageJeu.NOMBRE_FPS_JEU), new EventHandler<ActionEvent>() {
 			@Override
@@ -148,7 +150,7 @@ public class Controleur_PageJeu implements Initializable {
 		        System.out.println("y point = " + y);
 		        int x = robot.getMouseX();
 		        System.out.println("x point= " + x);
-		        */
+				 */
 			}
 		}));
 		Controleur_PageJeu.timerJeu.setCycleCount(Timeline.INDEFINITE);
@@ -171,9 +173,10 @@ public class Controleur_PageJeu implements Initializable {
 			this.listeTouchesPressees.add(event.getCode().getName());
 		}
 	}
-	
+
 	private void teleporterJoueur() {
-		for(Teleporteur t : this.listeTeleporteurs) {
+		for(Integer i : this.hashMapNumeroTeleporteurTeleporteur.keySet()) {
+			Teleporteur t = this.hashMapNumeroTeleporteurTeleporteur.get(i);
 			if(hashMapJoueur.get(Controleur_PageAccueil.PSEUDONYME).getImage().intersects(t.getRectangle().x, t.getRectangle().y, t.getRectangle().width, t.getRectangle().height)) {
 				//System.out.println("COLLISION TELEPORTEUR");
 				try {
@@ -182,13 +185,14 @@ public class Controleur_PageJeu implements Initializable {
 					Controleur_PageJeu.mediaPlayerSonTeleportation = new MediaPlayer(mediaSonTeleportation);
 					Controleur_PageJeu.mediaPlayerSonTeleportation.setCycleCount(1);
 					Controleur_PageJeu.mediaPlayerSonTeleportation.play();
+					this.numeroDernierTeleporteur = t.getNumero();
 				} catch (Exception e) {
 					//e.printStackTrace();
 				}
 			}
 		}
 	}
-	
+
 	private void actualiserNombreToursTerrain() {
 		this.compteurTours.setText("Tour " + (this.numeroTourActuel + 1) + " / " + Controleur_PageChoixCircuit.NOMBRE_TOURS_A_FAIRE);
 		//CAS OU TOUS LES TOURS SONT TERMINES
@@ -307,6 +311,7 @@ public class Controleur_PageJeu implements Initializable {
 	}
 
 	private void traiterTouches() {
+		//ACCELERER
 		if(this.listeTouchesPressees.contains(Controleur_PageChoixTouches.nomToucheAccelerer)) {
 			//System.out.println("Avancer");
 			if(!this.partieDemarree) { //Si c'est la première fois qu'on bouge on lance le chrono
@@ -320,6 +325,7 @@ public class Controleur_PageJeu implements Initializable {
 			}
 			this.listeTouchesPressees.remove(Controleur_PageChoixTouches.nomToucheAccelerer);
 		}
+		//FREINER
 		else if(this.listeTouchesPressees.contains(Controleur_PageChoixTouches.nomToucheFreiner)) {
 			//System.out.println("Freiner");
 			if(!this.partieDemarree) { //Si c'est la première fois qu'on bouge on lance le chrono
@@ -333,6 +339,7 @@ public class Controleur_PageJeu implements Initializable {
 			}
 			this.listeTouchesPressees.remove(Controleur_PageChoixTouches.nomToucheFreiner);
 		}
+		//GAUCHE
 		else if(this.listeTouchesPressees.contains(Controleur_PageChoixTouches.nomToucheTournerGauche)) {
 			//System.out.println("Gauche");
 			if(!this.partieDemarree) { //Si c'est la première fois qu'on bouge on lance le chrono
@@ -346,6 +353,7 @@ public class Controleur_PageJeu implements Initializable {
 			}
 			this.listeTouchesPressees.remove(Controleur_PageChoixTouches.nomToucheTournerGauche);
 		}
+		//DROITE
 		else if(this.listeTouchesPressees.contains(Controleur_PageChoixTouches.nomToucheTournerDroite)) {
 			//System.out.println("Droite");
 			if(!this.partieDemarree) { //Si c'est la première fois qu'on bouge on lance le chrono
@@ -359,7 +367,26 @@ public class Controleur_PageJeu implements Initializable {
 			}
 			this.listeTouchesPressees.remove(Controleur_PageChoixTouches.nomToucheTournerDroite);
 		}
-		else { //Si on appuie sur rien
+		//RETOUR
+		else if(this.listeTouchesPressees.contains(Controleur_PageChoixTouches.nomToucheRetour)) {
+			//System.out.println("Droite");
+			if(!this.partieDemarree) { //Si c'est la première fois qu'on bouge on lance le chrono
+				this.partieDemarree = true;
+				Controleur_PageJeu.timerChrono.play();
+			}
+			Teleporteur t = this.hashMapNumeroTeleporteurTeleporteur.get(this.numeroDernierTeleporteur);
+			try {
+				UtiliserWS.service_Teleporter(Controleur_PageAccueil.PSEUDONYME, t.getNewX(), t.getNewY(), t.getNewAngle());
+				Controleur_PageJeu.mediaSonTeleportation = new Media(Controleur_PageJeu.CHEMIN_SON_TELEPORTATION);
+				Controleur_PageJeu.mediaPlayerSonTeleportation = new MediaPlayer(mediaSonTeleportation);
+				Controleur_PageJeu.mediaPlayerSonTeleportation.setCycleCount(1);
+				Controleur_PageJeu.mediaPlayerSonTeleportation.play();
+			} catch (Exception e) {
+				//e.printStackTrace();
+			}
+			this.listeTouchesPressees.remove(Controleur_PageChoixTouches.nomToucheRetour);
+		}
+		else { //SI ON APPUIE SUR RIEN : ROUE LIBRE
 			this.amortissementDeceleration++;
 			this.amortissementDeceleration %= 
 					(Controleur_PageJeu.TAUX_AMORTISSEMENT_DECELERATION - Controleur_PageChoixVoiture.statistiqueVoiture.getDeceleration());

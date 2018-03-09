@@ -14,13 +14,23 @@ public class Teleporteur {
 	private int newX;
 	private int newY;
 	private int newAngle;
-	
-	public Teleporteur(Rectangle rectangle, int newX, int newY, int newAngle) {
+	private int numero;
+
+	public Teleporteur(Rectangle rectangle, int newX, int newY, int newAngle, int numero) {
 		super();
 		this.rectangle = rectangle;
 		this.newX = newX;
 		this.newY = newY;
 		this.newAngle = newAngle;
+		this.numero = numero;
+	}
+
+	public int getNumero() {
+		return numero;
+	}
+
+	public void setNumero(int numero) {
+		this.numero = numero;
 	}
 
 	public Rectangle getRectangle() {
