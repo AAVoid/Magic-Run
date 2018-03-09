@@ -83,8 +83,9 @@
                               <Label styleClass="jeu_affichage_nombreJoueursCo_2" text=" joueur(s) connecté(s)" />
                            </children>
                         </TextFlow>
-                        <JFXToggleButton fx:id="toggleAfficherPseudoJoueurs" layoutX="14.0" layoutY="72.0" text="Afficher pseudo. joueurs" />
-                        <JFXColorPicker fx:id="couleurPickerPseudo" layoutX="242.0" layoutY="89.0" />
+                        <JFXToggleButton fx:id="toggleAfficherPseudoJoueurs" layoutX="21.0" layoutY="73.0" text="Afficher pseudo. joueurs" />
+                        <JFXColorPicker fx:id="couleurPickerPseudo" layoutX="251.0" layoutY="89.0" />
+                        <JFXToggleButton fx:id="toggleAfficherAdversaires" layoutX="406.0" layoutY="73.0" selected="true" text="Afficher adversaires" toggleColor="#0026ca" toggleLineColor="#7a7cff" />
                      </children>
                   </AnchorPane>
               </content>

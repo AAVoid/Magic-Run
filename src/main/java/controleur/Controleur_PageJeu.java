@@ -72,16 +72,21 @@ public class Controleur_PageJeu implements Initializable {
     private JFXToggleButton toggleAfficherPseudoJoueurs;
 	@FXML
     private JFXColorPicker couleurPickerPseudo;
+	@FXML
+    private JFXToggleButton toggleAfficherAdversaires;
 
 	public static final String CHEMIN_FXML_PAGE_JEU = "/vue/pageJeu.fxml";
 	public static Media mediaMusiqueFond;
 	public static MediaPlayer mediaPlayerMusiqueFond;
-	public static final String CHEMIN_MUSIQUE_FOND = "file:/" + Main.CHEMIN_MUSIQUE + "/Dark_Souls_III_Soundtrack_OST_-_Iudex_Gundyr.mp3";
+	public static final String CHEMIN_MUSIQUE_FOND = "file:/" + Main.CHEMIN_MUSIQUE + "/Epic_Soul_Factory-The_Glorious_Ones.mp3";
 	public static final int NOMBRE_FPS_JEU = 30;
 	public static final int FACTEUR_VITESSE = 2;
 	public static Timeline timerJeu;
 	public static Timeline timerChrono;
 	private static final int TAUX_AMORTISSEMENT_DECELERATION = 10;
+	public static Media mediaSonTeleportation;
+	public static MediaPlayer mediaPlayerSonTeleportation;
+	public static final String CHEMIN_SON_TELEPORTATION = "file:/" + Main.CHEMIN_SON + "/teleportation.wav";
 
 	private ArrayList<String> listeTouchesPressees;
 	private String jsonListeJoueurs;
@@ -170,9 +175,13 @@ public class Controleur_PageJeu implements Initializable {
 	private void teleporterJoueur() {
 		for(Teleporteur t : this.listeTeleporteurs) {
 			if(hashMapJoueur.get(Controleur_PageAccueil.PSEUDONYME).getImage().intersects(t.getRectangle().x, t.getRectangle().y, t.getRectangle().width, t.getRectangle().height)) {
-				System.out.println("COLLISION TELEPORTEUR");
+				//System.out.println("COLLISION TELEPORTEUR");
 				try {
 					UtiliserWS.service_Teleporter(Controleur_PageAccueil.PSEUDONYME, t.getNewX(), t.getNewY(), t.getNewAngle());
+					Controleur_PageJeu.mediaSonTeleportation = new Media(Controleur_PageJeu.CHEMIN_SON_TELEPORTATION);
+					Controleur_PageJeu.mediaPlayerSonTeleportation = new MediaPlayer(mediaSonTeleportation);
+					Controleur_PageJeu.mediaPlayerSonTeleportation.setCycleCount(1);
+					Controleur_PageJeu.mediaPlayerSonTeleportation.play();
 				} catch (Exception e) {
 					//e.printStackTrace();
 				}
@@ -278,10 +287,15 @@ public class Controleur_PageJeu implements Initializable {
 						v.getLabelPseudo().setLayoutX(x + 50);
 						v.getLabelPseudo().setLayoutY(y);
 						v.getLabelPseudo().setTextFill(this.couleurPickerPseudo.getValue());
-						v.getLabelPseudo().setVisible(this.toggleAfficherPseudoJoueurs.isSelected());
-						//Si c'est nous on actualise la vitesse affichée
-						if(pseudo.equals(Controleur_PageAccueil.PSEUDONYME))
+						if(pseudo.equals(Controleur_PageAccueil.PSEUDONYME)) { //SI C'EST LE JOUEUR
 							this.vitesseAffichee.setText("" + vitesse + " km/h");
+							v.getLabelPseudo().setVisible(this.toggleAfficherPseudoJoueurs.isSelected());
+						}
+						else { //SI C'EST UN ENNEMI
+							v.getLabelPseudo().setVisible(this.toggleAfficherAdversaires.isSelected() 
+									&& this.toggleAfficherPseudoJoueurs.isSelected());
+							v.getImage().setVisible(this.toggleAfficherAdversaires.isSelected());
+						}
 					}
 				} catch (JSONException e) {
 					//e.printStackTrace();
@@ -374,6 +388,7 @@ public class Controleur_PageJeu implements Initializable {
 		}
 	}
 }
+
 
 
 

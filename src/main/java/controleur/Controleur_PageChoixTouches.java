@@ -60,7 +60,6 @@ public class Controleur_PageChoixTouches implements Initializable {
 	public static final String CHEMIN_SON_ENGAGEMENT = "file:/" + Main.CHEMIN_SON + "/engagement.wav";
 	public static Media mediaSonEngagement;
 	public static MediaPlayer mediaPlayerSonEngagement;
-	public static final String CHEMIN_MUSIQUE_FOND_JEU = "file:/" + Main.CHEMIN_MUSIQUE + "/Dark_Souls_III_Soundtrack_OST_-_Lorian_Elder_Prince_Lothric_Younger_Prince.mp3";
 	public static Media mediaMusiqueFond;
 	public static MediaPlayer mediaPlayerMusiqueFond;
 	public static String nomToucheAccelerer;
@@ -219,7 +218,7 @@ public class Controleur_PageChoixTouches implements Initializable {
 		mediaPlayerSonEngagement.play();
 		Controleur_PageAccueil.mediaPlayerMusiqueFond.stop();
 		if(mediaMusiqueFond == null) { //ON LANCE LA MUSIQUE QUE SI ELLE N'EST PAS DEJA EN TRAIN D'ETRE JOUEE
-			mediaMusiqueFond = new Media(Controleur_PageChoixTouches.CHEMIN_MUSIQUE_FOND_JEU);
+			mediaMusiqueFond = new Media(Controleur_PageJeu.CHEMIN_MUSIQUE_FOND);
 			mediaPlayerMusiqueFond = new MediaPlayer(mediaMusiqueFond);
 			mediaPlayerMusiqueFond.setCycleCount(Timeline.INDEFINITE); //Lecture de la musique en boucle
 			mediaPlayerMusiqueFond.play();
