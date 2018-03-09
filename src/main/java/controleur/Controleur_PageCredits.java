@@ -45,7 +45,7 @@ public class Controleur_PageCredits implements Initializable {
 	public static final String CHEMIN_SON_RETOUR = "file:/" + Main.CHEMIN_SON + "/retour.wav";
 	public static final String DATE_DEVELOPPEMENT = "2018";
 	public static final String EMAIL_DEVELOPPEUR = "abosoaymerik@gmail.com";
-	public static final String VERSION_DEVELOPPEMENT = "0.7 ALPHA (Démo)";
+	public static final String VERSION_DEVELOPPEMENT = "1.0";
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {

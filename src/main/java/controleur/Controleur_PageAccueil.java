@@ -54,8 +54,8 @@ public class Controleur_PageAccueil implements Initializable {
 	public static Media mediaSonMessage;
 	public static MediaPlayer mediaPlayerSonMessage;
 	public static final String CHEMIN_SON_MESSAGE = "file:/" + Main.CHEMIN_SON + "/message.wav";
-	private static final int COORDONNEES_X_APRES_CONNEXION = -9999999;
-	private static final int COORDONNEES_Y_APRES_CONNEXION = -9999999;
+	public static final int COORDONNEES_X_APRES_CONNEXION = -9999999;
+	public static final int COORDONNEES_Y_APRES_CONNEXION = -9999999;
 
 	public static String PSEUDONYME = "";
 	public static String ADRESSE_IP_SERVEUR = "";

@@ -70,21 +70,28 @@ public class Controleur_PageChoixTouches implements Initializable {
 	public static String nomToucheTournerDroite;
 	public static String nomToucheRetour;
 	public static ArrayList<String> listeTouchesDeJeu;
-	private static final String texteInformationsJeu = 
+	private static final String texteInformationsJeu_1 = 
 			"Le principe d'une course en jeu est celui du contre-la-montre. \r\n" + 
-					"\r\n" + 
-					"Dans la partie supérieure gauche de l'écran il y a un chronomètre. Il est lancé dès l'instant où vous allez utiliser les commandes de jeu configurées.\r\n" + 
-					"Il s'arrête automatiquement après avoir fait le nombre de tours de terrain choisi.\r\n" + 
-					"\r\n" + 
-					"Les joueurs peuvent réaliser leurs tours de terrain en même temps en faisant la course ou peuvent le faire quand bon leur semble. Le chronomètre juge des performances de chacun.\r\n" + 
-					"\r\n" + 
-					"Vous pouvez quitter la course grâce à l'icône dans la partie inférieure droite de l'écran.\r\n" + 
-					"\r\n" + 
-					"La vitesse de votre voiture est affichée dans la partie inférieure gauche de l'écran.\r\n" + 
-					"\r\n" + 
-					"La difficulté imposée aux joueurs : une seule touche de jeu est utilisable à la fois ! Il est donc impossible d'accélérer et de tourner en même temps par exemple !\r\n" + 
-					"\r\n" + 
-					"Dans l'onglet \"Joueurs connectés\" vous pouvez voir la liste des joueurs connectés. Vous pouvez aussi choisir ou non que les pseudonymes des joueurs soient affichés ainsi que leur couleur.";
+			"\r\n" + 
+			"Dans la partie supérieure gauche de l'écran il y a un chronomètre. Il est lancé dès l'instant où vous allez utiliser les commandes de jeu configurées.\r\n" + 
+			"Il s'arrête automatiquement après avoir fait le nombre de tours de terrain choisi.\r\n" + 
+			"\r\n" + 
+			"Les joueurs peuvent réaliser leurs tours de terrain en même temps en faisant la course ou peuvent le faire quand bon leur semble. Le chronomètre juge des performances de chacun.\r\n" + 
+			"\r\n" + 
+			"Vous pouvez quitter la course grâce à l'icône dans la partie inférieure droite de l'écran.\r\n" + 
+			"\r\n" + 
+			"La vitesse de votre voiture est affichée dans la partie inférieure gauche de l'écran.\r\n" + 
+			"\r\n" + 
+			"Dans l'onglet \"Joueurs connectés\" vous pouvez voir la liste des joueurs connectés. Vous pouvez aussi choisir ou non que les pseudonymes des joueurs soient affichés ainsi que leur couleur, ou même que les adversaires soient affichés ou non.";
+	private static final String texteInformationsJeu_2 = 
+			"Difficulté n°1 imposée aux joueurs : une seule touche de jeu est utilisable à la fois ! Il est donc impossible d'accélérer et de tourner en même temps par exemple !\r\n" + 
+			"\r\n" + 
+			"Sur le terrain le chemin à suivre est divisé en plusieurs portions qui sont matérialisées par de la neige plus foncée, en gris foncé. Il n'est pas nécessaire de suivre scrupuleusement ce chemin ! Il est là à titre indicatif ! L'unique but : atteindre le téléporteur suivant ! Il est cependant conseillé de ne pas quitter une portion de route pour aller sur une autre...\r\n" + 
+			"\r\n" + 
+			"Difficulté n°2 imposée aux joueurs : La téléportation\r\n" + 
+			"Au bout de chaque portion de chemin se trouve une zone matérialisée par des pierres marron. Ce sont des téléporteurs qui vous téléportent sur une autre portion du terrain.\r\n" + 
+			"\r\n" + 
+			"Même si vous ne suivez pas le chemin défini par les différentes portions de terrain, elles-mêmes définies par les téléporteurs, il convient de passer tous les téléporteurs dans l'ordre (si vous voulez tous les passer le plus rapidement que possible..., car suivre les portions de terrain permet de faire un tour au plus vite que possible...) car cela permet de valider votre tour de terrain ! CONCRETEMENT : Vous pouvez passer les téléporteurs dans l'ordre que vous voulez. Pour valider votre tour de terrain il faut passer par tous les téléporteurs. Si par malheur vous quittez le terrain et sortez de l'écran, vous pouvez appuyer sur votre touche de retour à la dernière téléportation pour que le dernier téléporteur passé vous téléporte de nouveau.";
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -254,10 +261,16 @@ public class Controleur_PageChoixTouches implements Initializable {
 		Controleur_PageChoixTouches.listeTouchesDeJeu.add(Controleur_PageChoixTouches.nomToucheRetour);
 		//AFFICHAGE DES INFORMATIONS DE JEU VIA UNE BOITE DE DIALOGUE
 		Alert alert = new Alert(AlertType.INFORMATION);
-		alert.setTitle("Déroulement d'une partie");
+		alert.setTitle("Déroulement d'une partie (1)");
 		alert.setHeaderText("3..., 2..., 1..., GO !!!");
-		alert.setContentText(Controleur_PageChoixTouches.texteInformationsJeu);
+		alert.setContentText(Controleur_PageChoixTouches.texteInformationsJeu_1);
 		alert.showAndWait();
+		//- - -
+		Alert alert2 = new Alert(AlertType.INFORMATION);
+		alert2.setTitle("Déroulement d'une partie (2)");
+		alert2.setHeaderText("3..., 2..., 1..., GO !!!");
+		alert2.setContentText(Controleur_PageChoixTouches.texteInformationsJeu_2);
+		alert2.showAndWait();
 		//On joue le son d'engagement de partie, on arrête la musique de fond actuelle et on lance la nouvelle musique de fond
 		try {
 			Thread.sleep(TEMPS_ATTENTE_AVANT_ENGAGEMENT);

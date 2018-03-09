@@ -46,8 +46,12 @@ public class Main extends Application {
 		//Pour déconnecter le joueur à la fermeture de la fenêtre
 		Main.windowStage.setOnCloseRequest(e -> {
 			e.consume();
-			//DECONNEXION DU JOUEUR
 			try {
+				//ON FAIT LE JOUEUR QUITTER LE TERRAIN POUR MONTRER QU'IL A QUITTE LA PARTIE
+				UtiliserWS.service_Teleporter(Controleur_PageAccueil.PSEUDONYME, Controleur_PageAccueil.COORDONNEES_X_APRES_CONNEXION, 
+						Controleur_PageAccueil.COORDONNEES_Y_APRES_CONNEXION, 0);
+				Thread.sleep(1000);
+				//DECONNEXION DU JOUEUR
 				UtiliserWS.service_DeconnecterJoueur(Controleur_PageAccueil.PSEUDONYME);
 			} catch (Exception e1) {
 				//e1.printStackTrace();

@@ -17,21 +17,21 @@ public class StatistiquesVoiture {
 	public static final int ACCELERATION_N = 4;
 	public static final int ACCELERATION_U = 7;
 	private int rotation;
-	public static final int ROTATION_D = 3;
-	public static final int ROTATION_N = 4;
-	public static final int ROTATION_U = 15;
+	public static final int ROTATION_D = 18;
+	public static final int ROTATION_N = 30;
+	public static final int ROTATION_U = 45;
 	private int deceleration;
-	public static final int DECELERATION_D = 1;
-	public static final int DECELERATION_N = 1;
+	public static final int DECELERATION_D = 3;
+	public static final int DECELERATION_N = 2;
 	public static final int DECELERATION_U = 1;
 	private int frein;
-	public static final int FREIN_D = 3;
-	public static final int FREIN_N = 4;
-	public static final int FREIN_U = 5;
+	public static final int FREIN_D = 1;
+	public static final int FREIN_N = 3;
+	public static final int FREIN_U = 6;
 	private int vitesseMax;
 	public static final int VITESSE_MAX_D = 10;
-	public static final int VITESSE_MAX_N = 13;
-	public static final int VITESSE_MAX_U = 50;
+	public static final int VITESSE_MAX_N = 30;
+	public static final int VITESSE_MAX_U = 40;
 	
 	public StatistiquesVoiture(int x, int y, int angle, int vitesse, int acceleration, int rotation, int deceleration,
 			int frein, int vitesseMax) {

@@ -80,13 +80,17 @@ public class Controleur_PageJeu implements Initializable {
 	public static MediaPlayer mediaPlayerMusiqueFond;
 	public static final String CHEMIN_MUSIQUE_FOND = "file:/" + Main.CHEMIN_MUSIQUE + "/Epic_Soul_Factory-The_Glorious_Ones.mp3";
 	public static final int NOMBRE_FPS_JEU = 30;
-	public static final int FACTEUR_VITESSE = 2;
+	public static final int FACTEUR_VITESSE = 6;
 	public static Timeline timerJeu;
 	public static Timeline timerChrono;
 	private static final int TAUX_AMORTISSEMENT_DECELERATION = 10;
 	public static Media mediaSonTeleportation;
 	public static MediaPlayer mediaPlayerSonTeleportation;
 	public static final String CHEMIN_SON_TELEPORTATION = "file:/" + Main.CHEMIN_SON + "/teleportation.wav";
+	public static Media mediaSonTourValide;
+	public static MediaPlayer mediaPlayerSonTourValide;
+	public static Media mediaSonQuitterPartie;
+	public static MediaPlayer mediaPlayerSonQuitterPartie;
 
 	private ArrayList<String> listeTouchesPressees;
 	private String jsonListeJoueurs;
@@ -97,6 +101,7 @@ public class Controleur_PageJeu implements Initializable {
 	private int numeroTourActuel;
 	private HashMap<Integer, Teleporteur> hashMapNumeroTeleporteurTeleporteur;
 	private int numeroDernierTeleporteur;
+	private boolean partieTerminee;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -110,6 +115,7 @@ public class Controleur_PageJeu implements Initializable {
 		this.amortissementDeceleration = 0;
 		this.couleurPickerPseudo.setValue(Color.rgb(0, 0, 0));
 		this.numeroTourActuel = 0;
+		this.partieTerminee = false;
 		this.numeroDernierTeleporteur = 7; //Dernier téléporteur du terrain pour être téléporter au début
 		//ECOUTEUR SUR LA SELECTION D'ONGLET
 		this.groupeOnglets.getSelectionModel().selectedItemProperty().addListener((ov, oldTab, newTab) -> {
@@ -122,19 +128,19 @@ public class Controleur_PageJeu implements Initializable {
 		this.hashMapNumeroTeleporteurTeleporteur = new HashMap<Integer, Teleporteur>();
 		//Téléporteurs rajouté dans l'ordre de passage sur la carte
 		this.hashMapNumeroTeleporteurTeleporteur.put(1, new Teleporteur(new Rectangle(570, 9, 50, 55),
-				45, 29, 90, 1));
+				45, 29, 90, 1, false));
 		this.hashMapNumeroTeleporteurTeleporteur.put(2, new Teleporteur(new Rectangle(0, 219, 30, 55),
-				30, 454, 0, 2));
+				30, 454, 0, 2, false));
 		this.hashMapNumeroTeleporteurTeleporteur.put(3, new Teleporteur(new Rectangle(0, 309, 30, 55),
-				290, 394, 0, 3));
+				290, 394, 0, 3, false));
 		this.hashMapNumeroTeleporteurTeleporteur.put(4, new Teleporteur(new Rectangle(516, 524, 59, 50),
-				165, 539, -90, 4));
+				165, 539, -90, 4, false));
 		this.hashMapNumeroTeleporteurTeleporteur.put(5, new Teleporteur(new Rectangle(425, 489, 50, 55),
-				195, 399, -90, 5));
+				195, 399, -90, 5, false));
 		this.hashMapNumeroTeleporteurTeleporteur.put(6, new Teleporteur(new Rectangle(370, 100, 45, 54),
-				375, 204, 90, 6));
+				375, 204, 90, 6, false));
 		this.hashMapNumeroTeleporteurTeleporteur.put(7, new Teleporteur(new Rectangle(570, 129, 50, 55),
-				30, 10, 0, 7));
+				30, 10, 0, 7, false));
 		//BOUCLE DE JEU
 		Controleur_PageJeu.timerJeu = new Timeline(new KeyFrame(Duration.millis(1000 / Controleur_PageJeu.NOMBRE_FPS_JEU), new EventHandler<ActionEvent>() {
 			@Override
@@ -186,6 +192,7 @@ public class Controleur_PageJeu implements Initializable {
 					Controleur_PageJeu.mediaPlayerSonTeleportation.setCycleCount(1);
 					Controleur_PageJeu.mediaPlayerSonTeleportation.play();
 					this.numeroDernierTeleporteur = t.getNumero();
+					t.setJoueurPasseParLa(true);
 				} catch (Exception e) {
 					//e.printStackTrace();
 				}
@@ -194,13 +201,37 @@ public class Controleur_PageJeu implements Initializable {
 	}
 
 	private void actualiserNombreToursTerrain() {
-		this.compteurTours.setText("Tour " + (this.numeroTourActuel + 1) + " / " + Controleur_PageChoixCircuit.NOMBRE_TOURS_A_FAIRE);
-		//CAS OU TOUS LES TOURS SONT TERMINES
-		/*if(this.numeroTourActuel == Controleur_PageChoixCircuit.NOMBRE_TOURS_A_FAIRE) {
-			//Arrêt des timer etc.
-			On empêche le joueur de bouger, ...
-			On efface le comptage de tours
-		}*/
+		if(!this.partieTerminee) {
+			if(this.numeroTourActuel != Controleur_PageChoixCircuit.NOMBRE_TOURS_A_FAIRE)
+				this.compteurTours.setText("Tour " + (this.numeroTourActuel + 1) + " / " + Controleur_PageChoixCircuit.NOMBRE_TOURS_A_FAIRE);
+			long nbTeleporteurs = this.hashMapNumeroTeleporteurTeleporteur.keySet().size();
+			long nbTeleporteursPasses = this.hashMapNumeroTeleporteurTeleporteur.keySet().stream()
+			.map(k -> hashMapNumeroTeleporteurTeleporteur.get(k))
+			.filter(t -> t.isJoueurPasseParLa()).count();
+			//System.out.println(nbTeleporteurs + "/" + nbTeleporteursPasses);
+			//SI ON A PASSE TOUS LES TELEPORTEURS ON VALIDE LE TOUR
+			if(nbTeleporteurs == nbTeleporteursPasses) {
+				this.numeroTourActuel++;
+				resetTeleporteurPasse();
+				Controleur_PageJeu.mediaSonTourValide = new Media(Controleur_PageAccueil.CHEMIN_SON_BOUTON);
+				Controleur_PageJeu.mediaPlayerSonTourValide = new MediaPlayer(mediaSonTourValide);
+				Controleur_PageJeu.mediaPlayerSonTourValide.setCycleCount(1);
+				Controleur_PageJeu.mediaPlayerSonTourValide.play();
+			}
+			//CAS OU TOUS LES TOURS SONT TERMINES
+			if(this.numeroTourActuel == Controleur_PageChoixCircuit.NOMBRE_TOURS_A_FAIRE) {
+				//Arrêt des timer etc.
+				Controleur_PageJeu.timerChrono.stop();
+				this.partieTerminee = true;
+			}
+		}
+	}
+	
+	private void resetTeleporteurPasse() {
+		for(Integer i : this.hashMapNumeroTeleporteurTeleporteur.keySet()) {
+			Teleporteur t = this.hashMapNumeroTeleporteurTeleporteur.get(i);
+			t.setJoueurPasseParLa(false);
+		}
 	}
 
 	private void incrementerChrono() {
@@ -292,7 +323,7 @@ public class Controleur_PageJeu implements Initializable {
 						v.getLabelPseudo().setLayoutY(y);
 						v.getLabelPseudo().setTextFill(this.couleurPickerPseudo.getValue());
 						if(pseudo.equals(Controleur_PageAccueil.PSEUDONYME)) { //SI C'EST LE JOUEUR
-							this.vitesseAffichee.setText("" + vitesse + " km/h");
+							this.vitesseAffichee.setText("" + (vitesse * Controleur_PageJeu.FACTEUR_VITESSE) + " km/h");
 							v.getLabelPseudo().setVisible(this.toggleAfficherPseudoJoueurs.isSelected());
 						}
 						else { //SI C'EST UN ENNEMI
@@ -404,6 +435,18 @@ public class Controleur_PageJeu implements Initializable {
 	void quitterPartie(ActionEvent event) {
 		Controleur_PageJeu.timerJeu.stop(); //Arrêt de la boucle de jeu et du chrono
 		Controleur_PageJeu.timerChrono.stop();
+		//ON FAIT LE JOUEUR QUITTER LE TERRAIN POUR MONTRER QU'IL A QUITTE LA PARTIE
+		try {
+			UtiliserWS.service_Teleporter(Controleur_PageAccueil.PSEUDONYME, Controleur_PageAccueil.COORDONNEES_X_APRES_CONNEXION, 
+					Controleur_PageAccueil.COORDONNEES_Y_APRES_CONNEXION, 0);
+		} catch (Exception e1) {
+			//e1.printStackTrace();
+		}
+		Controleur_PageJeu.mediaSonQuitterPartie = new Media(Controleur_PageAccueil.CHEMIN_SON_BOUTON);
+		Controleur_PageJeu.mediaPlayerSonQuitterPartie = new MediaPlayer(mediaSonQuitterPartie);
+		Controleur_PageJeu.mediaPlayerSonQuitterPartie.setCycleCount(1);
+		Controleur_PageJeu.mediaPlayerSonQuitterPartie.play();
+		//RETOUR A L'ECRAN PRECEDENT
 		Parent root = null;
 		try {
 			root = FXMLLoader.load(getClass().getResource(Controleur_PageChoixTouches.CHEMIN_FXML_PAGE_CHOIX_TOUCHES));

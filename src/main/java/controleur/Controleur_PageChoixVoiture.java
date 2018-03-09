@@ -112,7 +112,7 @@ public class Controleur_PageChoixVoiture implements Initializable {
 		this.valeurPriseVent.setText("" + Controleur_PageChoixVoiture.statistiqueVoiture.getDeceleration());
 		this.valeurFreinage.setText("" + Controleur_PageChoixVoiture.statistiqueVoiture.getFrein());
 		this.valeurTenueRoute.setText("" + Controleur_PageChoixVoiture.statistiqueVoiture.getRotation());
-		this.valeurVitesseMax.setText("" + Controleur_PageChoixVoiture.statistiqueVoiture.getVitesseMax());
+		this.valeurVitesseMax.setText("" + (Controleur_PageChoixVoiture.statistiqueVoiture.getVitesseMax() * Controleur_PageJeu.FACTEUR_VITESSE) + " km/h");
 		nomVoitureSelectionnee.setText(nomVoiture_1);
 		imageVoiture.setImage(new Image(Controleur_PageChoixVoiture.hashMapNomVoitureNomImage.get(nomVoiture_1)));
 		this.listeNomsVoitures.add(nomVoiture_2);
@@ -196,7 +196,7 @@ public class Controleur_PageChoixVoiture implements Initializable {
 			this.valeurPriseVent.setText("" + Controleur_PageChoixVoiture.statistiqueVoiture.getDeceleration());
 			this.valeurFreinage.setText("" + Controleur_PageChoixVoiture.statistiqueVoiture.getFrein());
 			this.valeurTenueRoute.setText("" + Controleur_PageChoixVoiture.statistiqueVoiture.getRotation());
-			this.valeurVitesseMax.setText("" + Controleur_PageChoixVoiture.statistiqueVoiture.getVitesseMax());
+			this.valeurVitesseMax.setText("" + (Controleur_PageChoixVoiture.statistiqueVoiture.getVitesseMax() * Controleur_PageJeu.FACTEUR_VITESSE) + " km/h");
 		});
 	}
 
